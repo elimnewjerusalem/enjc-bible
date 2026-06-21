@@ -1,0 +1,62 @@
+{
+  "faith": [
+    {"ref":"Hebrews 11:1","text":"Now faith is the substance of things hoped for, the evidence of things not seen."},
+    {"ref":"Romans 10:17","text":"Faith comes from hearing, and hearing through the word of Christ."},
+    {"ref":"Matthew 17:20","text":"If you have faith like a grain of mustard seed, nothing will be impossible for you."},
+    {"ref":"Ephesians 2:8","text":"For by grace you have been saved through faith. And this is not your own doing; it is the gift of God."}
+  ],
+  "prayer": [
+    {"ref":"Philippians 4:6","text":"Do not be anxious about anything, but in everything by prayer and supplication with thanksgiving let your requests be made known to God."},
+    {"ref":"Matthew 6:9","text":"Pray then like this: Our Father in heaven, hallowed be your name."},
+    {"ref":"1 Thessalonians 5:17","text":"Pray without ceasing."},
+    {"ref":"James 5:16","text":"The prayer of a righteous person has great power as it is working."}
+  ],
+  "love": [
+    {"ref":"John 3:16","text":"For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life."},
+    {"ref":"1 Corinthians 13:4","text":"Love is patient and kind; love does not envy or boast; it is not arrogant."},
+    {"ref":"1 John 4:8","text":"Anyone who does not love does not know God, because God is love."},
+    {"ref":"Romans 8:38-39","text":"Neither death nor life, nor angels nor rulers, nor things present nor things to come, nor powers, nor height nor depth, nor anything else in all creation, will be able to separate us from the love of God in Christ Jesus our Lord."}
+  ],
+  "peace": [
+    {"ref":"John 14:27","text":"Peace I leave with you; my peace I give to you. Let not your hearts be troubled, neither let them be afraid."},
+    {"ref":"Philippians 4:7","text":"The peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus."},
+    {"ref":"Isaiah 26:3","text":"You keep him in perfect peace whose mind is stayed on you, because he trusts in you."},
+    {"ref":"Romans 5:1","text":"Therefore, since we have been justified by faith, we have peace with God through our Lord Jesus Christ."}
+  ],
+  "healing": [
+    {"ref":"Isaiah 53:5","text":"But he was pierced for our transgressions; he was crushed for our iniquities; and by his wounds we are healed."},
+    {"ref":"Jeremiah 17:14","text":"Heal me, O Lord, and I shall be healed; save me, and I shall be saved, for you are my praise."},
+    {"ref":"James 5:14","text":"Is anyone among you sick? Let him call for the elders of the church to pray over him, anointing him with oil in the name of the Lord."},
+    {"ref":"Psalm 103:3","text":"Who forgives all your iniquity, who heals all your diseases."}
+  ],
+  "salvation": [
+    {"ref":"John 3:16","text":"For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life."},
+    {"ref":"Romans 10:9","text":"If you confess with your mouth that Jesus is Lord and believe in your heart that God raised him from the dead, you will be saved."},
+    {"ref":"Acts 4:12","text":"There is salvation in no one else, for there is no other name under heaven given among men by which we must be saved."},
+    {"ref":"Ephesians 2:8","text":"For by grace you have been saved through faith. And this is not your own doing; it is the gift of God."}
+  ],
+  "strength": [
+    {"ref":"Philippians 4:13","text":"I can do all things through him who strengthens me."},
+    {"ref":"Isaiah 40:31","text":"They who wait for the Lord shall renew their strength; they shall mount up with wings like eagles."},
+    {"ref":"Psalm 46:1","text":"God is our refuge and strength, a very present help in trouble."},
+    {"ref":"2 Corinthians 12:9","text":"My grace is sufficient for you, for my power is made perfect in weakness."}
+  ],
+  "family": [
+    {"ref":"Joshua 24:15","text":"As for me and my house, we will serve the Lord."},
+    {"ref":"Proverbs 22:6","text":"Train up a child in the way he should go; even when he is old he will not depart from it."},
+    {"ref":"Ephesians 6:1","text":"Children, obey your parents in the Lord, for this is right."},
+    {"ref":"Psalm 127:3","text":"Children are a heritage from the Lord, the fruit of the womb a reward."}
+  ],
+  "hope": [
+    {"ref":"Jeremiah 29:11","text":"For I know the plans I have for you, declares the Lord, plans for welfare and not for evil, to give you a future and a hope."},
+    {"ref":"Romans 15:13","text":"May the God of hope fill you with all joy and peace in believing, so that by the power of the Holy Spirit you may abound in hope."},
+    {"ref":"Lamentations 3:22-23","text":"The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning."},
+    {"ref":"Romans 8:28","text":"And we know that for those who love God all things work together for good."}
+  ],
+  "worship": [
+    {"ref":"Psalm 95:1","text":"Oh come, let us sing to the Lord; let us make a joyful noise to the rock of our salvation!"},
+    {"ref":"John 4:24","text":"God is spirit, and those who worship him must worship in spirit and truth."},
+    {"ref":"Romans 12:1","text":"Present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship."},
+    {"ref":"Psalm 100:4","text":"Enter his gates with thanksgiving, and his courts with praise! Give thanks to him; bless his name!"}
+  ]
+}

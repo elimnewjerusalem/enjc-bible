@@ -1,0 +1,187 @@
+{
+  "verseOfDay": [
+    {
+      "ref": "Jeremiah 29:11",
+      "book": "jeremiah",
+      "chapter": 29,
+      "ta": "என்னால் நினைக்கப்படுகிற நினைவுகளை நான் அறிவேன்; அவைகள் சமாதானத்திற்கான நினைவுகளே, தீமைக்கல்ல; இறுதியில் உங்களுக்கு நம்பிக்கையான எதிர்காலம் கொடுக்கிறேன்.",
+      "tref": "எரேமியா 29:11",
+      "en": "For I know the plans I have for you, declares the Lord — plans for welfare and not for evil, to give you a future and a hope."
+    },
+    {
+      "ref": "Proverbs 3:5-6",
+      "book": "proverbs",
+      "chapter": 3,
+      "ta": "உன் சம்பூர்ண இருதயத்தோடே கர்த்தரில் நம்பிக்கைவை; உன் சொந்த அறிவை நம்பாதே.",
+      "tref": "நீதிமொழிகள் 3:5",
+      "en": "Trust in the Lord with all your heart, and do not lean on your own understanding. In all your ways acknowledge him, and he will make straight your paths."
+    },
+    {
+      "ref": "Philippians 4:13",
+      "book": "philippians",
+      "chapter": 4,
+      "ta": "என்னை பலப்படுத்துகிற கிறிஸ்துவினால் எல்லாவற்றையும் செய்யவல்லேன்.",
+      "tref": "பிலிப்பியர் 4:13",
+      "en": "I can do all things through him who strengthens me."
+    },
+    {
+      "ref": "Psalm 23:1",
+      "book": "psalms",
+      "chapter": 23,
+      "ta": "கர்த்தர் என் மேய்ப்பர்; எனக்கு குறைவுண்டாவதில்லை.",
+      "tref": "சங்கீதம் 23:1",
+      "en": "The Lord is my shepherd; I shall not want."
+    },
+    {
+      "ref": "Joshua 1:9",
+      "book": "joshua",
+      "chapter": 1,
+      "ta": "திடமனதாயிரு, தைரியமாயிரு; கர்த்தர் நீ போகும் எவ்விடத்திலும் உன்னோடிருக்கிறார்.",
+      "tref": "யோசுவா 1:9",
+      "en": "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go."
+    },
+    {
+      "ref": "Matthew 11:28",
+      "book": "matthew",
+      "chapter": 11,
+      "ta": "வருத்தப்பட்டு பாரஞ்சுமக்கிறவர்களே, என்னிடத்தில் வாருங்கள்; நான் உங்களுக்கு இளைப்பாறுதல் தருவேன்.",
+      "tref": "மத்தேயு 11:28",
+      "en": "Come to me, all who labour and are heavy laden, and I will give you rest."
+    },
+    {
+      "ref": "Isaiah 40:31",
+      "book": "isaiah",
+      "chapter": 40,
+      "ta": "கர்த்தருக்கு காத்திருக்கிறவர்களோ புதுப்பெலன் அடைவார்கள்; கழுகுகளைப்போல சிறகடித்து ஏறுவார்கள்.",
+      "tref": "ஏசாயா 40:31",
+      "en": "But they who wait for the Lord shall renew their strength; they shall mount up with wings like eagles; they shall run and not be weary; they shall walk and not faint."
+    }
+  ],
+  "imageVerses": [
+    {
+      "ref": "John 3:16",
+      "ta": "தேவன் இவ்வளவாய் உலகத்தில் அன்பு கூர்ந்தார், அதனால் தம்முடைய ஒரே பேறான குமாரனை அனுப்பினார்.",
+      "tref": "யோவான் 3:16",
+      "en": "For God so loved the world, that He gave His only begotten Son, that whoever believes in Him shall not perish but have eternal life."
+    },
+    {
+      "ref": "Philippians 4:13",
+      "ta": "என்னை பலப்படுத்துகிற கிறிஸ்துவினால் எல்லாவற்றையும் செய்யவல்லேன்.",
+      "tref": "பிலிப்பியர் 4:13",
+      "en": "I can do all things through Christ who strengthens me."
+    },
+    {
+      "ref": "Psalm 23:1",
+      "ta": "கர்த்தர் என் மேய்ப்பர்; எனக்கு குறைவுண்டாவதில்லை.",
+      "tref": "சங்கீதம் 23:1",
+      "en": "The Lord is my shepherd; I shall not want."
+    },
+    {
+      "ref": "Jeremiah 29:11",
+      "ta": "என்னால் நினைக்கப்படுகிற நினைவுகளை நான் அறிவேன்; சமாதானத்திற்கான நினைவுகளே.",
+      "tref": "எரேமியா 29:11",
+      "en": "For I know the plans I have for you, declares the Lord — plans for welfare and not for evil, to give you a future and a hope."
+    },
+    {
+      "ref": "Isaiah 43:4",
+      "ta": "நீ என் கண்களுக்கு அருமையானவன்; நீ கனம்பெற்றவன்; நான் உன்னை நேசிக்கிறேன்.",
+      "tref": "ஏசாயா 43:4",
+      "en": "Because you are precious in my sight, and honoured, and I love you."
+    },
+    {
+      "ref": "Isaiah 40:31",
+      "ta": "கர்த்தருக்கு காத்திருக்கிறவர்களோ புதுப்பெலன் அடைவார்கள்.",
+      "tref": "ஏசாயா 40:31",
+      "en": "But they who wait for the Lord shall renew their strength; they shall mount up with wings like eagles."
+    },
+    {
+      "ref": "Matthew 11:28",
+      "ta": "வருத்தப்பட்டு பாரஞ்சுமக்கிறவர்களே, என்னிடத்தில் வாருங்கள்; நான் இளைப்பாறுதல் தருவேன்.",
+      "tref": "மத்தேயு 11:28",
+      "en": "Come to me, all who labour and are heavy laden, and I will give you rest."
+    },
+    {
+      "ref": "Romans 8:28",
+      "ta": "தேவனிடத்தில் அன்பு கூருகிறவர்களுக்கு எல்லாமும் நன்மைக்கு ஏதுவாக நடக்கும்.",
+      "tref": "ரோமர் 8:28",
+      "en": "And we know that for those who love God all things work together for good."
+    },
+    {
+      "ref": "Proverbs 3:5",
+      "ta": "உன் சம்பூர்ண இருதயத்தோடே கர்த்தரில் நம்பிக்கைவை; உன் சொந்த அறிவை நம்பாதே.",
+      "tref": "நீதிமொழிகள் 3:5",
+      "en": "Trust in the Lord with all your heart, and do not lean on your own understanding."
+    },
+    {
+      "ref": "John 14:6",
+      "ta": "நான்தான் வழியும் சத்தியமும் ஜீவனுமாயிருக்கிறேன்.",
+      "tref": "யோவான் 14:6",
+      "en": "I am the way, and the truth, and the life. No one comes to the Father except through me."
+    }
+  ],
+  "readingPlan": [
+    {
+      "day": "Day 1",
+      "chapter": "Psalm 1",
+      "label": "The blessed man",
+      "book": "psalms",
+      "ta_day": "நாள் 1",
+      "ta_label": "பாக்கியமான மனுஷன்",
+      "n": 1
+    },
+    {
+      "day": "Day 2",
+      "chapter": "John 1",
+      "label": "The Word became flesh",
+      "book": "john",
+      "ta_day": "நாள் 2",
+      "ta_label": "வார்த்தை மாம்சமானது",
+      "n": 1
+    },
+    {
+      "day": "Day 3",
+      "chapter": "Romans 8",
+      "label": "No condemnation in Christ",
+      "book": "romans",
+      "ta_day": "நாள் 3",
+      "ta_label": "ஆக்கினைத்தீர்ப்பு இல்லை",
+      "n": 8
+    },
+    {
+      "day": "Day 4",
+      "chapter": "Matthew 5",
+      "label": "The Beatitudes",
+      "book": "matthew",
+      "ta_day": "நாள் 4",
+      "ta_label": "பாக்கியவசனங்கள்",
+      "n": 5
+    },
+    {
+      "day": "Day 5",
+      "chapter": "Philippians 4",
+      "label": "Rejoice always",
+      "book": "philippians",
+      "ta_day": "நாள் 5",
+      "ta_label": "சந்தோஷமாயிருங்கள்",
+      "n": 4
+    },
+    {
+      "day": "Day 6",
+      "chapter": "Isaiah 40",
+      "label": "Renew your strength",
+      "book": "isaiah",
+      "ta_day": "நாள் 6",
+      "ta_label": "புதுப்பெலன் அடைவார்கள்",
+      "n": 40
+    },
+    {
+      "day": "Day 7",
+      "chapter": "Revelation 21",
+      "label": "All things made new",
+      "book": "revelation",
+      "ta_day": "நாள் 7",
+      "ta_label": "எல்லாம் புதிதாகும்",
+      "n": 21
+    }
+  ]
+}

@@ -1,0 +1,642 @@
+/* ================================================================
+   ENJC — MOBILE FIX
+   Load LAST — after all other CSS files.
+   Fixes all mobile/responsive issues across every page.
+   Breakpoints: 900px (tablet), 600px (phone), 380px (small phone)
+================================================================ */
+
+/* ── 0. BASE BODY — nav clearance ──────────────────────────── */
+body {
+  padding-top: var(--nav-height) !important;
+}
+
+/* ── 1. HERO — video + layout ───────────────────────────────── */
+.hero {
+  /* Remove the negative margin that pulls hero under nav — body handles it */
+  margin-top: 0;
+  /* Full viewport minus nav */
+  height: calc(100svh - var(--nav-height));
+  min-height: 520px;
+}
+
+.hero-video {
+  display: block !important;   /* always show video */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    height: calc(100svh - var(--nav-height));
+    min-height: 480px;
+  }
+
+  /* Overlay — heavier on mobile so text is readable on video */
+  .hero-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(2,8,16,0.98) 0%,
+      rgba(2,8,16,0.94) 20%,
+      rgba(2,8,16,0.70) 40%,
+      rgba(2,8,16,0.30) 58%,
+      transparent 72%
+    ) !important;
+  }
+
+  /* Hero body — pin to bottom, full-width column */
+  .hero-body {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px clamp(80px, 14vw, 110px); /* bottom padding clears mob-nav */
+    gap: 0;
+  }
+
+  .hero-left  { max-width: 100%; padding: 0; }
+  .hero-right { display: none; }   /* card hidden; shown via hero-event-mobile */
+
+  /* Eyebrow */
+  .hero-eyebrow { margin-bottom: 10px; }
+  .hero-eyebrow-line { display: none; }
+  .hero-eyebrow-text {
+    font-size: 10px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.18em;
+  }
+
+  /* Title */
+  .hero-title {
+    font-size: clamp(32px, 9.5vw, 52px) !important;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+
+  /* Verse */
+  .hero-verse {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 6px;
+  }
+
+  /* Description — show on mobile, smaller size */
+  .hero-desc {
+    display: block;
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.70);
+    margin-bottom: 4px;
+    max-width: 92%;
+  }
+
+  /* Buttons */
+  .hero-btns {
+    margin-top: 16px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .hero-btns .btn-gold,
+  .hero-btns .btn-outline-light {
+    font-size: 13px;
+    padding: 11px 22px;
+    min-height: 44px;
+  }
+
+  /* Live badge — reposition for mobile */
+  .live-badge {
+    top: 12px !important;
+    right: 14px !important;
+    font-size: 10px;
+    padding: 5px 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: clamp(28px, 10vw, 38px) !important;
+  }
+}
+
+/* ── 2. HERO EVENT MOBILE CARD ──────────────────────────────── */
+.hero-event-mobile {
+  display: none;
+  margin: 0 16px 0;
+}
+
+@media (max-width: 900px) {
+  .hero-event-mobile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 16px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--gold-border);
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .hem-title { color: var(--text); }
+  .hem-label { color: var(--text-muted-dark); }
+  .hem-sub   { color: var(--text-muted-dark); }
+}
+
+/* ── 3. MOB QUICK GRID ──────────────────────────────────────── */
+.mob-quick-grid { display: none; }
+
+@media (max-width: 900px) {
+  .mob-quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 12px 16px 0;
+  }
+  .mqg-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-dark);
+    border-radius: 14px;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mqg-item:active { transform: scale(0.97); }
+  .mqg-title { color: var(--text); }
+  .mqg-sub   { color: var(--text-muted-dark); }
+}
+
+/* ── 4. COUNTDOWN STRIP ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .cd-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+  }
+  .cd-units { gap: 10px; }
+  .cd-num   { font-size: 22px; }
+  .cd-wa    { width: 100%; justify-content: center; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .cd-num { font-size: 20px; }
+  .cd-unit-label { font-size: 9px; }
+}
+
+/* ── 5. SERVICE STRIP ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .service-strip { flex-direction: column; }
+  .service-item {
+    border-right: none;
+    border-bottom: 1px solid var(--border-dark);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .service-item:last-child { border-bottom: none; }
+  .service-time { font-size: 13px; }
+  .service-name { font-size: 12px; }
+}
+
+/* ── 6. SECTIONS — padding reduction on mobile ──────────────── */
+@media (max-width: 600px) {
+  :root {
+    --section-v:    clamp(48px, 8vw, 72px);
+    --section-v-sm: clamp(32px, 6vw, 52px);
+    --container-px: 16px;
+  }
+}
+
+/* ── 7. ABOUT GRID ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .about-video-wrap iframe { border-radius: 10px; }
+}
+
+@media (max-width: 600px) {
+  .pastor-grid { grid-template-columns: 1fr; gap: 24px; }
+  .pastor-photo-col { flex-direction: column; align-items: center; }
+  .pastor-photo-frame { max-width: 160px; aspect-ratio: 1/1; }
+  .stats-band { flex-direction: column; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border-dark); }
+  .stat-item:last-child { border-bottom: none; }
+}
+
+/* ── 8. GALLERY PAGE ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Fan carousel */
+  .gal-carousel-wrap { height: 280px; }
+  .gc { width: 160px; height: 220px; }
+  .gc[data-pos="-1"] { transform: translateX(-140px) scale(0.80) rotateY(10deg); }
+  .gc[data-pos="1"]  { transform: translateX(140px)  scale(0.80) rotateY(-10deg); }
+  .gc[data-pos="-2"] { transform: translateX(-248px) scale(0.60) rotateY(18deg); }
+  .gc[data-pos="2"]  { transform: translateX(248px)  scale(0.60) rotateY(-18deg); }
+
+  /* Stats row */
+  .gal-stats { gap: 0; }
+  .gal-stat  { padding: 12px 16px; }
+  .gal-stat-num { font-size: 22px; }
+
+  /* Filter buttons — horizontal scroll */
+  .gal-filter-inner {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  .gal-filter-inner::-webkit-scrollbar { display: none; }
+
+  /* Nav arrows in lightbox */
+  .lb-nav { display: none; }
+}
+
+@media (max-width: 480px) {
+  .gal-carousel-wrap { height: 240px; }
+  .gc { width: 140px; height: 196px; }
+  .gc[data-pos="-1"] { transform: translateX(-120px) scale(0.78) rotateY(10deg); }
+  .gc[data-pos="1"]  { transform: translateX(120px)  scale(0.78) rotateY(-10deg); }
+  .gc[data-pos="-2"] { transform: translateX(-210px) scale(0.56) rotateY(18deg); }
+  .gc[data-pos="2"]  { transform: translateX(210px)  scale(0.56) rotateY(-18deg); }
+}
+
+/* ── 9. EVENTS PAGE ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .countdown { gap: 8px; }
+  .countdown__unit { min-width: 56px; padding: 10px 12px 6px; }
+  .countdown__value { font-size: 1.6rem; }
+
+  .schedule-row { flex-wrap: wrap; gap: 6px; }
+  .schedule-day  { min-width: auto; font-size: 13px; }
+  .schedule-time { font-size: 13px; }
+  .schedule-name { text-align: left; font-size: 12px; width: 100%; }
+
+  .reels-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .video-card__body { padding: 10px 10px 12px; }
+  .video-card__title { font-size: 12px; }
+}
+
+/* ── 10. MINISTRIES PAGE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .min-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .min-card-img { height: 130px; }
+}
+@media (max-width: 540px) {
+  .min-grid { grid-template-columns: 1fr; }
+  .min-card-img { height: 160px; }
+}
+
+/* ── 11. CONTACT PAGE ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 600px) {
+  .form-row,
+  .form-grid { grid-template-columns: 1fr; }
+  .visit-steps { gap: 16px; }
+}
+
+/* ── 12. PAGE HERO (inner pages) ─────────────────────────────── */
+@media (max-width: 600px) {
+  .page-hero {
+    padding: clamp(32px,6vw,52px) 0 clamp(24px,4vw,40px);
+  }
+  .page-hero h1 { font-size: clamp(28px,9vw,40px); }
+  .page-hero p  { font-size: 13px; }
+}
+
+/* ── 13. FOOTER ──────────────────────────────────────────────── */
+.footer {
+  /* Extra bottom padding so content clears the mobile bottom nav */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-bottom: 28px;
+  }
+
+  /* Brand block */
+  .footer-brand-name { font-size: 16px; }
+  .footer-tagline    { font-size: 11px; margin-bottom: 10px; }
+  .footer-addr       { font-size: 12px; margin-bottom: 14px; }
+  .footer-social     { gap: 12px; }
+  .social-icon {
+    width: 40px; height: 40px;   /* easier tap target */
+    font-size: 20px;
+  }
+
+  /* Column titles */
+  .footer-col-title { font-size: 10px; margin-bottom: 10px; }
+
+  /* Links */
+  .footer-links a, .footer-links li {
+    font-size: 13px;             /* readable on phone */
+    min-height: 36px;            /* tap-friendly spacing */
+    display: flex; align-items: center;
+  }
+
+  /* Bottom strip */
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    padding: 16px 16px;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 80px);
+  }
+  /* Stack Quick Links + Bible Tools side by side on narrow phones */
+  .footer-grid > *:nth-child(2),
+  .footer-grid > *:nth-child(3) {
+    /* These two cols can sit in a 2-col mini grid on small screens */
+  }
+}
+
+/* ── 14. FLOATING BUTTONS — clear mobile nav ─────────────────── */
+@media (max-width: 900px) {
+  /* WhatsApp float */
+  .wa-float {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
+    right: 14px;
+    width: 48px; height: 48px;
+    font-size: 22px;
+  }
+
+  /* Scroll-to-top */
+  #scroll-top-btn, .scroll-top-btn, .scroll-top {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 130px);
+    right: 14px;
+  }
+}
+
+/* ── 15. MOBILE BOTTOM NAV ───────────────────────────────────── */
+.mob-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.mob-item {
+  min-height: 48px;  /* 48px tap target */
+  padding: 8px 4px 10px;
+}
+.mob-item i { font-size: 22px; }
+.mob-item span { font-size: 10px; }
+
+/* ── 16. TYPOGRAPHY — body padding-bottom clears mob-nav ─────── */
+@media (max-width: 900px) {
+  body {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 64px) !important;
+  }
+}
+
+/* ── 17. GRIDS ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .gallery-strip { grid-template-columns: 1fr 1fr; }
+  .deliv-grid    { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .grid-4          { grid-template-columns: 1fr 1fr; }
+  .gallery-strip   { grid-template-columns: 1fr 1fr; }
+  .schedule-grid   { grid-template-columns: 1fr; }
+  .ministry-grid   { grid-template-columns: 1fr; }
+}
+@media (max-width: 380px) {
+  .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* ── 18. BUTTONS — touch targets ────────────────────────────── */
+@media (max-width: 900px) {
+  .btn, .btn-gold, .btn-outline-light, .btn-outline-dark,
+  .nav-visit-btn, button,
+  .min-card-cta, .enjc-filter-btn {
+    min-height: 44px;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ── 19. IMAGES ──────────────────────────────────────────────── */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── 20. HORIZONTAL OVERFLOW GUARD ──────────────────────────── */
+.container,
+.section,
+.footer,
+.footer-grid,
+.hero-body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ── 21. FOOTER BRAND BLOCK — ensure visible on mobile ──────── */
+@media (max-width: 768px) {
+  .footer-grid > div:first-child {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .footer-brand-name {
+    font-size: 17px !important;
+    color: var(--gold) !important;
+  }
+  .footer-tagline {
+    color: var(--text-muted-dark) !important;
+    margin-bottom: 10px;
+  }
+  .footer-addr {
+    color: var(--text-muted-dark) !important;
+    line-height: 1.9;
+  }
+  /* YouTube icon was missing — ensure all 4 social icons show */
+  .footer-social { gap: 14px; flex-wrap: wrap; }
+  .social-icon {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    font-size: 20px;
+  }
+}
+
+/* ── 22. FOOTER LINKS — plain <a> inside .footer-links ──────── */
+/* When footer-links contains plain <a> not wrapped in <li> */
+@media (max-width: 768px) {
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .footer-links a,
+  .footer-links li {
+    font-size: 14px;
+    color: var(--text-muted-dark);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .footer-links a:last-child,
+  .footer-links li:last-child { border-bottom: none; }
+  .footer-links a:active,
+  .footer-links li:active { color: var(--gold); }
+}
+
+/* ── 23. BIBLE PAGE — tools.css mobile additions ─────────────── */
+@media (max-width: 600px) {
+  /* Bible reader toolbar overflow */
+  .bible-toolbar,
+  .bible-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  /* Book/chapter selects full width */
+  .bible-select {
+    width: 100%;
+    font-size: 14px;
+  }
+  /* Verse text readable */
+  .verse-text, .verse-content {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+  .tamil-text {
+    font-size: 16px;
+    line-height: 2.0;
+  }
+}
+
+/* ── 24. IMAGEGEN PAGE — canvas/tools on mobile ──────────────── */
+@media (max-width: 600px) {
+  .ig-canvas-wrap,
+  .canvas-container {
+    width: 100% !important;
+    max-width: 100%;
+  }
+  canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+  .ig-panel,
+  .tool-panel,
+  .controls-panel {
+    padding: 12px;
+  }
+}
+
+/* ── 25. EVENTS PAGE — video grid mobile ─────────────────────── */
+@media (max-width: 600px) {
+  .video-grid,
+  .playlist-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .video-card__body { padding: 8px 10px 10px; }
+  .video-card__title { font-size: 11px; -webkit-line-clamp: 2; }
+  .video-card__meta  { font-size: 10px; gap: 6px; }
+}
+@media (max-width: 400px) {
+  .video-grid,
+  .playlist-grid { grid-template-columns: 1fr; }
+}
+
+/* ── 26. PAGE HERO — inner pages consistent padding ──────────── */
+@media (max-width: 600px) {
+  .page-hero {
+    padding: clamp(28px,6vw,44px) var(--container-px) clamp(20px,4vw,36px);
+    text-align: center;
+  }
+  .page-hero h1 {
+    font-size: clamp(26px,8.5vw,38px);
+    margin-bottom: 10px;
+  }
+  .page-hero p { font-size: 13px; max-width: 100%; }
+}
+
+/* ── 27. SECTION HEADERS — mobile ───────────────────────────── */
+@media (max-width: 600px) {
+  .section-header,
+  .section-header-center {
+    margin-bottom: 20px;
+  }
+  .section-header h2,
+  .section-header-center h2 {
+    font-size: clamp(22px, 7vw, 30px);
+  }
+}
+
+/* ── 28. CTA SECTION — mobile ────────────────────────────────── */
+@media (max-width: 600px) {
+  .cta-section,
+  .s-cta {
+    padding: clamp(40px,8vw,60px) var(--container-px);
+    text-align: center;
+  }
+  .cta-title { font-size: clamp(22px,7vw,30px); }
+  .cta-btns,
+  .cta-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .cta-btns a,
+  .cta-actions a { width: 100%; justify-content: center; }
+}
+
+/* ── 29. ABOUT PAGE — pastor section mobile ──────────────────── */
+@media (max-width: 600px) {
+  .pastor-grid { grid-template-columns: 1fr; gap: 20px; }
+  .pastor-photo-col { align-items: center; flex-direction: column; }
+  .pastor-photo-frame {
+    max-width: 180px;
+    width: 180px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .del-grid   { grid-template-columns: 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .mv-grid    { grid-template-columns: 1fr; }
+}
+
+/* ── 30. CONTACT PAGE — map + form mobile ────────────────────── */
+@media (max-width: 600px) {
+  .map-embed iframe,
+  .contact-map iframe {
+    height: 200px !important;
+  }
+  .contact-info-card { padding: 16px; }
+  .visit-step { gap: 12px; }
+}
+
+/* ── 31. INDEX PAGE — PC layout on mobile (no mob-nav) ───────── */
+.page-home .mob-nav        { display: none !important; }
+.page-home .mob-quick-grid { display: none !important; }
+.page-home .hero-event-mobile { display: none !important; }
+@media (max-width: 900px) {
+  .page-home body,
+  body.page-home {
+    padding-bottom: 0 !important;
+  }
+  .page-home .hero-right { display: block !important; }
+  .page-home .footer { padding-bottom: 24px !important; }
+}
