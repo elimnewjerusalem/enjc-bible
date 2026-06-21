@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-page="bible">
+<head>
+<meta charset="UTF-8">
+  <link rel="manifest" href="data/manifest.json">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" type="image/png" href="images/logo/logo.png">
+  <link rel="apple-touch-icon" href="images/logo/logo.png">
+  <link rel="canonical" href="https://elimnewjerusalem.github.io/enjc-bible/bible.html">
+<title>பரிசுத்த வேதாகமம் | ENJC</title>
+<meta name="description" content="Tamil & English Bible — 66 books, Audio, Image, Bookmark | ENJC Tondiarpet Chennai">
+
+<noscript>
+</noscript><script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
+<!-- Styles -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/tools.css">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/premium-v2.css">
+  <link rel="stylesheet" href="css/mobile-fix.css">
+
+<!-- Styles -->
+
+<noscript>
+</noscript>
+<noscript>
+</noscript>
+
+  <!-- SEO: Open Graph & Twitter Card -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://elimnewjerusalem.github.io/enjc-bible/bible.html">
+  <meta property="og:title"       content="பரிசுத்த வேதாகமம் | ENJC">
+  <meta property="og:description" content="Tamil &amp; English Bible — 66 books, Audio, Bookmarks, Image Generator | ENJC Tondiarpet Chennai">
+  <meta property="og:image" content="https://elimnewjerusalem.github.io/enjc-bible/images/logo/logo.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title"      content="பரிசுத்த வேதாகமம் | ENJC">
+  <meta name="twitter:description" content="Tamil &amp; English Bible — 66 books, Audio, Bookmarks, Image Generator | ENJC Tondiarpet Chennai">
+  <meta name="twitter:image"      content="https://elimnewjerusalem.github.io/enjc-bible/images/logo/logo.png">
+
+</head>
+<body>
+<!-- ── SITE NAV ─────────────────────────────────────── -->
+<a href="#main" class="skip-to-content">Skip to main content</a>
+<header>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container">
+      <a href="app.html" class="nav-logo" aria-label="ENJC Bible home">
+        <img src="images/logo/logo.png" class="nav-logo__img" alt="ENJC logo" width="36" height="36" onerror="this.style.display='none'">
+        <div>
+          <div class="nav-logo__name">ENJC Bible</div>
+          <div class="nav-logo__sub">Elim New Jerusalem Church</div>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links" role="list" aria-label="Main navigation">
+        <li><a href="app.html" class="nav-link">Home</a></li>
+        <li><a href="bible.html" class="nav-link  nav-link--active" aria-current="page">Bible</a></li>
+        <li><a href="imagegen.html" class="nav-link">Cards</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMenu()"
+        aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="nav-hamburger__line"></span>
+        <span class="nav-hamburger__line"></span>
+        <span class="nav-hamburger__line"></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="app.html" class="mobile-menu__link">Home</a>
+      <a href="bible.html" class="mobile-menu__link  is-active" aria-current="page">Bible</a>
+      <a href="imagegen.html" class="mobile-menu__link">Cards</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ── MAIN LAYOUT — Manuscript Reader (2026 redesign) ──────────── -->
+<div class="bv-wrap">
+
+  <!-- VERSE OF THE DAY — manuscript hero -->
+  <section class="bv-hero">
+    <div class="bv-hero-ornament" aria-hidden="true">✦</div>
+    <span class="bv-hero-eyebrow">இன்றைய வேத வாக்கு · Verse of the Day</span>
+    <p class="bv-hero-ta" id="votd-ta">ஏற்றுகிறோம்...</p>
+    <cite class="bv-hero-taref" id="votd-taref"></cite>
+    <p class="bv-hero-en" id="votd-en"></p>
+    <cite class="bv-hero-enref" id="votd-enref"></cite>
+    <div class="bv-hero-acts">
+      <button class="bv-chip bv-chip-gold" onclick="playVOTD('ta')"><i class="ti ti-volume" aria-hidden="true"></i> தமிழ்</button>
+      <button class="bv-chip bv-chip-gold" onclick="playVOTD('en')"><i class="ti ti-volume" aria-hidden="true"></i> English</button>
+      <button class="bv-chip" onclick="openImageStudio()"><i class="ti ti-photo" aria-hidden="true"></i> Image</button>
+      <button class="bv-chip" onclick="copyVOTD()"><i class="ti ti-copy" aria-hidden="true"></i> Copy</button>
+      <button class="bv-chip" onclick="shareVOTD()"><i class="ti ti-share-2" aria-hidden="true"></i> Share</button>
+      <button class="bv-chip" onclick="reqNotify()"><i class="ti ti-bell" aria-hidden="true"></i> Notify</button>
+    </div>
+  </section>
+
+  <!-- READING CONSOLE — book/chapter + version + tools, one cohesive bar -->
+  <section class="bv-console">
+
+    <div class="bv-console-row">
+      <div class="bv-field bv-field-grow">
+        <label class="bv-field-lbl" for="book-sel">புத்தகம் · Book</label>
+        <select id="book-sel" class="bv-select" onchange="onBook()">
+          <option value="">தேர்வு செய்க...</option>
+        </select>
+      </div>
+      <div class="bv-field">
+        <label class="bv-field-lbl" for="ch-sel">அதிகாரம் · Ch</label>
+        <select id="ch-sel" class="bv-select bv-select-narrow" onchange="onCh()" disabled>
+          <option>—</option>
+        </select>
+      </div>
+      <button class="bv-go-btn" onclick="loadCh()" aria-label="Read chapter">
+        <i class="ti ti-book-2" aria-hidden="true"></i><span>படி</span>
+      </button>
+      <button id="gobtn" onclick="loadCh()" style="display:none">படி</button>
+    </div>
+
+    <div class="bv-console-row bv-console-row-versions">
+      <div class="bv-field bv-field-grow">
+        <label class="bv-field-lbl" for="ver-sel">பதிப்பு · Version</label>
+        <select id="ver-sel" class="bv-select" onchange="setVersion(this.value)">
+        </select>
+      </div>
+      <button id="btn-ta" class="on" style="display:none"></button>
+      <button id="btn-en" style="display:none"></button>
+    </div>
+
+    <div class="bv-console-row bv-console-row-tools">
+      <div class="bv-search">
+        <i class="ti ti-search" aria-hidden="true"></i>
+        <input id="sinp" type="search"
+          placeholder="தேடுக — John 3:16, faith, அன்பு..."
+          inputmode="search" autocomplete="off" autocorrect="off" spellcheck="false"
+          onkeydown="if(event.key==='Enter')doSearch()">
+        <button onclick="doSearch()" aria-label="Search">Go</button>
+      </div>
+
+      <label class="bv-parallel">
+        <input type="checkbox" id="para-chk" onchange="togParallelNew()">
+        <span class="bv-parallel-track"></span>
+        <span class="bv-parallel-txt">Parallel <em id="para-state">Off</em></span>
+      </label>
+      <button id="para-btn" style="display:none">Off</button>
+
+      <div class="bv-fsz">
+        <button onclick="chFont(-1)" aria-label="Decrease font size">A−</button>
+        <span id="fszv">17px</span>
+        <button onclick="chFont(1)" aria-label="Increase font size">A+</button>
+      </div>
+    </div>
+
+    <div class="bv-console-row bv-console-row-feat">
+      <button class="bv-feat feat-btn" id="fb-bm" onclick="openPanel('bm')">
+        <i class="ti ti-heart" aria-hidden="true"></i><span id="bm-lbl">Saved</span><em class="feat-badge" id="bm-badge">0</em>
+      </button>
+      <button class="bv-feat feat-btn" id="fb-quiz" onclick="openPanel('quiz')">
+        <i class="ti ti-brain" aria-hidden="true"></i><span>Quiz</span>
+      </button>
+      <button class="bv-feat feat-btn" id="fb-compare" onclick="openPanel('compare')">
+        <i class="ti ti-arrows-left-right" aria-hidden="true"></i><span>Compare</span>
+      </button>
+      <button class="bv-feat feat-btn" id="fb-notes" onclick="openPanel('notes')">
+        <i class="ti ti-notes" aria-hidden="true"></i><span>Notes</span>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- OFFLINE BAR -->
+  <div class="offline-bar" id="offline-bar">
+    <strong>Offline:</strong> சேமிக்கப்பட்ட அதிகாரங்கள் மட்டும் கிடைக்கும்
+  </div>
+
+  <!-- AUDIO BAR -->
+  <div class="bv-audio" id="abar">
+    <button class="bv-audio-play" onclick="togPlay()">
+      <span id="plic">▶</span><span id="puic" style="display:none">⏸</span>
+    </button>
+    <div class="bv-audio-info">
+      <div class="bv-audio-title" id="aptitle">ENJC Bible</div>
+      <div class="bv-audio-stat"  id="apstat">வசனத்தை தொட்டு கேளுங்கள்</div>
+    </div>
+    <select class="bv-audio-spd" id="aspd" onchange="chSpd()">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.25">1.25×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+    <button class="bv-audio-ctrl" onclick="prevCh();playAll()" title="Prev chapter"><i class="ti ti-player-skip-back" aria-hidden="true"></i></button>
+    <button class="bv-audio-stop" onclick="stopAud()">■ Stop</button>
+    <button class="bv-audio-ctrl" onclick="nextCh();playAll()" title="Next chapter"><i class="ti ti-player-skip-forward" aria-hidden="true"></i></button>
+  </div>
+
+  <!-- CHAPTER BAR — bookmark-ribbon style -->
+  <div class="bv-chbar" id="chbar">
+    <button class="bv-chbar-nav" id="prevb" onclick="prevCh()" aria-label="Previous chapter">
+      <i class="ti ti-chevron-left" aria-hidden="true"></i>
+    </button>
+    <div class="bv-chbar-info">
+      <div class="bv-chbar-title" id="chtitle">—</div>
+      <div class="bv-chbar-sub"   id="chsub"></div>
+    </div>
+    <div class="bv-chbar-acts">
+      <button class="bv-chbar-act bv-chbar-act-gold" onclick="playAll()" title="Play all"><i class="ti ti-player-play" aria-hidden="true"></i></button>
+      <button class="bv-chbar-act" id="bmchbtn" onclick="togBMChapter()" title="Bookmark chapter"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+    </div>
+    <button class="bv-chbar-nav" id="nextb" onclick="nextCh()" aria-label="Next chapter">
+      <i class="ti ti-chevron-right" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="ch-prog"><div class="ch-prog-fill" id="chprogf"></div></div>
+
+  <!-- VERSE CONTENT -->
+  <div id="bcontent">
+    <div class="bload">
+      <div class="bspin"></div>
+      <p>புத்தகம் &amp; அதிகாரம் தேர்வு செய்யுங்கள்</p>
+    </div>
+  </div>
+
+</div>
+<!-- ── END Manuscript Reader ─────────────────────────────────── -->
+
+<!-- ── SIDE PANEL ──────────────────────────────────────── -->
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+<div class="panel"   id="panel">
+  <div class="panel-handle"></div>
+  <div class="panel-head">
+    <span class="panel-title" id="panel-title">Panel</span>
+    <button class="panel-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-body" id="panel-body"></div>
+</div>
+
+<!-- ── BOTTOM SHEET (verse actions) ───────────────────── -->
+<div class="sheet-backdrop" id="sheet-backdrop" onclick="closeVModal()"></div>
+<div class="verse-sheet" id="verse-sheet">
+  <div class="vs-handle"></div>
+
+  <div class="vs-inner">
+
+    <!-- Reference -->
+    <div class="vs-ref-wrap">
+      <div class="vs-ref" id="vs-ref">—</div>
+      <button class="vs-close" onclick="closeVModal()">✕</button>
+    </div>
+
+    <!-- Tamil verse -->
+    <div class="vs-ta" id="vs-ta"></div>
+
+    <!-- English verse -->
+    <div class="vs-en" id="vs-en"></div>
+
+    <!-- Note textarea -->
+    <textarea class="vs-note-inp" id="vs-note" rows="2"
+      placeholder="📝 குறிப்பு எழுதுங்கள்..."
+      oninput="autoSaveNote(this.value)"></textarea>
+
+    <!-- Highlight row (hidden, toggled by Highlight button) -->
+    <div class="vs-hl-row" id="vs-hl-row">
+      <span class="vs-hl-lbl">Highlight</span>
+      <div class="hldot" style="background:#f5c518" onclick="setSheetHL(this,'#f5c518')"></div>
+      <div class="hldot" style="background:#4ade80" onclick="setSheetHL(this,'#4ade80')"></div>
+      <div class="hldot" style="background:#60a5fa" onclick="setSheetHL(this,'#60a5fa')"></div>
+      <div class="hldot" style="background:#f87171" onclick="setSheetHL(this,'#f87171')"></div>
+      <div class="hldot" style="background:#c084fc" onclick="setSheetHL(this,'#c084fc')"></div>
+      <button class="hldot-clear" onclick="clearSheetHL()">✕</button>
+    </div>
+
+    <!-- 8 Action buttons -->
+    <div class="vs-actions">
+
+      <button class="vs-act-btn" onclick="mAct('ta-audio')">
+        <span class="vs-act-icon" style="background:#166534;color:#ffffff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M15.54 8.46a5 5 0 010 7.07"/>
+            <path d="M19.07 4.93a10 10 0 010 14.14"/>
+          </svg>
+        </span>
+        <span class="vs-act-lbl">Tamil</span>
+      </button>
+
+      <button class="vs-act-btn" onclick="mAct('en-audio')">
+        <span class="vs-act-icon" style="background:#134e4a;color:#ffffff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M15.54 8.46a5 5 0 010 7.07"/>
+          </svg>
+        </span>
+        <span class="vs-act-lbl">English</span>
+      </button>
+
+      <button class="vs-act-btn" onclick="openImageStudioWithVerse()">
+        <span class="vs-act-icon" style="background:#581c87;color:#ffffff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </span>
+        <span class="vs-act-lbl">Image</span>
+      </button>
+
+      <button class="vs-act-btn" id="sheet-bm-btn" onclick="mAct('save')">
+        <span class="vs-act-icon" style="background:#991b1b;color:#ffffff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" id="bm-act-svg">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </span>
+        <span class="vs-act-lbl" id="bm-lbl2">Save</span>
+      </button>
+
+      <button class="vs-act-btn" onclick="mAct('copy')">
+        <span class="vs-act-icon" style="background:#92400e;color:#ffffff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2"/>
+            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+          </svg>
+        </span>
+        <span class="vs-act-lbl">Copy</span>
+      </button>
+
+      <button class="vs-act-btn" onclick="mAct('share')">
+        <span class="vs-act-icon" style="background:#1e3a8a;color:#ffffff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+        </span>
+        <span class="vs-act-lbl">Share</span>
+      </button>
+
+      <button class="vs-act-btn" onclick="toggleNoteRow()">
+        <span class="vs-act-icon" style="background:#78350f;color:#ffffff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+          </svg>
+        </span>
+        <span class="vs-act-lbl">Note</span>
+      </button>
+
+      <button class="vs-act-btn" onclick="toggleHLRow()">
+        <span class="vs-act-icon" style="background:#4c1d95;color:#ffffff">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"/>
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+        </span>
+        <span class="vs-act-lbl">Highlight</span>
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- BOTTOM NAV -->
+<nav class="mob-nav" aria-label="Mobile navigation">
+  <div class="mob-nav-inner">
+    <a href="app.html"     class="mob-item"        aria-label="App Home">  <i class="ti ti-home"     aria-hidden="true"></i><span>Home</span></a>
+    <a href="bible.html"   class="mob-item active"  aria-label="Bible">    <i class="ti ti-book"     aria-hidden="true"></i><span>Bible</span></a>
+    <a href="imagegen.html" class="mob-item"        aria-label="Verse Card"><i class="ti ti-photo"   aria-hidden="true"></i><span>Cards</span></a>
+  </div>
+</nav>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/919444345102" target="_blank" rel="noopener"
+   class="wa-float" title="WhatsApp" aria-label="Chat on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__bottom">
+      <span>© 2026 Elim New Jerusalem Church, Chennai</span>
+      <span>Built with ❤️ for the Kingdom</span>
+    </div>
+  </div>
+</footer>
+
+<!-- BOTTOM SHEET JS -->
+<script>
+// ── Bottom Sheet helpers (bible.js owns openVModal/closeVModal/mAct) ──
+
+function closeSheet(){
+  document.getElementById('verse-sheet').classList.remove('open');
+  document.getElementById('sheet-backdrop').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function toggleHLRow(){
+  const row = document.getElementById('vs-hl-row');
+  if(!row) return;
+  row.classList.toggle('show');
+  // Hide note row when HL row shown
+  const nr = document.getElementById('vs-note-row');
+  if(nr && row.classList.contains('show')) nr.classList.remove('show');
+}
+
+function toggleNoteRow(){
+  const row = document.getElementById('vs-note-row');
+  if(!row) return;
+  row.classList.toggle('show');
+  // Hide HL row when note row shown
+  const hr = document.getElementById('vs-hl-row');
+  if(hr && row.classList.contains('show')) hr.classList.remove('show');
+  // Focus textarea
+  if(row.classList.contains('show')){
+    setTimeout(()=>document.getElementById('vs-note')?.focus(), 100);
+  }
+}
+
+function setSheetHL(dot, color){
+  document.querySelectorAll('.hldot').forEach(d => d.classList.remove('on'));
+  dot.classList.add('on');
+  const ta = document.getElementById('vs-ta');
+  if(ta){
+    ta.style.background    = color + '22';
+    ta.style.borderRadius  = '8px';
+    ta.style.padding       = '10px 12px';
+    ta.classList.add('highlighted');
+  }
+  // Apply highlight to verse in list
+  if(window._mv){
+    const vi = document.getElementById('vi' + _mv.i);
+    if(vi){ vi.style.setProperty('--hl-color', color); vi.classList.add('vhl'); }
+    // Save to localStorage
+    const hlk = (window.S?.book||'') + (window.S?.ch||'');
+    if(window.S && hlk){
+      if(!S.hl[hlk]) S.hl[hlk] = {};
+      S.hl[hlk][_mv.v.num] = color;
+      try{ localStorage.setItem('enjc_hl', JSON.stringify(S.hl)); }catch(e){}
+    }
+  }
+  if(typeof toast === 'function') toast('🎨 Highlighted!');
+}
+
+function clearSheetHL(){
+  document.querySelectorAll('.hldot').forEach(d => d.classList.remove('on'));
+  const ta = document.getElementById('vs-ta');
+  if(ta){ ta.style.background=''; ta.style.padding=''; ta.style.borderRadius=''; ta.classList.remove('highlighted'); }
+  if(window._mv){
+    const vi = document.getElementById('vi' + _mv.i);
+    if(vi) vi.classList.remove('vhl');
+    const hlk = (window.S?.book||'') + (window.S?.ch||'');
+    if(window.S && hlk && S.hl[hlk]){
+      delete S.hl[hlk][_mv.v.num];
+      try{ localStorage.setItem('enjc_hl', JSON.stringify(S.hl)); }catch(e){}
+    }
+  }
+}
+
+function saveSheetNote(){
+  const note = document.getElementById('vs-note')?.value?.trim();
+  if(note && typeof autoSaveNote === 'function') autoSaveNote(note);
+  if(typeof toast === 'function') toast('✅ Note saved');
+}
+
+// Swipe to dismiss
+(function(){
+  const sheet = document.getElementById('verse-sheet');
+  if(!sheet) return;
+  let ty = 0;
+  sheet.addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
+  sheet.addEventListener('touchmove', e => {
+    const dy = e.touches[0].clientY - ty;
+    if(dy > 0) sheet.style.transform = 'translateY(' + Math.min(dy, 280) + 'px)';
+  }, { passive: true });
+  sheet.addEventListener('touchend', e => {
+    const dy = e.changedTouches[0].clientY - ty;
+    sheet.style.transform = '';
+    if(dy > 80) closeSheet();
+  });
+})();
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeSheet();
+});
+
+function openImageStudio(){
+  const v = window._vd;
+  if(v){
+    const verse = { ta: v.ta||'', tref: v.tref||'', en: v.en||v.text||'', ref: v.ref||'' };
+    try{ localStorage.setItem('enjc_ig_verse', JSON.stringify(verse)); }catch(e){}
+  }
+  window.open('imagegen.html', '_blank');
+}
+
+function openImageStudioWithVerse(){
+  const mv = window._mv;
+  let verse = null;
+  if(mv){
+    const ta   = mv.ta   || document.getElementById('vs-ta')?.textContent?.replace(/["“”]/g,'').trim() || '';
+    const en   = mv.en   || document.getElementById('vs-en')?.textContent?.replace(/["“”]/g,'').trim() || '';
+    const tref = mv.taRef || '';
+    const ref  = mv.ref  || '';
+    if(ta) verse = { ta, tref, en, ref };
+  }
+  if(!verse){
+    // Fallback to VOTD
+    const v = window._vd;
+    if(v) verse = { ta: v.ta||'', tref: v.tref||'', en: v.en||'', ref: v.ref||'' };
+  }
+  if(verse){
+    try{ localStorage.setItem('enjc_ig_verse', JSON.stringify(verse)); }catch(e){}
+  }
+  window.open('imagegen.html', '_blank');
+}
+
+</script>
+
+<!-- BIBLE ENGINE -->
+<script src="js/bible.js"></script>
+<script src="js/bible-mobile.js"></script>
+<!-- SCROLL TOP -->
+<button class="scroll-top-btn" id="scroll-top-btn" onclick="goTop()" aria-label="Back to top">↑</button>
+<script>window.ENJC_PAGE="bible";</script>
+<script src="js/site.js" defer></script>
+<script src="js/design-upgrade.js" defer></script>
+</body>
+</html>

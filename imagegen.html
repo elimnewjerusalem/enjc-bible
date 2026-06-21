@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-page="imagegen">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="images/logo/logo.png">
+  <link rel="apple-touch-icon" href="images/logo/logo.png">
+  <link rel="manifest" href="data/manifest.json">
+  <meta name="viewport" content="width=device-width,initial-scale=1">  
+  
+  
+  <noscript>
+</noscript>
+  
+<link rel="canonical" href="https://elimnewjerusalem.github.io/enjc-bible/imagegen.html">
+<title>Verse Studio — ENJC</title>
+<meta name="description" content="Create beautiful Tamil Bible verse images for Instagram, WhatsApp and YouTube. ENJC Verse Studio.">
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://elimnewjerusalem.github.io/enjc-bible/imagegen.html">
+<meta property="og:title"       content="Verse Studio — ENJC">
+<meta property="og:description" content="Create beautiful Tamil Bible verse images for Instagram, WhatsApp and YouTube Shorts.">
+<meta property="og:image" content="https://elimnewjerusalem.github.io/enjc-bible/images/logo/logo.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elimnewjerusalem.github.io/enjc-bible/images/logo/logo.png">
+<meta name="twitter:title"      content="Verse Studio — ENJC">
+
+  <script>
+  // Canvas memory-clear patch: prevent leaks on style/background swaps
+  (function(){
+    var _raf = requestAnimationFrame;
+    function patchCanvas(cv){
+      if(!cv || cv._patched) return;
+      cv._patched = true;
+      var origGetCtx = cv.getContext.bind(cv);
+      cv.getContext = function(type, opts){
+        var ctx = origGetCtx(type, opts);
+        return ctx;
+      };
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+      var cv = document.getElementById('mob-preview-cv');
+      if(cv) patchCanvas(cv);
+      // Inject clearRect before every draw cycle triggered by UI controls
+      document.querySelectorAll('[data-style], [data-bg], select, input[type=radio]').forEach(function(el){
+        el.addEventListener('change', function(){
+          var cv2 = document.getElementById('mob-preview-cv');
+          if(cv2){
+            var ctx2 = cv2.getContext('2d');
+            if(ctx2) ctx2.clearRect(0, 0, cv2.width, cv2.height);
+          }
+        });
+      });
+    });
+  })();
+  </script>
+<!-- Styles -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/tools.css">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/premium-v2.css">
+  <link rel="stylesheet" href="css/mobile-fix.css">
+
+<!-- Styles -->
+
+<noscript>
+</noscript>
+<noscript>
+</noscript>
+
+</head>
+<body>
+
+<!-- ENJC SITE NAV (compact) -->
+<a href="#main" class="skip-to-content">Skip to main content</a>
+<header>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container">
+      <a href="app.html" class="nav-logo" aria-label="ENJC Bible home">
+        <img src="images/logo/logo.png" class="nav-logo__img" alt="ENJC logo" width="36" height="36" onerror="this.style.display='none'">
+        <div>
+          <div class="nav-logo__name">ENJC Bible</div>
+          <div class="nav-logo__sub">Elim New Jerusalem Church</div>
+        </div>
+      </a>
+      <ul class="nav-links" id="nav-links" role="list" aria-label="Main navigation">
+        <li><a href="app.html" class="nav-link">Home</a></li>
+        <li><a href="bible.html" class="nav-link">Bible</a></li>
+        <li><a href="imagegen.html" class="nav-link  nav-link--active" aria-current="page">Cards</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMenu()"
+        aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="nav-hamburger__line"></span>
+        <span class="nav-hamburger__line"></span>
+        <span class="nav-hamburger__line"></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="app.html" class="mobile-menu__link">Home</a>
+      <a href="bible.html" class="mobile-menu__link">Bible</a>
+      <a href="imagegen.html" class="mobile-menu__link  is-active" aria-current="page">Cards</a>
+    </div>
+  </nav>
+</header>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-logo">
+    <div class="tb-logo-dot"></div>
+    ENJC <span>Verse Studio</span>
+  </div>
+  <!-- I3: size pills hidden on mobile — moved to mob-sheet -->
+  <div class="tb-sizes tb-sizes--desktop">
+    <button class="tb-sz on" data-sz="9:16" onclick="setSz(this,'9:16')">9:16 Story</button>
+    <button class="tb-sz" data-sz="3:4"  onclick="setSz(this,'3:4')">3:4 Post</button>
+    <button class="tb-sz" data-sz="1:1"  onclick="setSz(this,'1:1')">1:1 Square</button>
+    <button class="tb-sz" data-sz="16:9" onclick="setSz(this,'16:9')">16:9 Wide</button>
+  </div>
+  <!-- I4: download/share hidden on mobile — moved to mob-actions bar -->
+  <div class="tb-actions tb-actions--desktop">
+    <button class="tb-btn btn-wa" onclick="shareWA()">🟢 WhatsApp</button>
+    <button class="tb-btn btn-dl" onclick="dlIG('png')">⬇ Download</button>
+    <button class="tb-btn btn-back" onclick="goBack()">← Bible</button>
+    <button onclick="undoLast()" aria-label="Undo" title="Undo last change" style="background:transparent;border:1px solid var(--bd2);border-radius:var(--r8);padding:4px 10px;font-size:14px;cursor:pointer;color:var(--tx2);margin-left:4px;font-family:var(--sans);transition:all .15s;flex-shrink:0">↩</button>
+    <button id="studio-theme-btn" onclick="toggleStudioTheme()" aria-label="Toggle dark/light theme" style="background:transparent;border:1px solid var(--bd2);border-radius:var(--r8);padding:4px 10px;font-size:14px;cursor:pointer;color:var(--tx2);margin-left:4px;font-family:var(--sans);transition:all .15s;flex-shrink:0" title="Toggle theme">🌙</button>
+  </div>
+  <!-- I3: Mobile topbar — only undo + theme + back -->
+  <div class="tb-actions tb-actions--mobile">
+    <button class="tb-btn btn-back" onclick="goBack()">← Bible</button>
+    <button onclick="undoLast()" aria-label="Undo" style="background:transparent;border:1px solid var(--bd2);border-radius:var(--r8);padding:6px 12px;font-size:14px;cursor:pointer;color:var(--tx2);font-family:var(--sans);">↩</button>
+    <button id="studio-theme-btn2" onclick="toggleStudioTheme()" style="background:transparent;border:1px solid var(--bd2);border-radius:var(--r8);padding:6px 12px;font-size:14px;cursor:pointer;color:var(--tx2);font-family:var(--sans);">🌙</button>
+  </div>
+</div>
+
+<!-- STUDIO -->
+<div class="studio">
+
+<!-- ── LEFT PANEL ── -->
+<div class="lp">
+  <div class="lp-tabs">
+    <div class="lp-tab on"  data-tab="style"  onclick="switchTab(this)">🎨 Style</div>
+    <div class="lp-tab"     data-tab="bg"     onclick="switchTab(this)">🖼 BG</div>
+    <div class="lp-tab"     data-tab="text"   onclick="switchTab(this)">✍ Text</div>
+    <div class="lp-tab"     data-tab="verse"  onclick="switchTab(this)">📖 Verse</div>
+  </div>
+  <div class="lp-body">
+
+    <!-- STYLE TAB -->
+    <div class="tab-content on" id="tab-style">
+      <div class="lp-sec">
+        <div class="lp-lbl">Templates</div>
+        <div class="tpl-grid" id="tpl-grid"></div>
+      </div>
+    </div>
+
+    <!-- BG TAB -->
+    <div class="tab-content" id="tab-bg">
+      <div class="lp-sec">
+        <div class="lp-lbl">Type</div>
+        <div class="bgmode-btns">
+          <button class="bgmode-btn on" id="bgm-solid"    data-mode='solid'    onclick="setBG('solid')">🎨 Colour</button>
+          <button class="bgmode-btn"    id="bgm-gradient" data-mode='gradient' onclick="setBG('gradient')">🌈 Gradient</button>
+          <button class="bgmode-btn"    id="bgm-photo"    data-mode='photo'    onclick="setBG('photo')">📷 Photo</button>
+          <button class="bgmode-btn"    id="bgm-gallery"  data-mode='gallery'  onclick="setBG('gallery')">🌄 Gallery</button>
+        </div>
+      </div>
+
+      <!-- Solid -->
+      <div id="bg-solid">
+        <div class="lp-sec">
+          <div class="lp-lbl">Colour</div>
+          <div class="color-preview" id="col-prev" style="background:#1a0a3a"></div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+            <div class="hex-val" id="hex-val" style="font-size:11px;font-weight:600;color:var(--gd);font-family:monospace">#1A0A3A</div>
+            <input id="hex-inp" type="text" maxlength="7" placeholder="#1a0a3a"
+              oninput="onHexInput(this.value)"
+              style="width:72px;background:var(--bg3);border:1px solid var(--bd2);border-radius:var(--r6);color:var(--tx);font-size:11px;font-family:monospace;padding:3px 7px;outline:none;text-transform:uppercase">
+            <input type="color" id="col-wheel" value="#1a0a3a" title="Colour wheel"
+              oninput="setColorHex(this.value)"
+              style="width:28px;height:26px;border:1px solid var(--bd2);border-radius:var(--r4);cursor:pointer;padding:2px;background:var(--bg3)">
+          </div>
+          <div class="preset-dots" id="preset-dots"></div>
+          <div class="sl-row">
+            <span class="sl-lbl" style="color:#f87171">R</span>
+            <input type="range" class="csl r" id="sl-r" min="0" max="255" value="26" oninput="onRGB()">
+            <span class="sl-num" id="sl-rv">26</span>
+          </div>
+          <div class="sl-row">
+            <span class="sl-lbl" style="color:#4ade80">G</span>
+            <input type="range" class="csl g" id="sl-g" min="0" max="255" value="10" oninput="onRGB()">
+            <span class="sl-num" id="sl-gv">10</span>
+          </div>
+          <div class="sl-row">
+            <span class="sl-lbl" style="color:#60a5fa">B</span>
+            <input type="range" class="csl b" id="sl-b" min="0" max="255" value="58" oninput="onRGB()">
+            <span class="sl-num" id="sl-bv">58</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gradient -->
+      <div id="bg-gradient" style="display:none">
+        <div class="lp-sec">
+          <div class="lp-lbl">Gradient</div>
+          <!-- Preview -->
+          <div id="grad-preview" style="height:48px;border-radius:8px;border:1px solid var(--bd2);margin-bottom:10px;transition:all .3s"></div>
+          <!-- Color 1 -->
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <div id="grad-c1-dot" style="width:22px;height:22px;border-radius:50%;background:#1a0a3a;border:2px solid var(--bd2);cursor:pointer;flex-shrink:0" onclick="g('grad-c1-inp').click()"></div>
+            <span style="font-size:11px;color:var(--tx2);flex:1">Colour 1</span>
+            <span id="grad-c1-hex" style="font-size:10px;color:var(--gd);font-family:monospace">#1A0A3A</span>
+            <input type="color" id="grad-c1-inp" value="#1a0a3a" style="opacity:0;width:0;height:0;position:absolute" oninput="onGradColor(1,this.value)">
+          </div>
+          <!-- Color 2 -->
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+            <div id="grad-c2-dot" style="width:22px;height:22px;border-radius:50%;background:#0a1a3a;border:2px solid var(--bd2);cursor:pointer;flex-shrink:0" onclick="g('grad-c2-inp').click()"></div>
+            <span style="font-size:11px;color:var(--tx2);flex:1">Colour 2</span>
+            <span id="grad-c2-hex" style="font-size:10px;color:var(--gd);font-family:monospace">#0A1A3A</span>
+            <input type="color" id="grad-c2-inp" value="#0a1a3a" style="opacity:0;width:0;height:0;position:absolute" oninput="onGradColor(2,this.value)">
+          </div>
+          <!-- Angle -->
+          <div class="lp-lbl">Direction</div>
+          <div class="ov-row" style="margin-top:0">
+            <input type="range" class="ov-sl" id="grad-angle" min="0" max="360" value="135" oninput="onGradAngle(this.value)">
+            <span class="ov-val" id="grad-angle-v">135°</span>
+          </div>
+          <!-- Presets -->
+          <div class="lp-lbl" style="margin-top:10px">Presets</div>
+          <div id="grad-presets-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px"></div>
+        </div>
+      </div>
+
+      <!-- Photo -->
+      <div id="bg-photo" style="display:none">
+        <div class="lp-sec">
+          <div class="lp-lbl">Upload</div>
+          <div class="photo-drop" onclick="pickPhoto()">
+            <img id="photo-thumb" class="photo-thumb">
+            <div style="font-size:26px;margin-bottom:6px">📷</div>
+            <div style="font-size:11px;color:var(--gd);font-weight:500">Tap to choose photo</div>
+            <div style="font-size:9px;color:var(--tx3);margin-top:3px">Gallery · Camera · Files</div>
+          </div>
+          <div class="ov-row">
+            <span class="ov-lbl">Overlay</span>
+            <input type="range" class="ov-sl" id="photo-ov" min="0" max="90" value="55" step="5" oninput="g('photo-ov-v').textContent=this.value+'%';draw()">
+            <span class="ov-val" id="photo-ov-v">55%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery -->
+      <div id="bg-gallery" style="display:none">
+        <div class="lp-sec">
+          <div class="lp-lbl">Gallery <span style="font-size:9px;color:var(--tx3);font-weight:400;margin-left:4px">Nature · Faith ✝</span></div>
+          <div id="gal-wrap">
+            <div class="gal-grid" id="gal-grid"></div>
+          </div>
+          <div class="ov-row">
+            <span class="ov-lbl">Overlay</span>
+            <input type="range" class="ov-sl" id="gal-ov" min="0" max="80" value="50" oninput="g('gal-ov-v').textContent=this.value+'%';draw()">
+            <span class="ov-val" id="gal-ov-v">50%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEXT TAB -->
+    <div class="tab-content" id="tab-text">
+      <div class="lp-sec">
+        <div class="lp-lbl">Font</div>
+        <div class="font-grid" id="font-grid"></div>
+      </div>
+      <div class="lp-sec">
+        <div class="lp-lbl">Tamil Size</div>
+        <div class="gsl-row">
+          <input type="range" class="gsl" id="ta-size" min="28" max="150" value="52" oninput="g('ta-size-v').textContent=this.value+'px';draw()">
+          <span class="gsl-val" id="ta-size-v">52px</span>
+        </div>
+        <div class="lp-lbl">English Size</div>
+        <div class="gsl-row">
+          <input type="range" class="gsl" id="en-size" min="16" max="120" value="32" oninput="g('en-size-v').textContent=this.value+'px';draw()">
+          <span class="gsl-val" id="en-size-v">32px</span>
+        </div>
+      </div>
+      <div class="lp-sec">
+        <div class="lp-lbl">Text Colour</div>
+        <div class="tc-row" id="tc-row"></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+          <input type="color" id="tc-wheel" value="#ffffff" oninput="setTC(this.value)"
+            style="width:34px;height:28px;border:1px solid var(--bd2);border-radius:var(--r6);cursor:pointer;padding:2px;background:var(--bg3)">
+          <span style="font-size:10px;color:var(--tx3)">Custom colour</span>
+          <span id="tc-hex-display" style="font-size:11px;color:var(--gd);font-family:monospace;margin-left:auto">#FFFFFF</span>
+        </div>
+      </div>
+      <div class="lp-sec">
+        <div class="lp-lbl">Options</div>
+        <div class="tog-row">
+          <div><div class="tog-lbl">Show Tamil</div></div>
+          <div class="tog on" id="tog-ta" data-key="showTa" onclick="togOpt(this,'showTa')"></div>
+        </div>
+        <div class="tog-row">
+          <div><div class="tog-lbl">Show English</div></div>
+          <div class="tog on" id="tog-en" data-key="showEn" onclick="togOpt(this,'showEn')"></div>
+        </div>
+        <div class="tog-row">
+          <div><div class="tog-lbl">Show Reference</div></div>
+          <div class="tog on" id="tog-ref" data-key="showRef" onclick="togOpt(this,'showRef')"></div>
+        </div>
+        <div class="tog-row">
+          <div><div class="tog-lbl">Text Glow</div></div>
+          <div class="tog" id="tog-glow" data-key="textGlow" onclick="togOpt(this,'textGlow')"></div>
+        </div>
+        <div class="tog-row">
+          <div><div class="tog-lbl">ENJC Watermark</div></div>
+          <div class="tog on" id="tog-wm" data-key="showWM" onclick="togOpt(this,'showWM')"></div>
+        </div>
+        <div class="lp-sec" style="margin-bottom:4px">
+          <div class="lp-lbl" style="margin-bottom:6px">Text Position</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:10px;color:var(--tx3)">Top</span>
+            <input type="range" id="text-pos-sl" min="0" max="100" value="50" step="5"
+              oninput="ST.textPos=this.value/100;debounceDraw()"
+              style="flex:1;accent-color:var(--gd);height:3px">
+            <span style="font-size:10px;color:var(--tx3)">Bottom</span>
+          </div>
+        </div>
+        <div class="tog-row">
+          <div>
+            <div class="tog-lbl">Instagram Safe Zone</div>
+            <div class="tog-sub">Shows crop guides for Stories</div>
+          </div>
+          <div class="tog" id="tog-safe" data-key="safeZone" onclick="togOpt(this,'safeZone')"></div>
+        </div>
+      </div>
+      <div class="lp-sec">
+        <div class="lp-lbl">Church Name</div>
+        <input class="inp" id="wm-name" type="text" value="ELIM NEW JERUSALEM CHURCH" oninput="draw()" style="margin-bottom:6px" placeholder="Church name">
+        <input class="inp" id="wm-sub"  type="text" value="110e, Elaya Street, Tondiarpet, Chennai, 600 081"         oninput="draw()">
+      </div>
+    </div>
+
+    <!-- VERSE TAB -->
+    <div class="tab-content" id="tab-verse">
+      <div class="lp-sec">
+        <div class="lp-lbl">Current Verse</div>
+        <div class="vd">
+          <div class="vd-ta" id="vd-ta">Select a verse below...</div>
+          <div class="vd-ref" id="vd-ref"></div>
+        </div>
+        <div class="vnav">
+          <button class="vnav-btn" onclick="prevVerse()">← Prev</button>
+          <button class="vnav-btn primary" onclick="useVOTD()">⭐ VOTD</button>
+          <button class="vnav-btn" onclick="nextVerse()">Next →</button>
+        </div>
+      </div>
+      <div class="lp-sec">
+        <div class="lp-lbl">✏ Custom Verse</div>
+        <textarea id="custom-ta" placeholder="Tamil verse text..." rows="2"
+          style="width:100%;background:var(--bg3);border:1px solid var(--bd2);border-radius:var(--r8);color:var(--tx);font-size:12px;padding:7px 9px;font-family:var(--tamil);resize:vertical;margin-bottom:5px;outline:none;box-sizing:border-box"></textarea>
+        <input id="custom-en" type="text" placeholder="English verse (optional)..."
+          style="width:100%;background:var(--bg3);border:1px solid var(--bd2);border-radius:var(--r8);color:var(--tx);font-size:12px;padding:7px 9px;margin-bottom:5px;outline:none;box-sizing:border-box">
+        <div style="display:flex;gap:5px;margin-bottom:2px">
+          <input id="custom-ref" type="text" placeholder="Reference (e.g. John 3:16)"
+            style="flex:1;background:var(--bg3);border:1px solid var(--bd2);border-radius:var(--r8);color:var(--tx);font-size:12px;padding:7px 9px;outline:none">
+          <button onclick="useCustomVerse()" style="background:var(--gd);border:none;border-radius:var(--r8);padding:6px 10px;font-size:11px;font-weight:700;color:#07090f;cursor:pointer;white-space:nowrap">✅ Use</button>
+        </div>
+      </div>
+      <div class="lp-sec">
+        <div class="lp-lbl">Bible Index</div>
+        <input class="inp" id="bi-search" type="search" placeholder="🔍 Book search..."
+          oninput="biSearch(this.value)" style="margin-bottom:8px" autocomplete="off">
+        <div style="display:flex;gap:4px;margin-bottom:8px">
+          <button class="bgmode-btn on" id="bi-all" onclick="biFilter('all')">All 66</button>
+          <button class="bgmode-btn" id="bi-ot"  onclick="biFilter('OT')">OT 39</button>
+          <button class="bgmode-btn" id="bi-nt"  onclick="biFilter('NT')">NT 27</button>
+        </div>
+        <div id="bi-books" style="max-height:260px;overflow-y:auto"></div>
+        <div id="bi-ch-area" style="display:none;margin-top:8px">
+          <button onclick="biBackBooks()" class="bgmode-btn" style="margin-bottom:8px;width:auto;padding:5px 10px;font-size:10px">← Books</button>
+          <div id="bi-ch-title" style="font-size:11px;font-weight:600;color:var(--gd);margin-bottom:8px"></div>
+          <div id="bi-ch-grid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:4px;max-height:180px;overflow-y:auto"></div>
+        </div>
+        <div id="bi-v-area" style="display:none;margin-top:8px">
+          <button onclick="biBackCh()" class="bgmode-btn" style="margin-bottom:8px;width:auto;padding:5px 10px;font-size:10px">← Chapters</button>
+          <div id="bi-v-title" style="font-size:11px;font-weight:600;color:var(--gd);margin-bottom:8px"></div>
+          <div id="bi-v-loading" style="text-align:center;padding:16px;color:var(--tx3);display:none">
+            <div style="width:16px;height:16px;border:2px solid var(--bd2);border-top-color:var(--gd);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 6px"></div>Loading...
+          </div>
+          <div id="bi-v-list" class="verse-list"></div>
+        </div>
+      </div>
+      <div class="lp-sec">
+        <div style="display:flex;align-items:center;margin-bottom:6px">
+          <span class="lp-lbl" style="margin-bottom:0;flex:1">Quick Verses</span>
+          <button onclick="shuffleVerse()" title="Random verse" style="background:transparent;border:none;cursor:pointer;font-size:14px;padding:0 2px;color:var(--tx3);transition:color .15s" onmouseover="this.style.color='var(--gd)'" onmouseout="this.style.color='var(--tx3)'">🔀</button>
+        </div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px" id="verse-tag-row"></div>
+        <div class="verse-list" id="quick-verses"></div>
+      </div>
+    </div>
+
+  </div><!-- end lp-body -->
+</div><!-- end lp -->
+
+<!-- ── CENTER CANVAS ── -->
+<div class="canvas-area">
+  <div class="canvas-wrap" style="position:relative">
+    <canvas id="igcv" ontouchstart="onTS(event)" ontouchend="onTE(event)"></canvas>
+    <button class="canvas-fullscreen-btn" onclick="openCanvasFullscreen()" title="Preview full size">🔍 Full Preview</button>
+    <div class="canvas-hint">Tap to cycle verse · Swipe to change</div>
+  </div>
+</div>
+
+<!-- I7: Fullscreen preview overlay -->
+<div class="canvas-fullscreen-overlay" id="canvas-fullscreen-overlay" onclick="closeCanvasFullscreen()">
+  <button class="canvas-fullscreen-close" onclick="closeCanvasFullscreen()">✕</button>
+  <canvas id="fullscreen-cv"></canvas>
+</div>
+
+<!-- ── RIGHT PANEL ── -->
+<div class="rp">
+
+  <div class="rp-card">
+    <div class="rp-head">📐 Canvas Size</div>
+    <div class="rp-body">
+      <div class="sz-btns" id="sz-btns"></div>
+    </div>
+  </div>
+
+  <div class="rp-card">
+    <div class="rp-head">⬇ Download</div>
+    <div class="rp-body">
+      <div class="exp-grid">
+        <button class="exp-btn e-png" onclick="dlIG('png')">↓ PNG</button>
+        <button class="exp-btn e-jpg" onclick="dlIG('jpg')">↓ JPG</button>
+        <button class="exp-btn e-webp" onclick="dlIG('webp')">↓ WebP</button>
+        <button class="exp-btn e-copy" onclick="copyImg()">📋 Copy</button>
+      </div>
+      <div class="badges" id="info-badges"></div>
+    </div>
+  </div>
+
+  <div class="rp-card">
+    <div class="rp-head">📤 Share</div>
+    <div class="rp-body">
+      <div class="share-grid">
+        <button class="sh sh-wa"  onclick="shareWA()">🟢 WhatsApp</button>
+        <button class="sh sh-ig"  onclick="shareApp('ig')">📸 Instagram</button>
+        <button class="sh sh-yt"  onclick="shareApp('yt')">▶ YouTube</button>
+        <button class="sh sh-nat" onclick="shareNative()">↗ Share</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end rp -->
+</div><!-- end studio -->
+
+<!-- I4: Mobile sticky action bar -->
+<div class="mob-action-bar" id="mob-action-bar">
+  <button class="mob-act-btn mob-act-wa" onclick="shareWA()">🟢 WhatsApp</button>
+  <button class="mob-act-btn mob-act-dl" onclick="dlIG('png')">⬇ Save Image</button>
+</div>
+
+<!-- MOBILE BOTTOM BAR -->
+<!-- I3: size pills row above tabs -->
+<div class="mob-sizes-row" id="mob-sizes-row">
+  <button class="mob-sz-pill on" data-sz="9:16" onclick="setSzMob(this,'9:16')">9:16</button>
+  <button class="mob-sz-pill" data-sz="3:4"  onclick="setSzMob(this,'3:4')">3:4</button>
+  <button class="mob-sz-pill" data-sz="1:1"  onclick="setSzMob(this,'1:1')">1:1</button>
+  <button class="mob-sz-pill" data-sz="16:9" onclick="setSzMob(this,'16:9')">16:9</button>
+</div>
+<div class="mob-bar">
+  <a class="mob-tab" href="app.html" style="text-decoration:none;color:inherit;">
+    <span class="mob-tab-icon">🏠</span>Home
+  </a>
+  <button class="mob-tab" data-panel="m-verse" onclick="mobOpen(this,'📖 Verse')">
+    <span class="mob-tab-icon">📖</span>Verse
+  </button>
+  <button class="mob-tab" data-panel="m-text" onclick="mobOpen(this,'✍ Text')">
+    <span class="mob-tab-icon">✍</span>Text
+  </button>
+  <button class="mob-tab" data-panel="m-bg" onclick="mobOpen(this,'🖼 Background')">
+    <span class="mob-tab-icon">🖼</span>BG
+  </button>
+  <button class="mob-tab" data-panel="m-style" onclick="mobOpen(this,'🎨 Style')">
+    <span class="mob-tab-icon">🎨</span>Style
+  </button>
+  <button class="mob-tab" data-panel="m-export" onclick="mobOpen(this,'⬇ Export')">
+    <span class="mob-tab-icon">⬇</span>Export
+  </button>
+</div>
+
+<!-- BOTTOM SHEET BACKDROP -->
+<div class="mob-backdrop" id="mob-backdrop" onclick="mobClose()"></div>
+
+<!-- BOTTOM SHEET -->
+<div class="mob-sheet" id="mob-sheet">
+  <div class="mob-sheet-handle"></div>
+  <div class="mob-sheet-head">
+    <span class="mob-sheet-title" id="mob-sheet-title">Style</span>
+    <div class="mob-sheet-preview" id="mob-sheet-preview" title="Canvas preview">
+      <canvas id="mob-preview-cv"></canvas>
+    </div>
+    <button class="mob-sheet-close" onclick="mobClose()">✕</button>
+  </div>
+  <div class="mob-sheet-body" id="mob-sheet-body">
+    <!-- Content injected by mobOpen() -->
+    <div id="m-style"></div>
+    <div id="m-bg" style="display:none"></div>
+    <div id="m-text" style="display:none"></div>
+    <div id="m-verse" style="display:none"></div>
+    <div id="m-export" style="display:none"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// I3: setSzMob — sync size pill selection on mobile with desktop setSz
+function setSzMob(el, sz) {
+  document.querySelectorAll('.mob-sz-pill').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  // Sync desktop size buttons too
+  document.querySelectorAll('.tb-sz').forEach(b => {
+    b.classList.toggle('on', b.dataset.sz === sz);
+  });
+  // Call the main setSz if it's available
+  if (typeof setSz === 'function') setSz(el, sz);
+  else if (window._igSetSz) window._igSetSz(el, sz);
+}
+// I7: Fullscreen canvas preview
+function openCanvasFullscreen() {
+  const src = document.getElementById('igcv');
+  const dst = document.getElementById('fullscreen-cv');
+  if (!src || !dst) return;
+  dst.width = src.width;
+  dst.height = src.height;
+  const ctx = dst.getContext('2d');
+  ctx.drawImage(src, 0, 0);
+  document.getElementById('canvas-fullscreen-overlay').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeCanvasFullscreen() {
+  document.getElementById('canvas-fullscreen-overlay').classList.remove('on');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeCanvasFullscreen();
+});
+</script>
+
+<script src="js/imagegen-mobile.js" defer></script>
+<script type="module" src="js/imagegen-main.js"></script>
+
+<!-- ENJC FOOTER (minimal) -->
+<footer class="footer">
+  <div class="footer-bottom">
+    <div>© 2026 Elim New Jerusalem Church, Chennai. All rights reserved.</div>
+    <div>Built with ❤️ for the Kingdom of God</div>
+  </div>
+</footer>
+<a href="https://wa.me/919444345102" target="_blank" rel="noopener" title="WhatsApp"
+   style="position:fixed;bottom:80px;right:22px;z-index:800;width:46px;height:46px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.4);font-size:22px;text-decoration:none;">💬</a>
+<button onclick="window.scrollTo({top:0,behavior:'smooth'})"
+   style="position:fixed;bottom:80px;right:78px;z-index:800;width:42px;height:42px;border-radius:50%;background:#c9a84c;border:none;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#070f1e;box-shadow:0 4px 16px rgba(201,168,76,.35);"
+   id="scroll-top-btn">↑</button>
+<nav class="mob-nav" aria-label="Mobile navigation">
+  <div class="mob-nav-inner">
+    <a href="app.html"     class="mob-item"        aria-label="App Home">  <i class="ti ti-home"     aria-hidden="true"></i><span>Home</span></a>
+    <a href="bible.html"   class="mob-item"         aria-label="Bible">    <i class="ti ti-book"     aria-hidden="true"></i><span>Bible</span></a>
+    <a href="imagegen.html" class="mob-item active" aria-label="Verse Card"><i class="ti ti-photo"   aria-hidden="true"></i><span>Cards</span></a>
+  </div>
+</nav>
+<script>
+var stb=document.getElementById('scroll-top-btn');
+if(stb)window.addEventListener('scroll',function(){stb.style.display=window.scrollY>400?'flex':'none';});
+</script>
+<script>window.ENJC_PAGE="imagegen";</script>
+<script src="js/site.js" defer></script>
+<script src="js/design-upgrade.js" defer></script>
+</body>
+</html>

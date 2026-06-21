@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://elimnewjerusalem.github.io/enjc-bible/sitemap.xml
