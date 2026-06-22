@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>ENJC Bible App</title>
+  <meta name="description" content="Elim New Jerusalem Church — Bible Reader & Verse Cards">
+  <link rel="manifest" href="data/manifest.json">
+  <link rel="icon" type="image/png" href="images/logo/logo.png">
+  <link rel="apple-touch-icon" href="images/logo/logo.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ENJC">
+  <meta name="theme-color" content="#07101e">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap" onload="this.rel='stylesheet'">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&display=swap" onload="this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #07101e;
+      --navy2:  #0d1e35;
+      --navy3:  #112240;
+      --gold:   #c9a84c;
+      --gold2:  #e8c96a;
+      --purple: #7c3aed;
+      --teal:   #0d9488;
+      --tx1:    #dce8ff;
+      --tx2:    #8aa0c0;
+      --tx3:    #3a5a80;
+      --bd:     #1e3a5f;
+      --bd2:    rgba(30,58,95,.5);
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-tamil: 'Noto Serif Tamil', serif;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-top: env(safe-area-inset-top, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--navy);
+      color: var(--tx1);
+      font-family: var(--font-body);
+      overscroll-behavior: none;
+    }
+
+    /* ── PC redirect notice ── */
+    #pc-notice {
+      display: none;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      padding: 40px;
+      background: var(--navy);
+    }
+    #pc-notice .logo { font-size: 48px; color: var(--gold); }
+    #pc-notice h1 { font-size: 20px; color: var(--tx1); font-weight: 700; }
+    #pc-notice p { font-size: 14px; color: var(--tx2); max-width: 320px; line-height: 1.6; }
+    #pc-notice a {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 10px 24px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* ── App shell ── */
+    #app {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      max-height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* ── Status bar spacer ── */
+    .status-spacer {
+      height: var(--safe-top);
+      background: var(--navy2);
+      flex-shrink: 0;
+    }
+
+    /* ── Header ── */
+    .app-header {
+      background: var(--navy2);
+      border-bottom: 1px solid var(--bd);
+      padding: 14px 18px 12px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .app-header-left {}
+    .app-greet { font-size: 12px; color: var(--tx2); margin-bottom: 2px; }
+    .app-brand { font-size: 20px; font-weight: 800; color: var(--tx1); letter-spacing: -.02em; line-height: 1; }
+    .app-brand span { color: var(--gold); }
+
+    /* ── Scroll content ── */
+    .app-scroll {
+      flex: 1; overflow-y: auto; overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      padding-bottom: 16px;
+    }
+
+    /* ── VOTD ── */
+    .votd-wrap {
+      margin: 14px 16px 0;
+      padding: 13px 15px;
+      border-left: 3px solid var(--gold);
+      background: rgba(201,168,76,.07);
+      border-radius: 0 12px 12px 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background .15s;
+    }
+    .votd-wrap:active { background: rgba(201,168,76,.12); }
+    .votd-tag {
+      font-size: 9px; font-weight: 700; color: var(--gold);
+      letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px;
+    }
+    .votd-verse {
+      font-size: 14px; color: var(--tx1); line-height: 1.65;
+      font-family: var(--font-tamil);
+    }
+    .votd-meta {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 8px; font-size: 11px; color: var(--tx2);
+    }
+    .votd-pill {
+      background: rgba(201,168,76,.15); color: var(--gold);
+      border: 1px solid rgba(201,168,76,.25);
+      border-radius: 99px; padding: 2px 8px; font-size: 9px; font-weight: 700;
+    }
+
+    /* ── Section label ── */
+    .sec-lbl {
+      font-size: 10px; font-weight: 700; color: var(--tx3);
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 16px 16px 8px;
+    }
+
+    /* ── Feature card (Bible) ── */
+    .feat-card {
+      margin: 0 16px 10px;
+      background: var(--navy2); border: 1px solid var(--bd);
+      border-radius: 16px; padding: 16px;
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none; cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background .15s;
+    }
+    .feat-card:active { background: var(--navy3); }
+    .feat-ic {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; color: var(--gold); flex-shrink: 0;
+    }
+    .feat-body { flex: 1; }
+    .feat-name { font-size: 16px; font-weight: 700; color: var(--tx1); margin-bottom: 3px; }
+    .feat-sub { font-size: 12px; color: var(--tx2); margin-bottom: 7px; }
+    .feat-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      background: rgba(201,168,76,.12); color: var(--gold);
+      border: 1px solid rgba(201,168,76,.2); border-radius: 99px;
+      padding: 2px 9px; letter-spacing: .03em;
+    }
+    .feat-arr { font-size: 20px; color: var(--tx3); }
+
+    /* ── Bottom nav ── */
+    .app-nav {
+      display: flex;
+      background: var(--navy2);
+      border-top: 1px solid var(--bd);
+      padding-bottom: var(--safe-bottom);
+      flex-shrink: 0;
+    }
+    .nav-item {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 3px; padding: 9px 0;
+      text-decoration: none; cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      border-top: 2px solid transparent;
+      transition: all .15s;
+    }
+    .nav-item.on {
+      border-top-color: var(--gold);
+      background: rgba(201,168,76,.06);
+    }
+    .nav-item i { font-size: 20px; color: var(--tx3); }
+    .nav-item.on i { color: var(--gold); }
+    .nav-item span { font-size: 10px; font-weight: 700; color: var(--tx3); }
+    .nav-item.on span { color: var(--gold); }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: calc(80px + var(--safe-bottom)); left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: rgba(13,30,53,.95); border: 1px solid var(--bd);
+      border-radius: 99px; padding: 8px 20px;
+      font-size: 12px; color: var(--tx1);
+      opacity: 0; transition: all .25s; z-index: 9999;
+      pointer-events: none; white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── Animations ── */
+    .fade-in { animation: fadeIn .4s ease both; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+    .delay-1 { animation-delay: .05s; }
+    .delay-2 { animation-delay: .1s; }
+    .delay-3 { animation-delay: .15s; }
+    .delay-4 { animation-delay: .2s; }
+    .delay-5 { animation-delay: .25s; }
+  </style>
+</head>
+<body>
+
+<!-- PC: redirect notice -->
+<div id="pc-notice">
+  <div class="logo">✝</div>
+  <h1>ENJC Bible</h1>
+  <p>இந்த app mobile-க்காக design பண்ணப்பட்டது. தயவுசெய்து உங்கள் phone-ல் இதை திறக்கவும்.</p>
+</div>
+
+<!-- Mobile app shell -->
+<div id="app">
+  <div class="status-spacer"></div>
+
+  <header class="app-header">
+    <div class="app-header-left">
+      <div class="app-greet" id="app-greet">வணக்கம் 🙏</div>
+      <div class="app-brand">ENJC <span>Bible</span></div>
+    </div>
+  </header>
+
+  <div class="app-scroll" id="app-scroll">
+
+    <!-- VOTD -->
+    <div class="votd-wrap fade-in" id="votd-wrap" onclick="goVOTD()" role="button" tabindex="0" aria-label="இன்றைய வசனம் - tap to read">
+      <div class="votd-tag">இன்றைய வசனம்</div>
+      <div class="votd-verse" id="votd-verse">கர்த்தர் என் மேய்ப்பர், எனக்கு குறைவில்லை.</div>
+      <div class="votd-meta">
+        <span id="votd-ref">சங்கீதம் 23:1</span>
+        <span class="votd-pill">TAP TO READ</span>
+      </div>
+    </div>
+
+    <!-- Quick access -->
+    <div class="sec-lbl fade-in delay-1">Quick Access</div>
+
+    <!-- Bible featured -->
+    <a href="bible.html" class="feat-card fade-in delay-1" aria-label="Open Bible">
+      <div class="feat-ic"><i class="ti ti-book" aria-hidden="true"></i></div>
+      <div class="feat-body">
+        <div class="feat-name">Bible</div>
+        <div class="feat-sub">Tamil & English reader</div>
+        <span class="feat-badge">66 Books · 11 Versions</span>
+      </div>
+      <i class="ti ti-chevron-right feat-arr" aria-hidden="true">›</i>
+    </a>
+
+    <!-- Verse Card featured -->
+    <a href="imagegen.html" class="feat-card fade-in delay-2" aria-label="Open Verse Card maker">
+      <div class="feat-ic" style="background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.2)"><i class="ti ti-photo" aria-hidden="true" style="color:#a78bfa"></i></div>
+      <div class="feat-body">
+        <div class="feat-name">Verse Card</div>
+        <div class="feat-sub">Make & share Scripture images</div>
+        <span class="feat-badge" style="background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.2);color:#a78bfa">8 Templates · WhatsApp Ready</span>
+      </div>
+      <i class="ti ti-chevron-right feat-arr" aria-hidden="true">›</i>
+    </a>
+
+  </div>
+
+  <!-- Bottom nav -->
+  <nav class="app-nav" aria-label="Main navigation">
+    <a href="app.html" class="nav-item on" aria-current="page">
+      <i class="ti ti-home" aria-hidden="true"></i>
+      <span>Home</span>
+    </a>
+    <a href="bible.html" class="nav-item">
+      <i class="ti ti-book" aria-hidden="true"></i>
+      <span>Bible</span>
+    </a>
+    <a href="imagegen.html" class="nav-item">
+      <i class="ti ti-photo" aria-hidden="true"></i>
+      <span>Cards</span>
+    </a>
+  </nav>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ── PC detection — show notice, hide app ── */
+  const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (!isMobile) {
+    document.getElementById('pc-notice').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    return;
+  }
+
+  const hour = new Date().getHours();
+  const greet = hour < 12 ? 'காலை வணக்கம் 🌅'
+              : hour < 17 ? 'மதிய வணக்கம் ☀'
+              : hour < 20 ? 'மாலை வணக்கம் 🌇'
+              : 'இரவு வணக்கம் 🌙';
+  document.getElementById('app-greet').textContent = greet;
+
+  /* ── Toast ── */
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._tid);
+    t._tid = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  /* ── Load VOTD from bible-data.json ── */
+  let _votdBook = '', _votdChapter = 1;
+
+  const BASE = (function(){
+    const p = window.location.pathname;
+    return p.substring(0, p.lastIndexOf('/') + 1);
+  })();
+
+  fetch(BASE + 'data/bible-data.json')
+    .then(r => r.json())
+    .then(data => {
+      const verses = data.verseOfDay || [];
+      if (!verses.length) return;
+      const idx = Math.floor(Date.now() / 86400000) % verses.length;
+      const v = verses[idx];
+      document.getElementById('votd-verse').textContent = v.ta || v.en || '';
+      document.getElementById('votd-ref').textContent = v.tref || v.ref || '';
+      _votdBook = v.book || '';
+      _votdChapter = v.chapter || 1;
+    })
+    .catch(() => {
+      document.getElementById('votd-verse').textContent = 'கர்த்தர் என் மேய்ப்பர், எனக்கு குறைவில்லை.';
+      document.getElementById('votd-ref').textContent = 'சங்கீதம் 23:1';
+      _votdBook = 'psalms';
+      _votdChapter = 23;
+    });
+
+  /* ── Go to VOTD in bible ── */
+  window.goVOTD = function() {
+    if (_votdBook) {
+      try {
+        localStorage.setItem('enjc_app_votd', JSON.stringify({ book: _votdBook, chapter: _votdChapter }));
+      } catch(e) {}
+    }
+    window.location.href = 'bible.html';
+  };
+
+})();
+</script>
+
+</body>
+</html>
