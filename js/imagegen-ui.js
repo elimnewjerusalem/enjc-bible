@@ -393,7 +393,7 @@ export function syncMobile(){
           <div style="font-size:9px;font-weight:600;text-align:center;padding:3px 4px;background:rgba(0,0,0,.6);color:${t.accent}">${t.name}</div>
         </div>`).join('')}
     </div>
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin:12px 0 8px">Options</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin:12px 0 8px">Options</p>
     <div onclick="togOpt(this.querySelector('.tog'),'textGlow')" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer"><span style="font-size:12px;color:var(--tx)">Text Glow</span><div class="tog${ST.textGlow?' on':''}" data-key="textGlow"></div></div>
     <div onclick="togOpt(this.querySelector('.tog'),'safeZone')" style="display:flex;justify-content:space-between;padding:8px 0;cursor:pointer"><span style="font-size:12px;color:var(--tx)">Safe Zone Guide</span><div class="tog${ST.safeZone?' on':''}" data-key="safeZone"></div></div>`
 
@@ -488,7 +488,7 @@ export function syncMobile(){
       <span style="font-size:10px;color:var(--tx3)">Custom colour</span>
       <span style="font-size:11px;color:var(--gd);font-family:monospace;margin-left:auto">${(ST.txColor||'#fff').toUpperCase()}</span>
     </div>
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px">Options</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:8px">Options</p>
     <div onclick="togOpt(this.querySelector('.tog'),'showTa')" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer"><span style="font-size:12px;color:var(--tx)">Show Tamil</span><div class="tog${ST.showTa?' on':''}" data-key="showTa"></div></div>
     <div onclick="togOpt(this.querySelector('.tog'),'showEn')" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer"><span style="font-size:12px;color:var(--tx)">Show English</span><div class="tog${ST.showEn?' on':''}" data-key="showEn"></div></div>
     <div onclick="togOpt(this.querySelector('.tog'),'showRef')" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer"><span style="font-size:12px;color:var(--tx)">Show Reference</span><div class="tog${ST.showRef?' on':''}" data-key="showRef"></div></div>
