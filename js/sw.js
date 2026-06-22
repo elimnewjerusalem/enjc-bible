@@ -9,7 +9,7 @@ const DATA_CACHE = 'enjc-app-data-v1';
 // Static shell — cache on install, serve from cache always.
 const SHELL_ASSETS = [
   './',
-  'app.html',
+  'index.html',
   'bible.html',
   'imagegen.html',
   'data/manifest.json',
@@ -92,7 +92,7 @@ self.addEventListener('fetch', event => {
         return res;
       }).catch(() => {
         if (request.mode === 'navigate') {
-          return caches.match('app.html');
+          return caches.match('index.html');
         }
       });
     })

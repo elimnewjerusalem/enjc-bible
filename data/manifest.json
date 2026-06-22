@@ -2,7 +2,7 @@
   "name": "ENJC Bible — Elim New Jerusalem Church",
   "short_name": "ENJC Bible",
   "description": "Read the Bible in Tamil & English and create shareable Scripture cards — by Elim New Jerusalem Church, Tondiarpet, Chennai",
-  "start_url": "./app.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#04101e",

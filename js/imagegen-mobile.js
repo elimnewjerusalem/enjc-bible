@@ -35,7 +35,7 @@
     shell.innerHTML = `
       <!-- TOP BAR: size pills + back -->
       <div class="igm-top">
-        <a href="app.html" class="igm-back" aria-label="Home">‹</a>
+        <a href="index.html" class="igm-back" aria-label="Home">‹</a>
         <div class="igm-sizes" id="igm-sizes">
           <button class="igm-sz on" data-sz="9:16" onclick="igmSetSz(this,'9:16')">9:16</button>
           <button class="igm-sz" data-sz="3:4"   onclick="igmSetSz(this,'3:4')">3:4</button>

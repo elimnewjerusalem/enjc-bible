@@ -87,7 +87,7 @@
       <!-- SCREEN: BOOKS -->
       <div id="mb-screen-books" class="mb-screen mb-active">
         <div class="mb-header">
-          <a href="app.html" class="mb-back" aria-label="Home">‹ Home</a>
+          <a href="index.html" class="mb-back" aria-label="Home">‹ Home</a>
           <div class="mb-brand">📖 ENJC Bible</div>
           <div class="mb-lang-row">
             <select class="mb-lang on mb-lang-sel" id="mb-ver-btn" onchange="mbSetVersion(this.value)"></select>
