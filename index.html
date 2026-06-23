@@ -6,8 +6,8 @@
   <title>ENJC Bible App</title>
   <meta name="description" content="Elim New Jerusalem Church — Bible Reader & Verse Cards">
   <link rel="manifest" href="data/manifest.json">
-  <link rel="icon" type="image/png" href="images/logo/logo.png">
-  <link rel="apple-touch-icon" href="images/logo/logo.png">
+  <link rel="icon" type="image/png" href="images/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -229,6 +229,30 @@
     .delay-3 { animation-delay: .15s; }
     .delay-4 { animation-delay: .2s; }
     .delay-5 { animation-delay: .25s; }
+
+    /* ── Install banner ── */
+    .install-bar {
+      display: none;
+      margin: 14px 16px 0;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, rgba(201,168,76,.16), rgba(201,168,76,.06));
+      border: 1px solid rgba(201,168,76,.3);
+      border-radius: 14px;
+      align-items: center; gap: 12px;
+    }
+    .install-bar.show { display: flex; }
+    .install-bar i.bell { font-size: 22px; color: var(--gold); flex-shrink: 0; }
+    .install-bar .ib-txt { flex: 1; }
+    .install-bar .ib-tt { font-size: 13px; font-weight: 700; color: var(--tx1); }
+    .install-bar .ib-sb { font-size: 11px; color: var(--tx2); }
+    .install-bar button {
+      background: var(--gold); color: var(--navy); border: none;
+      font-size: 11.5px; font-weight: 700; padding: 8px 14px;
+      border-radius: 99px; cursor: pointer; flex-shrink: 0;
+    }
+    .install-bar .ib-close {
+      background: none; color: var(--tx3); font-size: 16px; padding: 4px;
+    }
   </style>
 </head>
 <body>
@@ -252,6 +276,17 @@
   </header>
 
   <div class="app-scroll" id="app-scroll">
+
+    <!-- Install banner -->
+    <div class="install-bar" id="install-bar">
+      <i class="ti ti-download bell" aria-hidden="true"></i>
+      <div class="ib-txt">
+        <div class="ib-tt">App-ஆ install பண்ணுங்க</div>
+        <div class="ib-sb">Offline reading, quick access</div>
+      </div>
+      <button id="install-bar-btn">Install</button>
+      <button class="ib-close" id="install-bar-close" aria-label="Dismiss"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
 
     <!-- VOTD -->
     <div class="votd-wrap fade-in" id="votd-wrap" onclick="goVOTD()" role="button" tabindex="0" aria-label="இன்றைய வசனம் - tap to read">
@@ -292,7 +327,7 @@
 
   <!-- Bottom nav -->
   <nav class="app-nav" aria-label="Main navigation">
-    <a href="app.html" class="nav-item on" aria-current="page">
+    <a href="index.html" class="nav-item on" aria-current="page">
       <i class="ti ti-home" aria-hidden="true"></i>
       <span>Home</span>
     </a>
@@ -303,6 +338,10 @@
     <a href="imagegen.html" class="nav-item">
       <i class="ti ti-photo" aria-hidden="true"></i>
       <span>Cards</span>
+    </a>
+    <a href="more.html" class="nav-item">
+      <i class="ti ti-dots" aria-hidden="true"></i>
+      <span>More</span>
     </a>
   </nav>
 </div>
@@ -327,6 +366,44 @@
               : hour < 20 ? 'மாலை வணக்கம் 🌇'
               : 'இரவு வணக்கம் 🌙';
   document.getElementById('app-greet').textContent = greet;
+
+  /* ── Service worker (app shell offline cache) ── */
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('js/sw.js').catch(function(){});
+    });
+  }
+
+  /* ── Install banner ── */
+  (function(){
+    var isStandalone = window.matchMedia('(display-mode: standalone)').matches
+                        || window.navigator.standalone === true;
+    var DISMISS_KEY = 'enjc_install_dismissed';
+    if (isStandalone || localStorage.getItem(DISMISS_KEY)) return;
+
+    var bar = document.getElementById('install-bar');
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      window.__enjcInstallEvent = e;
+      bar.classList.add('show');
+    });
+    document.getElementById('install-bar-btn').addEventListener('click', function () {
+      var ev = window.__enjcInstallEvent;
+      if (!ev) return;
+      ev.prompt();
+      ev.userChoice.finally(function(){
+        window.__enjcInstallEvent = null;
+        bar.classList.remove('show');
+      });
+    });
+    document.getElementById('install-bar-close').addEventListener('click', function () {
+      bar.classList.remove('show');
+      try { localStorage.setItem(DISMISS_KEY, '1'); } catch(e) {}
+    });
+    window.addEventListener('appinstalled', function () {
+      bar.classList.remove('show');
+    });
+  })();
 
   /* ── Toast ── */
   function toast(msg) {

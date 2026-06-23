@@ -3,7 +3,7 @@
 //  Scope: app only (Home shell, Bible reader, Scripture Cards studio)
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'enjc-app-v1';
+const CACHE_NAME = 'enjc-app-v2';
 const DATA_CACHE = 'enjc-app-data-v1';
 
 // Static shell — cache on install, serve from cache always.
@@ -12,6 +12,7 @@ const SHELL_ASSETS = [
   'index.html',
   'bible.html',
   'imagegen.html',
+  'more.html',
   'data/manifest.json',
   'data/bible-data.json',
   'data/tamil-bible.json',
@@ -31,6 +32,11 @@ const SHELL_ASSETS = [
   'js/imagegen-export.js',
   'js/imagegen-ui.js',
   'images/logo/logo.png',
+  'images/icons/icon-192.png',
+  'images/icons/icon-512.png',
+  'images/icons/icon-192-maskable.png',
+  'images/icons/icon-512-maskable.png',
+  'images/icons/apple-touch-icon.png',
 ];
 
 // ── INSTALL — pre-cache shell ────────────────────────────────

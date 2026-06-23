@@ -45,6 +45,16 @@
     });
   }
 
+  /* ── PWA INSTALL PROMPT (shared) ── */
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    window.__enjcInstallEvent = e;
+    window.dispatchEvent(new Event('enjc-install-available'));
+  });
+  window.addEventListener('appinstalled', function () {
+    window.__enjcInstallEvent = null;
+  });
+
   /* ══════════════════════════════════════════════════════
      ALL DOM-READY LOGIC
   ══════════════════════════════════════════════════════ */
