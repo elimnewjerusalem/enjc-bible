@@ -464,65 +464,9 @@
 </div><!-- end rp -->
 </div><!-- end studio -->
 
-<!-- I4: Mobile sticky action bar -->
-<div class="mob-action-bar" id="mob-action-bar">
-  <button class="mob-act-btn mob-act-wa" onclick="shareWA()">🟢 WhatsApp</button>
-  <button class="mob-act-btn mob-act-dl" onclick="dlIG('png')">⬇ Save Image</button>
-</div>
-
-<!-- MOBILE BOTTOM BAR -->
-<!-- I3: size pills row above tabs -->
-<div class="mob-sizes-row" id="mob-sizes-row">
-  <button class="mob-sz-pill on" data-sz="9:16" onclick="setSzMob(this,'9:16')">9:16</button>
-  <button class="mob-sz-pill" data-sz="3:4"  onclick="setSzMob(this,'3:4')">3:4</button>
-  <button class="mob-sz-pill" data-sz="1:1"  onclick="setSzMob(this,'1:1')">1:1</button>
-  <button class="mob-sz-pill" data-sz="16:9" onclick="setSzMob(this,'16:9')">16:9</button>
-</div>
-<div class="mob-bar">
-  <a class="mob-tab" href="index.html" style="text-decoration:none;color:inherit;">
-    <span class="mob-tab-icon">🏠</span>Home
-  </a>
-  <button class="mob-tab" data-panel="m-verse" onclick="mobOpen(this,'📖 Verse')">
-    <span class="mob-tab-icon">📖</span>Verse
-  </button>
-  <button class="mob-tab" data-panel="m-text" onclick="mobOpen(this,'✍ Text')">
-    <span class="mob-tab-icon">✍</span>Text
-  </button>
-  <button class="mob-tab" data-panel="m-bg" onclick="mobOpen(this,'🖼 Background')">
-    <span class="mob-tab-icon">🖼</span>BG
-  </button>
-  <button class="mob-tab" data-panel="m-style" onclick="mobOpen(this,'🎨 Style')">
-    <span class="mob-tab-icon">🎨</span>Style
-  </button>
-  <button class="mob-tab" data-panel="m-export" onclick="mobOpen(this,'⬇ Export')">
-    <span class="mob-tab-icon">⬇</span>Export
-  </button>
-</div>
-
-<!-- BOTTOM SHEET BACKDROP -->
-<div class="mob-backdrop" id="mob-backdrop" onclick="mobClose()"></div>
-
-<!-- BOTTOM SHEET -->
-<div class="mob-sheet" id="mob-sheet">
-  <div class="mob-sheet-handle"></div>
-  <div class="mob-sheet-head">
-    <span class="mob-sheet-title" id="mob-sheet-title">Style</span>
-    <div class="mob-sheet-preview" id="mob-sheet-preview" title="Canvas preview">
-      <canvas id="mob-preview-cv"></canvas>
-    </div>
-    <button class="mob-sheet-close" onclick="mobClose()">✕</button>
-  </div>
-  <div class="mob-sheet-body" id="mob-sheet-body">
-    <!-- Content injected by mobOpen() -->
-    <div id="m-style"></div>
-    <div id="m-bg" style="display:none"></div>
-    <div id="m-text" style="display:none"></div>
-    <div id="m-verse" style="display:none"></div>
-    <div id="m-export" style="display:none"></div>
-  </div>
-</div>
-
 <div id="toast"></div>
+
+
 
 <script>
 // I3: setSzMob — sync size pill selection on mobile with desktop setSz

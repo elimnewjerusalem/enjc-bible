@@ -29,10 +29,18 @@ export function initStudio(){
   // Apply saved theme on load
   applyStudioTheme(_studioTheme);
 
-  // Preload ENJC logo for canvas header
+  // Preload ENJC logo for canvas header (square icon — small & reliable to decode)
   window._logoImg = new Image();
   window._logoImg.onload = ()=>debounceDraw();
-  window._logoImg.src = 'images/logo/logo.png';
+  window._logoImg.onerror = ()=>{
+    // Retry once after a short delay (handles slow/flaky first paint loads),
+    // then give up silently — draw() already has a text-fallback for this case.
+    if(!window._logoImg._retried){
+      window._logoImg._retried = true;
+      setTimeout(()=>{ window._logoImg.src = 'images/icons/icon-512.png?retry=1'; }, 600);
+    }
+  };
+  window._logoImg.src = 'images/icons/icon-512.png';
 
   buildTemplates();
   buildFonts();
@@ -382,7 +390,7 @@ export function syncMobile(){
   if(!g('m-style')||!g('m-bg')||!g('m-text')||!g('m-verse'))return;
   // Style
   g('m-style').innerHTML=`
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:8px">Templates</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px">Templates</p>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
       ${TEMPLATES.map(t=>`
         <div onclick='applyTemplate(${JSON.stringify(t)})'
@@ -449,7 +457,7 @@ export function syncMobile(){
       </div>
     </div>
     <div id="m-bg-gallery" class="m-bg-section" data-mode="gallery" style="display:${ST.bgMode==='gallery'?'block':'none'}">
-      <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:8px">Nature Photos</p>
+      <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px">Nature Photos</p>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
         <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px">
         ${(window.GALLERY_GROUPS||['All','Nature','Faith']).map(grp=>`<button class="bgmode-btn${(ST._galGroup||'All')===grp?' on':''}" onclick="setGalGroup('${grp}')">${grp==='Faith'?'✝ '+grp:'🌿 '+grp}</button>`).join('')}
@@ -469,7 +477,7 @@ export function syncMobile(){
 
   // Text
   g('m-text').innerHTML=`
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:8px">Font</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px">Font</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:12px">
       ${Object.entries(FONTS).map(([k,f])=>`
         <div onclick="setFont('${k}')" style="border:1.5px solid var(--bd);border-radius:8px;padding:8px 6px;cursor:pointer;text-align:center">
@@ -477,7 +485,7 @@ export function syncMobile(){
           <div style="font-size:8px;color:var(--tx3)">${f.hint}</div>
         </div>`).join('')}
     </div>
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:6px">Text Colour</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:6px">Text Colour</p>
     <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px">
       ${TC_COLORS.map(c=>`<div onclick="setTC('${c}')" data-c="${c}" style="width:26px;height:26px;border-radius:50%;background:${c};cursor:pointer;border:2px solid ${ST.txColor===c?'var(--gd)':'transparent'};transition:all .15s"></div>`).join('')}
     </div>
@@ -485,7 +493,7 @@ export function syncMobile(){
       <input type="color" id="m-tc-wheel" value="${ST.txColor||'#ffffff'}"
         oninput="setTC(this.value)"
         style="width:36px;height:30px;border:1px solid var(--bd2);border-radius:var(--r6);cursor:pointer;padding:2px;background:var(--bg2)">
-      <span style="font-size:10px;color:var(--tx2)">Custom colour</span>
+      <span style="font-size:10px;color:var(--tx3)">Custom colour</span>
       <span style="font-size:11px;color:var(--gd);font-family:monospace;margin-left:auto">${(ST.txColor||'#fff').toUpperCase()}</span>
     </div>
     <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:8px">Options</p>
@@ -493,7 +501,7 @@ export function syncMobile(){
     <div onclick="togOpt(this.querySelector('.tog'),'showEn')" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer"><span style="font-size:12px;color:var(--tx)">Show English</span><div class="tog${ST.showEn?' on':''}" data-key="showEn"></div></div>
     <div onclick="togOpt(this.querySelector('.tog'),'showRef')" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);cursor:pointer"><span style="font-size:12px;color:var(--tx)">Show Reference</span><div class="tog${ST.showRef?' on':''}" data-key="showRef"></div></div>
     <div onclick="togOpt(this.querySelector('.tog'),'textGlow')" style="display:flex;justify-content:space-between;padding:8px 0;cursor:pointer"><span style="font-size:12px;color:var(--tx)">Text Glow</span><div class="tog${ST.textGlow?' on':''}" data-key="textGlow"></div></div>
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin:12px 0 8px">Text Size</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin:12px 0 8px">Text Size</p>
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
       <span style="font-size:11px;color:var(--tx2);min-width:50px">Tamil</span>
       <input type="range" min="28" max="200" value="${parseInt(g('ta-size')?.value||52)}" step="2"
@@ -522,7 +530,7 @@ export function syncMobile(){
       <button class="bgmode-btn" onclick="shuffleVerse()" title="Random verse">🔀</button>
     </div>
 
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:6px">Custom Verse</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:6px">Custom Verse</p>
     <textarea id="m-custom-ta" placeholder="Tamil verse text..." rows="2"
       style="width:100%;background:var(--bg2);border:1px solid var(--bd2);border-radius:8px;color:var(--tx);font-size:16px;padding:7px 9px;font-family:var(--tamil);resize:none;margin-bottom:5px;outline:none"></textarea>
     <input id="m-custom-en" type="text" placeholder="English verse (optional)..."
@@ -533,7 +541,7 @@ export function syncMobile(){
       <button class="bgmode-btn on" onclick="mUseCustomVerse()" style="white-space:nowrap">✅ Use</button>
     </div>
 
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:8px">📖 Bible Index — all 66 books</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px">📖 Bible Index — all 66 books</p>
     <input class="inp" id="mbi-search" type="search" placeholder="🔍 Book search — Genesis, யோவான்..."
       oninput="mbiSearch(this.value)" style="margin-bottom:8px" autocomplete="off">
     <div style="display:flex;gap:4px;margin-bottom:8px">
@@ -556,7 +564,7 @@ export function syncMobile(){
       <div id="mbi-v-list" style="max-height:220px;overflow-y:auto"></div>
     </div>
 
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin:14px 0 8px;padding-top:10px;border-top:1px solid var(--bd)">⭐ Quick Verses</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin:14px 0 8px;padding-top:10px;border-top:1px solid var(--bd)">⭐ Quick Verses</p>
     <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px">
       ${VERSE_TAGS.map(t=>`<button class="bgmode-btn m-vtag${(ST._verseTag||'All')===t?' on':''}" data-tag="${t}" onclick="setVerseTag('${t}',this)">${t}</button>`).join('')}
     </div>
@@ -575,7 +583,7 @@ export function syncMobile(){
 
   // Export
   g('m-export').innerHTML=`
-    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx2);margin-bottom:8px">Download</p>
+    <p style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px">Download</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px">
       <button class="exp-btn e-png" onclick="dlIG('png')">↓ PNG</button>
       <button class="exp-btn e-jpg" onclick="dlIG('jpg')">↓ JPG</button>
