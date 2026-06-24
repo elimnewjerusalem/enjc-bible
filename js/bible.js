@@ -52,7 +52,7 @@ const S = {
   tamilDB:{}, bibleData:{}, enDB:{},
   igSz:'9:16', igBg:'#080c10', igTc:'#e8a020',
   igVerses:[], customVerse:null,
-  igBgMode:'solid', igBgImg:null, igUnsOverlay:0.5,
+  igBgImg:null, igUnsOverlay:0.5,
   audEl:null, playing:false, playAllM:false, pIdx:0,
   showParallel:false, hlColor:'#f5c518',
   theme: localStorage.getItem('enjc-theme')||'dark',
@@ -78,29 +78,7 @@ const VOTD=[
 ];
 
 // ── TOPICS ──────────────────────────────────────────────────────
-const TOPICS={
-  faith:[{ref:"எபிரெயர் 11:1",en:"Heb 11:1",ta:"விசுவாசமானது நம்பப்படுகிறவைகளின் உறுதியும், காணப்படாதவைகளின் நிச்சயமுமாயிருக்கிறது."},{ref:"ரோமர் 10:17",en:"Rom 10:17",ta:"விசுவாசம் கேள்வியினாலே வரும்; கேள்வி தேவனுடைய வசனத்தினாலே வரும்."},{ref:"மத்தேயு 17:20",en:"Matt 17:20",ta:"கடுகுவிதை அளவு விசுவாசமுண்டாயிருந்தாலும் இந்த மலையை நகர்த்தலாம்."},{ref:"எபேசியர் 2:8",en:"Eph 2:8",ta:"கிருபையினாலே விசுவாசத்தைக்கொண்டு இரட்சிக்கப்பட்டீர்கள்; இது தேவனுடைய ஈவு."}],
-  prayer:[{ref:"பிலிப்பியர் 4:6",en:"Phil 4:6",ta:"ஒன்றினிமித்தமும் கவலைப்படாமல், எல்லாவற்றிலேயும் ஸ்தோத்திரத்தோடு கூடிய விண்ணப்பங்களால் உங்கள் அபேட்சைகளை தேவனுக்கு தெரியப்படுத்துங்கள்."},{ref:"மத்தேயு 6:9",en:"Matt 6:9",ta:"பரமண்டலங்களிலிருக்கிற எங்கள் பிதாவே, உமது நாமம் பரிசுத்தப்படுவதாக."},{ref:"1 தெசலோனிக்கேயர் 5:17",en:"1 Thes 5:17",ta:"இடைவிடாமல் ஜெபம் பண்ணுங்கள்."},{ref:"யாக்கோபு 5:16",en:"Jas 5:16",ta:"நீதிமானுடைய வேண்டுதல் மிகவும் பெலனுள்ளதாய் வல்லமையாய் நடக்கிறது."}],
-  love:[{ref:"யோவான் 3:16",en:"John 3:16",ta:"தேவன் இவ்வளவாய் உலகத்தில் அன்பு கூர்ந்தார், அதனால் தம்முடைய ஒரே பேறான குமாரனை அனுப்பினார்."},{ref:"1 கொரிந்தியர் 13:4",en:"1 Cor 13:4",ta:"அன்பு நீடிய பொறுமையுள்ளது; அன்பு தயவுள்ளது; அன்பு பொறாமைப்படாது."},{ref:"1 யோவான் 4:8",en:"1 John 4:8",ta:"அன்பில்லாதவன் தேவனை அறியான்; ஏனென்றால் தேவன் அன்பாகவே இருக்கிறார்."},{ref:"ரோமர் 8:38-39",en:"Rom 8:38",ta:"மரணமும் ஜீவனும் தேவதூதர்களும் நம்மை தேவனுடைய அன்பினின்று பிரிக்கமாட்டாது."}],
-  peace:[{ref:"யோவான் 14:27",en:"John 14:27",ta:"சமாதானத்தை உங்களுக்கு வைத்துவிடுகிறேன், என்னுடைய சமாதானத்தை உங்களுக்கு கொடுக்கிறேன்."},{ref:"பிலிப்பியர் 4:7",en:"Phil 4:7",ta:"எல்லா அறிவையும் கடந்த தேவசமாதானம் உங்கள் இருதயங்களையும் சிந்தைகளையும் காத்துக்கொள்ளும்."},{ref:"ஏசாயா 26:3",en:"Isa 26:3",ta:"உம்மை நம்புகிறவனுடைய மனம் உம்மில் நிலைத்திருக்கிறபடியால் அவனை நீர் பூரண சமாதானத்தில் காப்பீர்."},{ref:"ரோமர் 5:1",en:"Rom 5:1",ta:"விசுவாசத்தினாலே நீதிமான்களாக்கப்பட்டிருக்கிறோம்; கர்த்தராகிய இயேசு கிறிஸ்துவின் மூலமாய் தேவனிடத்தில் சமாதானம் பெற்றிருக்கிறோம்."}],
-  healing:[{ref:"ஏசாயா 53:5",en:"Isa 53:5",ta:"அவர் நம்முடைய மீறுதல்களினிமித்தம் காயப்பட்டு; அவருடைய தழும்புகளால் குணமாகிறோம்."},{ref:"எரேமியா 17:14",en:"Jer 17:14",ta:"கர்த்தாவே, என்னை குணமாக்கும், அப்பொழுது குணமாவேன்."},{ref:"யாக்கோபு 5:14",en:"Jas 5:14",ta:"உங்களில் ஒருவன் வியாதிப்பட்டிருக்கிறானா? சபையிலுள்ள மூப்பர்களை வரவழைக்கட்டும்."},{ref:"சங்கீதம் 103:3",en:"Ps 103:3",ta:"அவர் உன் எல்லா அக்கிரமங்களையும் மன்னிக்கிறவரும் உன் எல்லா வியாதிகளையும் குணமாக்குகிறவருமாயிருக்கிறார்."}],
-  salvation:[{ref:"யோவான் 3:16",en:"John 3:16",ta:"அவரில் விசுவாசமாயிருக்கிற எவனும் கெட்டுப்போகாமல் நித்தியஜீவனை அடையும்படிக்கு தேவன் தம்முடைய ஒரே பேறான குமாரனை தந்தார்."},{ref:"ரோமர் 10:9",en:"Rom 10:9",ta:"நீ இயேசுவை கர்த்தர் என்று வாயினாலே அறிக்கையிட்டு, தேவன் அவரை மரித்தோரிலிருந்து எழுப்பினார் என்று விசுவாசித்தால் இரட்சிக்கப்படுவாய்."},{ref:"அப்போஸ்தலர் 4:12",en:"Acts 4:12",ta:"வேறொருவரிலும் இரட்சிப்பில்லை; அவருடைய நாமத்தையன்றி வேறொரு நாமம் கட்டளையிடப்படவில்லை."},{ref:"எபேசியர் 2:8",en:"Eph 2:8",ta:"கிருபையினாலே விசுவாசத்தைக்கொண்டு இரட்சிக்கப்பட்டீர்கள்; இது தேவனுடைய ஈவு."}],
-  strength:[{ref:"பிலிப்பியர் 4:13",en:"Phil 4:13",ta:"என்னை பலப்படுத்துகிற கிறிஸ்துவினால் எல்லாவற்றையும் செய்யவல்லேன்."},{ref:"ஏசாயா 40:31",en:"Isa 40:31",ta:"கர்த்தருக்கு காத்திருக்கிறவர்களோ புதுப்பெலன் அடைவார்கள்."},{ref:"சங்கீதம் 46:1",en:"Ps 46:1",ta:"தேவன் நமக்கு அடைக்கலமும் பெலனுமாயிருக்கிறார்; ஆபத்துக்காலத்தில் அவர் உதவி எளிதில் கிடைக்கும்."},{ref:"2 கொரிந்தியர் 12:9",en:"2 Cor 12:9",ta:"என் கிருபை உனக்குப் போதும்; என் பெலன் பலவீனத்திலே பூரணமாகும்."}],
-  family:[{ref:"யோசுவா 24:15",en:"Josh 24:15",ta:"என்னைப் பொறுத்தமட்டில் நானும் என் வீட்டாரும் கர்த்தரை சேவிப்போம்."},{ref:"நீதிமொழிகள் 22:6",en:"Prov 22:6",ta:"பிள்ளையானவன் நடக்கவேண்டிய வழியிலே அவனை பழக்கு; அவன் முதிர்வயதிலும் அதை விடான்."},{ref:"எபேசியர் 6:1",en:"Eph 6:1",ta:"பிள்ளைகளே, இது நியாயமானதாகையால் கர்த்தருக்குள் உங்கள் பெற்றோருக்கு கீழ்ப்படியுங்கள்."},{ref:"சங்கீதம் 127:3",en:"Ps 127:3",ta:"பிள்ளைகள் கர்த்தரால் அளிக்கப்படும் சுதந்தரம்; கர்ப்பத்தின் கனி அவரால் அளிக்கப்படும் பலன்."}],
-  hope:[{ref:"எரேமியா 29:11",en:"Jer 29:11",ta:"உங்களுக்கு நம்பிக்கையான எதிர்காலம் கொடுக்கிறேன்; சமாதானத்திற்கான நினைவுகளே."},{ref:"ரோமர் 15:13",en:"Rom 15:13",ta:"நம்பிக்கையின் தேவன் விசுவாசத்தினால் உங்களை சகல சந்தோஷத்தினாலும் சமாதானத்தினாலும் நிரப்புவாராக."},{ref:"புலம்பல் 3:22-23",en:"Lam 3:22",ta:"கர்த்தருடைய கிருபைகள் தீர்ந்துபோவதில்லை; அவருடைய இரக்கங்கள் காலைதோறும் புதியவைகளாகும்."},{ref:"ரோமர் 8:28",en:"Rom 8:28",ta:"தேவனிடத்தில் அன்பு கூருகிறவர்களுக்கு எல்லாமும் நன்மைக்கு ஏதுவாக நடக்கும்."}],
-  worship:[{ref:"சங்கீதம் 95:1",en:"Ps 95:1",ta:"வாருங்கள், கர்த்தரை நோக்கி கெர்ஜீஷம் பாடுவோம்; நமது இரட்சணியாகிய கன்மலையை நோக்கி ஆர்ப்பரிப்போம்."},{ref:"யோவான் 4:24",en:"John 4:24",ta:"தேவன் ஆவியாயிருக்கிறார்; அவரை தொழுதுகொள்ளுகிறவர்கள் ஆவியோடும் உண்மையோடும் தொழுதுகொள்ளவேண்டும்."},{ref:"ரோமர் 12:1",en:"Rom 12:1",ta:"உங்கள் சரீரங்களை ஜீவனுள்ளதும் பரிசுத்தமுள்ளதும் தேவனுக்கு பிரியமுமான பலியாக ஒப்புக்கொடுங்கள்."},{ref:"சங்கீதம் 100:4",en:"Ps 100:4",ta:"ஸ்தோத்திரத்தோடே அவருடைய வாசல்களிலும், துதியோடே அவருடைய பிரகாரங்களிலும் பிரவேசியுங்கள்."}]
-};
 
-// ── PLAN ────────────────────────────────────────────────────────
-const PLAN=[
-  {day:"நாள் 1",ch:"சங்கீதம் 1",lbl:"பாக்கியமான மனுஷன்",book:"psalms",n:1},
-  {day:"நாள் 2",ch:"யோவான் 1",lbl:"வார்த்தை மாம்சமானது",book:"john",n:1},
-  {day:"நாள் 3",ch:"ரோமர் 8",lbl:"ஆக்கினைத்தீர்ப்பு இல்லை",book:"romans",n:8},
-  {day:"நாள் 4",ch:"மத்தேயு 5",lbl:"பாக்கியவசனங்கள்",book:"matthew",n:5},
-  {day:"நாள் 5",ch:"பிலிப்பியர் 4",lbl:"சந்தோஷமாயிருங்கள்",book:"philippians",n:4},
-  {day:"நாள் 6",ch:"ஏசாயா 40",lbl:"புதுப்பெலன் அடைவார்கள்",book:"isaiah",n:40},
-  {day:"நாள் 7",ch:"வெளிப்படுத்தல் 21",lbl:"எல்லாம் புதிதாகும்",book:"revelation",n:21}
-];
 
 // ── QUIZ — 100 questions in 10 rotating sets of 10 ─────────────
 const QQ_ALL=[
@@ -277,11 +255,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderVersionChips();
   syncVersionUI();
   g('fszv').textContent=S.fs+'px';
-  loadVOTD();
-  loadData();
+  loadVOTD(); // show local fallback immediately
+  loadData(); // will call loadVOTD() again once remote bible-data.json loads
   initVoices();
   updateBmBadge();
-  updateTrackerBadge();
+  updateDailyBadge();
   // Unlock audio on first touch/click
   document.addEventListener('click',unlockAudio,{once:true});
   document.addEventListener('touchstart',unlockAudio,{once:true});
@@ -332,7 +310,7 @@ async function loadData(){
       }).catch(()=>{});
     }
   }catch(e){}
-  loadVOTD(); // reload with remote data if available
+  loadVOTD();
   initIGVerses();
 }
 
@@ -469,7 +447,6 @@ function togParallel(){
   if(S.verses.length)renderVerses();
 }
 // Checkbox in the new console UI calls this directly via onchange="togParallelNew()"
-function togParallelNew(){ togParallel(); }
 
 
 // ── BOOKS ────────────────────────────────────────────────────────
@@ -1134,7 +1111,7 @@ async function doSearch(){
 }
 
 // ── PANEL ─────────────────────────────────────────────────────────
-const PANEL_TITLES={bm:'♥ Saved',quiz:'Bible Quiz',compare:'⇄ Compare Versions',notes:'📝 My Notes',img:'Verse Image'};
+const PANEL_TITLES={bm:'♥ Saved',quiz:'Bible Quiz',compare:'⇄ Compare Versions',notes:'📝 My Notes',img:'Verse Image',daily:'📅 Daily Bible Read'};
 
 function openPanel(id){
   // Highlight button
@@ -1163,32 +1140,13 @@ function renderPanelContent(id,body){
     else if(id==='quiz')renderQuiz(body);
     else if(id==='compare')renderCompare(body);
     else if(id==='notes')renderNotesPanel(body);
+    else if(id==='daily')renderDaily(body);
   }catch(err){
     body.innerHTML='<div class="berr">Error: '+err.message+'</div>';
     console.error(err);
   }
 }
 
-// ── TOPICS ───────────────────────────────────────────────────────
-function renderTopics(body){
-  const topicKeys=Object.keys(TOPICS);
-  const labels={topics:'Topics',faith:'Faith · விசுவாசம்',prayer:'Prayer · ஜெபம்',love:'Love · அன்பு',peace:'Peace · சமாதானம்',healing:'Healing · குணம்',salvation:'Salvation · இரட்சிப்பு',strength:'Strength · பெலன்',family:'Family · குடும்பம்',hope:'Hope · நம்பிக்கை',worship:'Worship · ஆராதனை'};
-  let activeTopic=topicKeys[0];
-  function show(topic){
-    activeTopic=topic;
-    body.querySelectorAll('.tp').forEach(p=>p.classList.toggle('on',p.dataset.topic===topic));
-    const vv=TOPICS[topic]||[];
-    const res=body.querySelector('#topic-res');
-    if(res)res.innerHTML=vv.map(v=>`
-      <div class="tv-item">
-        <div class="tv-ref">${v.ref} ${v.en?'| '+v.en:''}</div>
-        <div class="tv-txt">${v.ta||v.text||''}</div>
-        <div style="display:flex;gap:5px;margin-top:6px">
-          <button class="vact" onclick="cpV('${v.ref.replace(/'/g,"\\'")}','${(v.ta||'').replace(/'/g,"\\'")}')">📋</button>
-          <button class="vact" onclick="shrV('${(v.en||v.ref).replace(/'/g,"\\'")}','${(v.ta||'').replace(/'/g,"\\'")}','${v.ref.replace(/'/g,"\\'")}')">🔗</button>
-        </div>
-      </div>`).join('');
-  }
   body.innerHTML=`<div class="tpills">${topicKeys.map(k=>`<button class="tp${k===activeTopic?' on':''}" data-topic="${k}">${labels[k]||k}</button>`).join('')}</div><div id="topic-res"></div>`;
   body.querySelectorAll('.tp').forEach(btn=>btn.addEventListener('click',()=>show(btn.dataset.topic)));
   show(activeTopic);
@@ -1212,51 +1170,6 @@ function renderBM(body){
 }
 
 // ── READING PLAN ─────────────────────────────────────────────────
-function getPD(){return JSON.parse(localStorage.getItem('enjc_pd')||'[]');}
-function savePD(d){localStorage.setItem('enjc_pd',JSON.stringify(d));}
-
-function renderPlan(body){
-  const done=getPD();
-  const pct=Math.round(done.length/PLAN.length*100);
-  body.innerHTML=`
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-      <div style="flex:1;height:4px;background:rgba(255,255,255,.08);border-radius:99px">
-        <div style="height:4px;background:var(--gd);border-radius:99px;width:${pct}%;transition:width .4s"></div>
-      </div>
-      <span style="font-size:11px;color:var(--tx3)">${done.length}/${PLAN.length}</span>
-      <button onclick="savePD([]);openPanel('plan')" style="font-size:10px;color:var(--tx3);background:transparent;border:1px solid var(--bd);border-radius:99px;padding:3px 10px;cursor:pointer;font-family:var(--sans)">Reset</button>
-    </div>
-    ${PLAN.map((p,i)=>{
-      const isDone=done.includes(i);
-      return `<div class="pday${isDone?' done':''}" onclick="togglePDay(${i})">
-        <div class="pchk">${isDone?'✓':''}</div>
-        <div class="pinfo">
-          <div class="plbl">${p.day}</div>
-          <div class="pch">${p.ch} <span style="opacity:.5;font-size:.82em">— ${p.lbl}</span></div>
-        </div>
-        <button class="pgo" onclick="event.stopPropagation();goPlan(${i})">படி →</button>
-      </div>`;
-    }).join('')}`;
-}
-
-function togglePDay(i){
-  const done=getPD();const idx=done.indexOf(i);
-  if(idx>=0)done.splice(idx,1);else done.push(i);
-  savePD(done);openPanel('plan');
-}
-
-function goPlan(i){
-  const p=PLAN[i];if(!p)return;
-  const bk=BOOKS.find(b=>b.id===p.book);if(!bk)return;
-  g('book-sel').value=p.book;
-  S.book=p.book;S.bookName=bk.name;S.bookTaName=bk.ta;S.bookNum=bk.n;S.totalCh=bk.ch;S.ch=p.n;
-  const cs=g('ch-sel');cs.innerHTML='';cs.disabled=false;
-  for(let j=1;j<=bk.ch;j++){const o=document.createElement('option');o.value=j;o.textContent='அதிகாரம் '+j;cs.appendChild(o);}
-  cs.value=p.n;g('gobtn').style.display='none';
-  closePanel();loadCh();
-  setTimeout(()=>g('bcontent').scrollIntoView({behavior:'smooth'}),300);
-}
-
 // ── COMPARE VERSIONS ──────────────────────────────────────────────
 // Generic fetch — gets one version's verses for the CURRENT book/chapter
 // without touching the main reading state (S.verses / S.lang etc).
@@ -1835,7 +1748,6 @@ function igLoadUnsplash(idx){
   toast('⏳ Loading...');
   img.onload = function(){
     S.igBgImg = img;
-    S.igBgMode = 'unsplash';
     _igMode = 'unsplash';
     drawIG();
     toast('✅ '+cat.label+' loaded');
@@ -1892,8 +1804,6 @@ function initIGVerses(){
   // No select needed — verse comes from current reading
 }
 
-function useCurrentForIG(){
-  if(!S.verses||!S.verses.length){toast('முதலில் ஒரு chapter திறங்கள்');return;}
   const v=S.verses[0];
   const taRef=(S.bookTaName||S.bookName)+' '+S.ch+':'+v.num;
   const enRef=S.bookName+' '+S.ch+':'+v.num;
@@ -2270,66 +2180,6 @@ function applyFont(fam){
   document.documentElement.style.setProperty('--tamil',fonts[fam]||fonts.noto);
 }
 
-function renderSettings(body){
-  const cacheKeys=Object.keys(localStorage).filter(k=>k.startsWith('enjc_ta_'));
-  const cacheKB=Math.round(cacheKeys.reduce((a,k)=>{try{return a+(localStorage.getItem(k)||'').length;}catch(e){return a;}},0)/1024);
-  body.innerHTML=`
-    <div class="p-section">
-      <span class="p-lbl">Reading Theme</span>
-      <div class="p-row3">
-        <button class="p-btn${S.theme==='dark'?' on':''}" onclick="applyTheme('dark');openPanel('settings')">🌙 Dark</button>
-        <button class="p-btn${S.theme==='sepia'?' on':''}" onclick="applyTheme('sepia');openPanel('settings')">📜 Sepia</button>
-        <button class="p-btn${S.theme==='light'?' on':''}" onclick="applyTheme('light');openPanel('settings')">☀ Light</button>
-      </div>
-    </div>
-    <div class="p-section">
-      <span class="p-lbl">Tamil Font</span>
-      <div class="p-row3">
-        <button class="p-btn${S.fontFamily==='noto'?' on':''}" onclick="applyFont('noto');openPanel('settings')">Noto Serif</button>
-        <button class="p-btn${S.fontFamily==='latha'?' on':''}" onclick="applyFont('latha');openPanel('settings')">Latha</button>
-        <button class="p-btn${S.fontFamily==='bamini'?' on':''}" onclick="applyFont('bamini');openPanel('settings')">Bamini</button>
-      </div>
-    </div>
-    <div class="p-section">
-      <span class="p-lbl">Font Size</span>
-      <div style="display:flex;align-items:center;gap:8px">
-        <button onclick="chFont(-1)" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:var(--rl);padding:7px 14px;font-size:13px;color:var(--tx);cursor:pointer;font-weight:600;font-family:var(--sans)">A−</button>
-        <span style="flex:1;text-align:center;font-size:12px;color:var(--tx3)">${S.fs}px</span>
-        <button onclick="chFont(1)" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:var(--rl);padding:7px 14px;font-size:13px;color:var(--tx);cursor:pointer;font-weight:600;font-family:var(--sans)">A+</button>
-        <button onclick="chFont(0)" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:var(--rl);padding:7px 10px;font-size:11px;color:var(--tx);cursor:pointer;font-family:var(--sans)">↺</button>
-      </div>
-    </div>
-    <div class="p-section">
-      <span class="p-lbl">Highlight Colour</span>
-      <div class="hl-dots">
-        ${[['#f5c518','Yellow'],['#4caf50','Green'],['#60b0ff','Blue'],['#c850c8','Purple'],['#ff7043','Orange']].map(([c,n])=>`<div class="hldot${S.hlColor===c?' on':''}" data-color="${c}" style="background:${c};border-color:${S.hlColor===c?'white':'transparent'}" onclick="setHlColor('${c}')" title="${n}"></div>`).join('')}
-      </div>
-    </div>
-    <div class="p-section">
-      <span class="p-lbl">Offline Cache</span>
-      <div style="font-size:12px;color:var(--tx2);margin-bottom:8px">${cacheKeys.length} chapters cached (${cacheKB} KB)</div>
-      <button onclick="clearCache();openPanel('settings')" style="background:transparent;border:1px solid rgba(248,113,113,.3);border-radius:99px;padding:5px 14px;font-size:11px;color:#fca5a5;cursor:pointer;font-family:var(--sans)">Clear Cache</button>
-    </div>
-    <div class="p-section">
-      <span class="p-lbl">Line Spacing</span>
-      <div class="p-row3">
-        <button class="p-btn" onclick="setSpacing(1.6)">Compact</button>
-        <button class="p-btn on" onclick="setSpacing(1.85)">Normal</button>
-        <button class="p-btn" onclick="setSpacing(2.3)">Wide</button>
-      </div>
-    </div>`;
-}
-
-function clearCache(){
-  const keys=Object.keys(localStorage).filter(k=>k.startsWith('enjc_ta_'));
-  keys.forEach(k=>localStorage.removeItem(k));
-  toast('Cache cleared: '+keys.length+' chapters');
-}
-function setSpacing(v){
-  document.querySelectorAll('.vtxt').forEach(el=>el.style.lineHeight=v);
-  toast('Spacing: '+v);
-}
-
 // ── QUIZ ─────────────────────────────────────────────────────────
 let _qi=0,_qs=0,_qo=[];
 
@@ -2390,43 +2240,6 @@ function markRead(){
     updateTrackerBadge();
   }
 }
-function updateTrackerBadge(){
-  const d=getRead();let total=0;
-  BOOKS.forEach(b=>{if(d[b.id])total+=d[b.id].length;});
-  const pct=Math.round(total/1189*100);
-  const el=g('tracker-pct');if(el)el.textContent='Track '+pct+'%';
-}
-
-function renderTracker(body){
-  const d=getRead();let totalRead=0;
-  BOOKS.forEach(b=>{if(d[b.id])totalRead+=d[b.id].length;});
-  const pct=Math.round(totalRead/1189*100);
-  body.innerHTML=`
-    <div style="text-align:center;padding:16px 0 12px">
-      <div style="font-size:2.2rem;font-weight:600;color:var(--gd)">${pct}%</div>
-      <div style="font-size:11px;color:var(--tx3)">${totalRead} / 1189 chapters read</div>
-      <div style="background:rgba(255,255,255,.07);border-radius:99px;height:5px;margin:10px 0">
-        <div style="height:5px;border-radius:99px;background:var(--gd);width:${pct}%"></div>
-      </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:3px">
-      ${BOOKS.map(b=>{
-        const read=(d[b.id]||[]).length;
-        const p=Math.round(read/b.ch*100);
-        const col=p===100?'var(--gd)':p>0?'rgba(232,160,32,.5)':'var(--tx3)';
-        return `<div class="track-book">
-          <span class="track-icon" style="color:${col}">${p===100?'✓':p>0?'◑':'○'}</span>
-          <div class="track-info">
-            <div class="track-name">${b.ta}</div>
-            <div class="track-bar"><div class="track-fill" style="width:${p}%;background:${col}"></div></div>
-          </div>
-          <span class="track-pct" style="color:${col}">${read}/${b.ch}</span>
-        </div>`;
-      }).join('')}
-    </div>
-    <button onclick="markRead();openPanel('tracker')" style="width:100%;margin-top:12px;background:var(--gd);color:var(--bg);border:none;border-radius:99px;padding:11px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans)">✓ Mark This Chapter as Read</button>`;
-}
-
 // ── VERSE MODAL ──────────────────────────────────────────────────
 let _mv=null;
 
@@ -2581,14 +2394,136 @@ function getCacheInfo(){
 // Sync old togParallel to also update checkbox
 
 
+// ── DAILY BIBLE READ ─────────────────────────────────────────────
+// 365-day plan: Genesis→Revelation + Psalms/Proverbs interleaved
+const DAILY_PLAN = (function(){
+  // Simple sequential plan: one chapter per day, cycling through OT+NT
+  const schedule = [
+    // Week 1 — Genesis + Matthew
+    {book:'genesis',ch:1,label:'ஆதியாகமம் 1 — படைப்பு',ta:'Genesis 1',en:'Gen 1'},
+    {book:'matthew',ch:1,label:'மத்தேயு 1 — இயேசுவின் வரலாறு',ta:'Matthew 1',en:'Matt 1'},
+    {book:'genesis',ch:2,label:'ஆதியாகமம் 2 — ஏதேன் தோட்டம்',ta:'Genesis 2',en:'Gen 2'},
+    {book:'matthew',ch:2,label:'மத்தேயு 2 — மேலவர்களின் வருகை',ta:'Matthew 2',en:'Matt 2'},
+    {book:'genesis',ch:3,label:'ஆதியாகமம் 3 — வீழ்ச்சி',ta:'Genesis 3',en:'Gen 3'},
+    {book:'psalms',ch:1,label:'சங்கீதம் 1 — பாக்கியமான மனுஷன்',ta:'Psalms 1',en:'Ps 1'},
+    {book:'matthew',ch:3,label:'மத்தேயு 3 — யோவானின் ஊழியம்',ta:'Matthew 3',en:'Matt 3'},
+    // Week 2
+    {book:'genesis',ch:4,label:'ஆதியாகமம் 4 — காயீன் ஆபேல்',ta:'Genesis 4',en:'Gen 4'},
+    {book:'john',ch:1,label:'யோவான் 1 — வார்த்தை மாம்சமானது',ta:'John 1',en:'John 1'},
+    {book:'psalms',ch:23,label:'சங்கீதம் 23 — ஆண்டவர் என் மேய்ப்பர்',ta:'Psalms 23',en:'Ps 23'},
+    {book:'romans',ch:8,label:'ரோமர் 8 — ஆவியில் வாழ்க்கை',ta:'Romans 8',en:'Rom 8'},
+    {book:'john',ch:3,label:'யோவான் 3 — யோவான் 3:16',ta:'John 3',en:'John 3'},
+    {book:'proverbs',ch:1,label:'நீதிமொழிகள் 1 — ஞானத்தின் ஆரம்பம்',ta:'Proverbs 1',en:'Prov 1'},
+    {book:'philippians',ch:4,label:'பிலிப்பியர் 4 — சந்தோஷமாயிருங்கள்',ta:'Philippians 4',en:'Phil 4'},
+    // Week 3
+    {book:'isaiah',ch:40,label:'ஏசாயா 40 — புதுப்பெலன் அடைவார்கள்',ta:'Isaiah 40',en:'Isa 40'},
+    {book:'john',ch:14,label:'யோவான் 14 — நான்தான் வழி',ta:'John 14',en:'John 14'},
+    {book:'psalms',ch:46,label:'சங்கீதம் 46 — தேவன் நமக்கு அடைக்கலம்',ta:'Psalms 46',en:'Ps 46'},
+    {book:'matthew',ch:5,label:'மத்தேயு 5 — மலைப்பிரசங்கம்',ta:'Matthew 5',en:'Matt 5'},
+    {book:'1corinthians',ch:13,label:'1 கொரிந்தியர் 13 — அன்பின் அத்தியாயம்',ta:'1 Corinthians 13',en:'1 Cor 13'},
+    {book:'psalms',ch:91,label:'சங்கீதம் 91 — தேவனின் பாதுகாப்பு',ta:'Psalms 91',en:'Ps 91'},
+    {book:'hebrews',ch:11,label:'எபிரெயர் 11 — விசுவாசத்தின் அத்தியாயம்',ta:'Hebrews 11',en:'Heb 11'},
+    // Week 4
+    {book:'revelation',ch:21,label:'வெளிப்படுத்தல் 21 — எல்லாம் புதிதாகும்',ta:'Revelation 21',en:'Rev 21'},
+    {book:'luke',ch:1,label:'லூக்கா 1 — மரியாளின் கீதம்',ta:'Luke 1',en:'Luke 1'},
+    {book:'psalms',ch:119,label:'சங்கீதம் 119 — வேத வசனம்',ta:'Psalms 119',en:'Ps 119'},
+    {book:'acts',ch:2,label:'அப்போஸ்தலர் 2 — பெந்தெகோஸ்தே',ta:'Acts 2',en:'Acts 2'},
+    {book:'proverbs',ch:3,label:'நீதிமொழிகள் 3 — கர்த்தரில் நம்பிக்கை',ta:'Proverbs 3',en:'Prov 3'},
+    {book:'luke',ch:15,label:'லூக்கா 15 — தொலைந்த மகன்',ta:'Luke 15',en:'Luke 15'},
+    {book:'ephesians',ch:6,label:'எபேசியர் 6 — ஆவிக்குரிய யுத்த ஆயுதம்',ta:'Ephesians 6',en:'Eph 6'},
+  ];
+  return schedule;
+})();
+
+function getDailyProgress(){
+  try{ return JSON.parse(localStorage.getItem('enjc_daily')||'{}'); }catch(e){ return {}; }
+}
+function saveDailyProgress(d){ localStorage.setItem('enjc_daily',JSON.stringify(d)); }
+function updateDailyBadge(){
+  const prog = getDailyProgress();
+  const done = Object.values(prog).filter(Boolean).length;
+  const badge = g('daily-badge');
+  if(badge) badge.textContent = done > 0 ? done+'/'+DAILY_PLAN.length : '';
+}
+
+function renderDaily(body){
+  const prog = getDailyProgress();
+  const todayKey = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+  const totalDone = Object.values(prog).filter(Boolean).length;
+  const streak = calcStreak(prog);
+
+  let html = `
+  <div class="dp-stats">
+    <div class="dp-stat"><span class="dp-stat-n">${totalDone}</span><span class="dp-stat-l">முடிந்தது</span></div>
+    <div class="dp-stat"><span class="dp-stat-n">${DAILY_PLAN.length - totalDone}</span><span class="dp-stat-l">மீதமுள்ளது</span></div>
+    <div class="dp-stat"><span class="dp-stat-n">${streak}</span><span class="dp-stat-l">🔥 Streak</span></div>
+  </div>
+  <div class="dp-bar-wrap"><div class="dp-bar" style="width:${Math.round(totalDone/DAILY_PLAN.length*100)}%"></div></div>
+  <p class="dp-tip">ஒவ்வொரு நாளும் ஒரு அதிகாரம் படியுங்கள் 📖</p>
+  <div class="dp-list">`;
+
+  DAILY_PLAN.forEach((item, i) => {
+    const key = 'day_'+i;
+    const done = !!prog[key];
+    const isToday = !prog[todayKey+'_done'] && !done && Object.values(prog).filter(Boolean).length === i;
+    html += `
+    <div class="dp-item${done?' dp-done':''}${isToday?' dp-today':''}">
+      <div class="dp-check" onclick="toggleDailyDay(${i})" title="${done?'Mark unread':'Mark as read'}">
+        ${done ? '<i class="ti ti-check"></i>' : (isToday?'<i class="ti ti-book-open"></i>':'<span class="dp-day-n">'+(i+1)+'</span>')}
+      </div>
+      <div class="dp-info">
+        <div class="dp-label">${item.label}</div>
+        <div class="dp-ref">${item.en}</div>
+      </div>
+      <button class="dp-go" onclick="goDailyChapter('${item.book}',${item.ch})" title="இந்த அதிகாரம் படி">
+        <i class="ti ti-arrow-right"></i>
+      </button>
+    </div>`;
+  });
+
+  html += '</div>';
+  body.innerHTML = html;
+  updateDailyBadge();
+}
+
+function calcStreak(prog){
+  let streak = 0;
+  const today = new Date();
+  for(let i = DAILY_PLAN.length-1; i >= 0; i--){
+    if(prog['day_'+i]) streak++;
+    else break;
+  }
+  return streak;
+}
+
+function toggleDailyDay(i){
+  const prog = getDailyProgress();
+  prog['day_'+i] = !prog['day_'+i];
+  saveDailyProgress(prog);
+  // Re-render
+  const body = g('panel-body');
+  if(body) renderDaily(body);
+  updateDailyBadge();
+}
+
+function goDailyChapter(book, ch){
+  // Navigate to that chapter
+  S.book = book; S.ch = ch;
+  closePanel();
+  loadCh();
+  // Auto-mark as read after going there
+  const i = DAILY_PLAN.findIndex(d=>d.book===book&&d.ch===ch);
+  if(i >= 0){
+    const prog = getDailyProgress();
+    prog['day_'+i] = true;
+    saveDailyProgress(prog);
+    updateDailyBadge();
+  }
+}
+
 // ── THEME SYNC: Override site.js toggleTheme to also update bible CSS vars ──
 // Called when user clicks the nav theme button on the bible page
-window.toggleTheme = function() {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'light' ? 'dark' : 'light';
-  applyTheme(next); // updates both CSS vars AND data-theme attribute
-};
-
-// ── Expose for bible-mobile.js ────────────────────────────────
+// ── Expose for site.js theme delegation & bible-mobile.js ────────────────────────────────
+window._applyTheme = applyTheme;
 window.S = S;
 window.BOOKS = BOOKS;

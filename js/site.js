@@ -16,6 +16,8 @@
   window.toggleTheme = function () {
     const cur = document.documentElement.getAttribute('data-theme');
     const next = cur === 'light' ? 'dark' : 'light';
+    // If bible.js applyTheme is available, let it handle full theme sync
+    if (typeof window._applyTheme === 'function') { window._applyTheme(next); return; }
     applyTheme(next); localStorage.setItem(THEME_KEY, next);
   };
 

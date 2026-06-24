@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>ENJC Bible App</title>
   <meta name="description" content="Elim New Jerusalem Church — Bible Reader & Verse Cards">
-  <link rel="manifest" href="data/manifest.json">
+  <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="images/icons/icon-192.png">
   <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
   <meta name="mobile-web-app-capable" content="yes">
@@ -366,13 +366,6 @@
               : hour < 20 ? 'மாலை வணக்கம் 🌇'
               : 'இரவு வணக்கம் 🌙';
   document.getElementById('app-greet').textContent = greet;
-
-  /* ── Service worker (app shell offline cache) ── */
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('js/sw.js').catch(function(){});
-    });
-  }
 
   /* ── Install banner ── */
   (function(){

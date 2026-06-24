@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark" data-page="bible">
 <head>
 <meta charset="UTF-8">
-  <link rel="manifest" href="data/manifest.json">
+  <link rel="manifest" href="manifest.json">
 <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="icon" type="image/png" href="images/icons/icon-192.png">
   <link rel="apple-touch-icon" href="images/icons/apple-touch-icon.png">
@@ -10,8 +10,7 @@
 <title>பரிசுத்த வேதாகமம் | ENJC</title>
 <meta name="description" content="Tamil & English Bible — 66 books, Audio, Image, Bookmark | ENJC Tondiarpet Chennai">
 
-<noscript>
-</noscript><script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
 <!-- Styles -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,14 +23,7 @@
 <link rel="stylesheet" href="css/tools.css">
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/premium-v2.css">
-  <link rel="stylesheet" href="css/mobile-fix.css">
-
-<!-- Styles -->
-
-<noscript>
-</noscript>
-<noscript>
-</noscript>
+<link rel="stylesheet" href="css/mobile-fix.css">
 
   <!-- SEO: Open Graph & Twitter Card -->
   <meta property="og:type"        content="website">
@@ -146,7 +138,7 @@
       </div>
 
       <label class="bv-parallel">
-        <input type="checkbox" id="para-chk" onchange="togParallelNew()">
+        <input type="checkbox" id="para-chk" onchange="togParallel()">
         <span class="bv-parallel-track"></span>
         <span class="bv-parallel-txt">Parallel <em id="para-state">Off</em></span>
       </label>
@@ -171,6 +163,9 @@
       </button>
       <button class="bv-feat feat-btn" id="fb-notes" onclick="openPanel('notes')">
         <i class="ti ti-notes" aria-hidden="true"></i><span>Notes</span>
+      </button>
+      <button class="bv-feat feat-btn" id="fb-daily" onclick="openPanel('daily')">
+        <i class="ti ti-calendar-check" aria-hidden="true"></i><span>Daily</span><em class="feat-badge" id="daily-badge"></em>
       </button>
     </div>
 
@@ -261,10 +256,12 @@
     <!-- English verse -->
     <div class="vs-en" id="vs-en"></div>
 
-    <!-- Note textarea -->
-    <textarea class="vs-note-inp" id="vs-note" rows="2"
-      placeholder="📝 குறிப்பு எழுதுங்கள்..."
-      oninput="autoSaveNote(this.value)"></textarea>
+    <!-- Note row (toggled by Note button) -->
+    <div class="vs-note-row" id="vs-note-row">
+      <textarea class="vs-note-inp" id="vs-note" rows="2"
+        placeholder="📝 குறிப்பு எழுதுங்கள்..."
+        oninput="autoSaveNote(this.value)"></textarea>
+    </div>
 
     <!-- Highlight row (hidden, toggled by Highlight button) -->
     <div class="vs-hl-row" id="vs-hl-row">
@@ -403,9 +400,7 @@
 // ── Bottom Sheet helpers (bible.js owns openVModal/closeVModal/mAct) ──
 
 function closeSheet(){
-  document.getElementById('verse-sheet').classList.remove('open');
-  document.getElementById('sheet-backdrop').classList.remove('open');
-  document.body.style.overflow = '';
+  if(typeof closeVModal === 'function') closeVModal();
 }
 
 function toggleHLRow(){
@@ -536,6 +531,6 @@ function openImageStudioWithVerse(){
 <button class="scroll-top-btn" id="scroll-top-btn" onclick="goTop()" aria-label="Back to top">↑</button>
 <script>window.ENJC_PAGE="bible";</script>
 <script src="js/site.js" defer></script>
-<script src="js/design-upgrade.js" defer></script>
+
 </body>
 </html>

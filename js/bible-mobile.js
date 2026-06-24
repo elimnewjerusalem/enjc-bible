@@ -398,7 +398,7 @@
     } else if (act === 'en-audio') {
       if (typeof speak === 'function') speak(v.en || v.ta, 'en');
     } else if (act === 'save') {
-      if (typeof togBM === 'function') togBM(v.ref, v.ta || '', v.en || '', v.taRef || '');
+      if (typeof togBM === 'function') togBM(v.ref, v.ta || '', v.taRef || v.ref, -1);
       const isBm = S.bm && S.bm.some(b => b.ref === v.ref);
       document.getElementById('mb-vs-bm-ic').textContent = isBm ? '♥' : '♡';
       document.getElementById('mb-vs-bm-lbl').textContent = isBm ? 'Saved' : 'Save';
