@@ -1051,7 +1051,7 @@ function updateBmBadge(){
   const n=S.bm.length;
   const el=g('bm-lbl');if(el)el.textContent=n?'Saved ('+n+')':'Saved';
 }
-function rmBM(i){const bms=S.bm;bms.splice(i,1);saveBM(bms);updateBmBadge();openPanel('bm');}
+function rmBM(i){const bms=S.bm;bms.splice(i,1);saveBM(bms);updateBmBadge();}
 
 
 // ── BOOKMARK CHAPTER ─────────────────────────────────────────────
@@ -1119,21 +1119,28 @@ async function doSearch(){
 const PANEL_TITLES={bm:'♥ Saved',quiz:'Bible Quiz',compare:'⇄ Compare Versions',notes:'📝 My Notes',img:'Verse Image',daily:'📅 Daily Bible Read'};
 
 function openPanel(id){
-  // Highlight button
   document.querySelectorAll('.feat-btn').forEach(b=>b.classList.remove('on'));
   const fb=g('fb-'+id);if(fb)fb.classList.add('on');
   safe('panel-title',PANEL_TITLES[id]||id);
   const body=g('panel-body');
+  if(!body){
+    // Panel removed — redirect to standalone feature page
+    const pageMap={bm:'saved.html',quiz:'quiz.html',compare:'compare.html',notes:'notes.html',daily:'daily.html',img:'imagegen.html'};
+    if(pageMap[id])location.href=pageMap[id];
+    return;
+  }
   body.innerHTML='<div class="bload"><div class="bspin"></div></div>';
-  g('overlay').classList.add('open');
-  g('panel').classList.add('open');
+  const ov=g('overlay'),pn=g('panel');
+  if(ov)ov.classList.add('open');
+  if(pn)pn.classList.add('open');
   document.body.style.overflow='hidden';
   setTimeout(()=>renderPanelContent(id,body),40);
 }
 
 function closePanel(){
-  g('overlay').classList.remove('open');
-  g('panel').classList.remove('open');
+  const ov=g('overlay'),pn=g('panel');
+  if(ov)ov.classList.remove('open');
+  if(pn)pn.classList.remove('open');
   document.body.style.overflow='';
   document.querySelectorAll('.feat-btn').forEach(b=>b.classList.remove('on'));
 }
@@ -1802,14 +1809,6 @@ function igUploadPhoto(){
 function initIGVerses(){
   S.igVerses=IGVERSES;
   // No select needed — verse comes from current reading
-}
-
-  const v=S.verses[0];
-  const taRef=(S.bookTaName||S.bookName)+' '+S.ch+':'+v.num;
-  const enRef=S.bookName+' '+S.ch+':'+v.num;
-  const enV=S.enVerses.find(e=>e.num===v.num);
-  S.customVerse={ta:v.text,tref:taRef,en:enV?.text||'',ref:enRef};
-  drawIG();toast('Using current verse');
 }
 
 // ── IG VERSE CONTROLS ─────────────────────────────────────────────
