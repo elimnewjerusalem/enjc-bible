@@ -252,8 +252,13 @@ document.addEventListener('DOMContentLoaded',()=>{
   applyTheme(S.theme);
   applyFont(S.fontFamily);
   populateBooks();
-  renderVersionChips();
+  // Restore navigation from feature pages (daily/compare/search)
+  try{
+    const go = JSON.parse(sessionStorage.getItem('enjc_go')||'null');
+    if(go && go.book){ S.book=go.book; S.ch=go.ch||1; sessionStorage.removeItem('enjc_go'); }
+  }catch(e){}
   syncVersionUI();
+  renderVersionChips();
   g('fszv').textContent=S.fs+'px';
   loadVOTD(); // show local fallback immediately
   loadData(); // will call loadVOTD() again once remote bible-data.json loads
@@ -1145,11 +1150,6 @@ function renderPanelContent(id,body){
     body.innerHTML='<div class="berr">Error: '+err.message+'</div>';
     console.error(err);
   }
-}
-
-  body.innerHTML=`<div class="tpills">${topicKeys.map(k=>`<button class="tp${k===activeTopic?' on':''}" data-topic="${k}">${labels[k]||k}</button>`).join('')}</div><div id="topic-res"></div>`;
-  body.querySelectorAll('.tp').forEach(btn=>btn.addEventListener('click',()=>show(btn.dataset.topic)));
-  show(activeTopic);
 }
 
 // ── BOOKMARKS ────────────────────────────────────────────────────

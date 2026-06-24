@@ -77,24 +77,6 @@
 <!-- ── MAIN LAYOUT — Manuscript Reader (2026 redesign) ──────────── -->
 <div class="bv-wrap">
 
-  <!-- VERSE OF THE DAY — manuscript hero -->
-  <section class="bv-hero">
-    <div class="bv-hero-ornament" aria-hidden="true">✦</div>
-    <span class="bv-hero-eyebrow">இன்றைய வேத வாக்கு · Verse of the Day</span>
-    <p class="bv-hero-ta" id="votd-ta">ஏற்றுகிறோம்...</p>
-    <cite class="bv-hero-taref" id="votd-taref"></cite>
-    <p class="bv-hero-en" id="votd-en"></p>
-    <cite class="bv-hero-enref" id="votd-enref"></cite>
-    <div class="bv-hero-acts">
-      <button class="bv-chip bv-chip-gold" onclick="playVOTD('ta')"><i class="ti ti-volume" aria-hidden="true"></i> தமிழ்</button>
-      <button class="bv-chip bv-chip-gold" onclick="playVOTD('en')"><i class="ti ti-volume" aria-hidden="true"></i> English</button>
-      <button class="bv-chip" onclick="openImageStudio()"><i class="ti ti-photo" aria-hidden="true"></i> Image</button>
-      <button class="bv-chip" onclick="copyVOTD()"><i class="ti ti-copy" aria-hidden="true"></i> Copy</button>
-      <button class="bv-chip" onclick="shareVOTD()"><i class="ti ti-share-2" aria-hidden="true"></i> Share</button>
-      <button class="bv-chip" onclick="reqNotify()"><i class="ti ti-bell" aria-hidden="true"></i> Notify</button>
-    </div>
-  </section>
-
   <!-- READING CONSOLE — book/chapter + version + tools, one cohesive bar -->
   <section class="bv-console">
 
@@ -149,24 +131,6 @@
         <span id="fszv">17px</span>
         <button onclick="chFont(1)" aria-label="Increase font size">A+</button>
       </div>
-    </div>
-
-    <div class="bv-console-row bv-console-row-feat">
-      <button class="bv-feat feat-btn" id="fb-bm" onclick="openPanel('bm')">
-        <i class="ti ti-heart" aria-hidden="true"></i><span id="bm-lbl">Saved</span><em class="feat-badge" id="bm-badge">0</em>
-      </button>
-      <button class="bv-feat feat-btn" id="fb-quiz" onclick="openPanel('quiz')">
-        <i class="ti ti-brain" aria-hidden="true"></i><span>Quiz</span>
-      </button>
-      <button class="bv-feat feat-btn" id="fb-compare" onclick="openPanel('compare')">
-        <i class="ti ti-arrows-left-right" aria-hidden="true"></i><span>Compare</span>
-      </button>
-      <button class="bv-feat feat-btn" id="fb-notes" onclick="openPanel('notes')">
-        <i class="ti ti-notes" aria-hidden="true"></i><span>Notes</span>
-      </button>
-      <button class="bv-feat feat-btn" id="fb-daily" onclick="openPanel('daily')">
-        <i class="ti ti-calendar-check" aria-hidden="true"></i><span>Daily</span><em class="feat-badge" id="daily-badge"></em>
-      </button>
     </div>
 
   </section>
@@ -225,17 +189,6 @@
 
 </div>
 <!-- ── END Manuscript Reader ─────────────────────────────────── -->
-
-<!-- ── SIDE PANEL ──────────────────────────────────────── -->
-<div class="overlay" id="overlay" onclick="closePanel()"></div>
-<div class="panel"   id="panel">
-  <div class="panel-handle"></div>
-  <div class="panel-head">
-    <span class="panel-title" id="panel-title">Panel</span>
-    <button class="panel-close" onclick="closePanel()">✕</button>
-  </div>
-  <div class="panel-body" id="panel-body"></div>
-</div>
 
 <!-- ── BOTTOM SHEET (verse actions) ───────────────────── -->
 <div class="sheet-backdrop" id="sheet-backdrop" onclick="closeVModal()"></div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/png" href="images/icons/icon-192.png">
+<title>Daily Bible Read | ENJC</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/tools.css">
+<link rel="stylesheet" href="css/design-system.css">
+<link rel="stylesheet" href="css/premium-v2.css">
+<link rel="stylesheet" href="css/mobile-fix.css">
+<style>
+body{background:var(--bg,#04101e);color:var(--tx,#e8eaf0);font-family:'DM Sans',system-ui,sans-serif;padding-bottom:40px}
+.fp-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg2,#071628);border-bottom:1px solid var(--bd,#1a2d47);position:sticky;top:0;z-index:10}
+.fp-back{width:36px;height:36px;border-radius:50%;background:none;border:1px solid var(--bd,#1a2d47);color:var(--tx,#e8eaf0);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0}
+.fp-title{font-size:17px;font-weight:600}
+.fp-body{padding:16px}
+</style>
+</head>
+<body>
+<header class="fp-head">
+  <a href="index.html" class="fp-back"><i class="ti ti-arrow-left"></i></a>
+  <span class="fp-title">📅 Daily Bible Read</span>
+</header>
+<div class="fp-body" id="fp-body">
+  <div class="bload"><div class="bspin"></div></div>
+</div>
+<script src="js/bible.js"></script>
+<script>
+(function(){
+  const t = localStorage.getItem('enjc-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  // Override goDailyChapter to navigate to bible.html with that chapter
+  window.goDailyChapter = function(book, ch){
+    const i = DAILY_PLAN.findIndex(d=>d.book===book&&d.ch===ch);
+    if(i >= 0){
+      const prog = getDailyProgress();
+      prog['day_'+i] = true;
+      saveDailyProgress(prog);
+    }
+    // Pass book+ch to bible.html via sessionStorage
+    try{ sessionStorage.setItem('enjc_go',JSON.stringify({book,ch})); }catch(e){}
+    window.location.href = 'bible.html';
+  };
+  function tryRender(){
+    const m = document.getElementById('fp-body');
+    if(typeof renderDaily === 'function'){ renderDaily(m); }
+    else { setTimeout(tryRender, 40); }
+  }
+  tryRender();
+})();
+</script>
+</body></html>
