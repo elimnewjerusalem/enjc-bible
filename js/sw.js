@@ -28,6 +28,7 @@ const SHELL_ASSETS = [
   'css/premium-v2.css',
   'css/mobile-fix.css',
   'js/site.js',
+  'js/features.js',
   'js/bible.js',
   'js/bible-mobile.js',
   'js/imagegen-mobile.js',
