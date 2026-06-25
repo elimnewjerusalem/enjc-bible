@@ -758,3 +758,520 @@ html, body {
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--paper-deep); }
 ::-webkit-scrollbar-thumb { background: var(--paper-line); border-radius: 4px; }
+
+/* ================================================================
+   BIBLE-MOBILE.JS OVERRIDES — mobile shell parchment theme
+================================================================ */
+
+/* Mobile wrap shell */
+.mb-wrap, #mb-shell {
+  background: var(--paper-deep) !important;
+}
+
+/* Mobile header — gradient banner */
+.mb-header {
+  background: var(--ban-books) !important;
+  border-bottom: none !important;
+  position: relative;
+  padding-bottom: 28px !important;
+}
+.mb-header::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 18px;
+  background: var(--paper);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: scaleX(1.42);
+  z-index: 2;
+  pointer-events: none;
+}
+/* Reader header uses bible gradient */
+#mb-screen-reader .mb-header {
+  background: var(--ban-bible) !important;
+}
+/* Chapter header uses a distinct gradient */
+#mb-screen-chapters .mb-header {
+  background: var(--ban-compare) !important;
+}
+
+.mb-brand {
+  color: #fff8ea !important;
+  text-shadow: 0 1px 6px rgba(0,0,0,.18);
+}
+.mb-header-title {
+  color: #fff8ea !important;
+  text-shadow: 0 1px 6px rgba(0,0,0,.18);
+}
+.mb-back {
+  color: rgba(255,255,255,.9) !important;
+}
+.mb-header-btn {
+  background: rgba(255,255,255,.2) !important;
+  border-color: rgba(255,255,255,.35) !important;
+  color: #fff8ea !important;
+}
+
+/* Version selector in header */
+.mb-lang {
+  background: rgba(255,255,255,.2) !important;
+  border-color: rgba(255,255,255,.35) !important;
+  color: #fff8ea !important;
+}
+.mb-lang.on {
+  background: rgba(255,255,255,.9) !important;
+  color: var(--ink) !important;
+  border-color: transparent !important;
+}
+.mb-lang-sel {
+  background: rgba(255,255,255,.9) !important;
+  color: var(--ink) !important;
+}
+
+/* OT/NT Tabs */
+.mb-tabs {
+  background: var(--paper) !important;
+  border-bottom: 1px solid var(--paper-line) !important;
+}
+.mb-tab {
+  color: var(--muted) !important;
+  background: transparent !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid transparent !important;
+}
+.mb-tab.on {
+  color: var(--rose1) !important;
+  border-bottom-color: var(--rose1) !important;
+}
+
+/* Book search bar */
+.mb-search-row {
+  background: var(--paper) !important;
+  border-bottom: 1px solid var(--paper-line) !important;
+  padding: 10px 14px !important;
+}
+.mb-search {
+  background: var(--paper-deep) !important;
+  border: 1px solid var(--paper-line) !important;
+  color: var(--ink) !important;
+  border-radius: 10px !important;
+}
+.mb-search:focus { border-color: var(--g2) !important; }
+.mb-search::placeholder { color: var(--muted-faint) !important; }
+
+/* Book list */
+.mb-book-list {
+  background: var(--paper) !important;
+}
+.mb-bk-row {
+  background: var(--paper) !important;
+  border-bottom: 1px solid var(--paper-line) !important;
+}
+.mb-bk-row:active { background: #f5f0e6 !important; }
+.mb-bk-num { color: var(--g3) !important; font-weight: 700 !important; }
+.mb-bk-ta  { color: var(--ink) !important; }
+.mb-bk-en  { color: var(--muted) !important; }
+.mb-bk-arr { color: var(--muted-faint) !important; }
+.mb-bk-pct {
+  background: rgba(79,158,142,.12) !important;
+  border-color: rgba(79,158,142,.3) !important;
+  color: var(--emer2) !important;
+}
+
+/* Chapter grid */
+.mb-ch-meta {
+  background: var(--paper) !important;
+  border-bottom: 1px solid var(--paper-line) !important;
+  color: var(--muted) !important;
+}
+.mb-ch-grid { background: var(--paper) !important; }
+.mb-ch-cell {
+  background: var(--paper) !important;
+  border: 1px solid var(--paper-line) !important;
+  color: var(--muted) !important;
+}
+.mb-ch-cell:active { background: #f5f0e6 !important; }
+.mb-ch-read {
+  border-color: rgba(79,158,142,.4) !important;
+  color: var(--emer2) !important;
+  background: rgba(79,158,142,.06) !important;
+}
+.mb-ch-cur {
+  background: linear-gradient(135deg, var(--g1), var(--g3)) !important;
+  color: #fff8ea !important;
+  border-color: var(--g2) !important;
+  font-weight: 700 !important;
+}
+
+/* Reader */
+.mb-reader-content {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+}
+.mb-reader-content .vi {
+  border-bottom: 1px solid var(--paper-line) !important;
+}
+.mb-reader-content .vn { color: var(--g3) !important; }
+.mb-reader-content .vtxt { color: var(--ink) !important; }
+
+/* Reader nav bar */
+.mb-reader-nav {
+  background: var(--paper) !important;
+  border-top: 1px solid var(--paper-line) !important;
+}
+.mb-nav-btn {
+  background: var(--paper) !important;
+  border: 1px solid var(--paper-line) !important;
+  color: var(--ink-soft) !important;
+  border-radius: 10px !important;
+}
+.mb-nav-btn:active { background: var(--paper-line) !important; }
+.mb-nav-play {
+  background: linear-gradient(135deg, var(--g1), var(--g3)) !important;
+  border: none !important;
+  color: #fff8ea !important;
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px -4px rgba(184,119,14,.4) !important;
+}
+
+/* Audio bar */
+.mb-audio-bar {
+  background: var(--paper) !important;
+  border-top: 1px solid var(--paper-line) !important;
+  box-shadow: 0 -2px 10px rgba(80,60,20,.08) !important;
+}
+.mb-aud-play {
+  background: linear-gradient(135deg, var(--g1), var(--g3)) !important;
+  color: #fff8ea !important;
+  border: none !important;
+}
+
+/* Settings panel */
+.mb-settings {
+  background: var(--paper) !important;
+  border-top: 1px solid var(--paper-line) !important;
+}
+.mb-set-row {
+  border-bottom: 1px solid var(--paper-line) !important;
+  color: var(--ink) !important;
+}
+.mb-set-label { color: var(--muted) !important; }
+.mb-set-sel, .mb-set-input {
+  background: var(--paper) !important;
+  border-color: var(--paper-line) !important;
+  color: var(--ink) !important;
+}
+
+/* ================================================================
+   IMAGEGEN.HTML OVERRIDES — tool panels
+================================================================ */
+.ig-panel {
+  background: var(--paper) !important;
+  border-top: 1px solid var(--paper-line) !important;
+}
+.ig-panel-head {
+  color: var(--ink) !important;
+  font-weight: 700 !important;
+}
+.ig-panel h3, .ig-panel .panel-section-title, .ig-panel label,
+.ig-panel .ig-label, [class*="ig-"] label {
+  color: var(--ink) !important;
+}
+
+/* Ratio bar */
+.ig-ratio-bar, .ratio-bar, #ratio-bar {
+  background: var(--paper) !important;
+}
+.ig-r-btn, .ratio-btn {
+  background: var(--paper) !important;
+  border: 1px solid var(--paper-line) !important;
+  color: var(--muted) !important;
+  border-radius: 99px !important;
+}
+.ig-r-btn.on, .ratio-btn.on, .ig-r-btn.active, .ratio-btn.active {
+  background: linear-gradient(135deg, var(--g1), var(--rose1)) !important;
+  border-color: transparent !important;
+  color: #fff8ea !important;
+}
+
+/* Template thumbnails section */
+.ig-tpl-grid { background: var(--paper) !important; }
+.ig-tpl-item {
+  border: 2px solid transparent !important;
+  border-radius: 10px !important;
+}
+.ig-tpl-item.on, .ig-tpl-item.active {
+  border-color: var(--g2) !important;
+}
+.ig-tpl-name {
+  color: var(--ink) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+/* BG tab */
+.ig-bg-tabs { background: var(--paper) !important; }
+.ig-bg-tab {
+  background: var(--paper) !important;
+  border: 1px solid var(--paper-line) !important;
+  color: var(--muted) !important;
+  border-radius: 12px !important;
+}
+.ig-bg-tab.on {
+  background: linear-gradient(135deg, var(--g1), var(--rose1)) !important;
+  border-color: transparent !important;
+  color: #fff8ea !important;
+}
+.ig-color-swatch { border: 2px solid var(--paper-line) !important; }
+.ig-color-swatch.on { border-color: var(--ink) !important; }
+
+/* Font options */
+.ig-font-opt {
+  background: var(--paper) !important;
+  border: 1px solid var(--paper-line) !important;
+  color: var(--ink) !important;
+  border-radius: 10px !important;
+}
+.ig-font-opt.on {
+  background: linear-gradient(135deg, var(--g1), var(--rose1)) !important;
+  border-color: transparent !important;
+  color: #fff8ea !important;
+}
+
+/* Toggle switches */
+.ig-tog-row { color: var(--ink) !important; }
+.ig-tog {
+  background: var(--paper-line) !important;
+}
+.ig-tog.on { background: var(--g2) !important; }
+
+/* Options section labels */
+.ig-opts-head, .ig-section-lbl {
+  color: var(--muted) !important;
+  font-size: 10px !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase;
+  font-weight: 700 !important;
+}
+
+/* Sliders */
+.ig-slider-row { color: var(--ink) !important; }
+.ig-slider-val { color: var(--muted) !important; }
+
+/* Verse panel */
+.ig-verse-panel { background: var(--paper) !important; }
+.ig-verse-text-preview {
+  font-family: var(--serif) !important;
+  color: var(--ink) !important;
+  background: var(--paper) !important;
+  border: 1px solid var(--paper-line) !important;
+}
+.ig-quick-verse { background: var(--paper) !important; border-color: var(--paper-line) !important; }
+.ig-qv-ta { color: var(--ink) !important; }
+.ig-qv-ref { color: var(--muted) !important; }
+.ig-qv-btn {
+  background: linear-gradient(135deg, var(--sap1), var(--violet1)) !important;
+  color: #fff8ea !important; border: none !important;
+}
+
+/* Bible index in verse panel */
+.ig-bi-row { border-bottom: 1px solid var(--paper-line) !important; color: var(--ink) !important; }
+.ig-bi-row:active { background: #f5f0e6 !important; }
+.ig-bi-head { color: var(--muted) !important; font-size: 10px !important; font-weight: 700 !important; }
+
+/* ================================================================
+   MORE.HTML OVERRIDES
+================================================================ */
+/* more.html has site-nav on top — hide it on mobile, show app-header style */
+[data-page="more"] .site-nav,
+more.html .site-nav {
+  display: none !important;
+}
+/* The more.html header needs gradient */
+.more-header, .page-header {
+  background: var(--ban-more) !important;
+  color: #fff8ea !important;
+}
+
+/* ================================================================
+   MORE.HTML SPECIFIC — hide site-nav, show parchment banner
+================================================================ */
+[data-page="more"] body {
+  background: var(--paper-deep) !important;
+}
+[data-page="more"] .site-nav {
+  background: var(--ban-more) !important;
+  border-bottom: none !important;
+  position: relative;
+}
+[data-page="more"] .site-nav::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 20px;
+  background: var(--paper);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: scaleX(1.42);
+  z-index: 2;
+  pointer-events: none;
+}
+[data-page="more"] .site-nav .nav-brand,
+[data-page="more"] .site-nav .nav-logo {
+  color: #fff8ea !important;
+  font-family: var(--serif) !important;
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 6px rgba(0,0,0,.15);
+}
+[data-page="more"] .site-nav a,
+[data-page="more"] .site-nav .nav-link { color: rgba(255,255,255,.9) !important; }
+[data-page="more"] .nav-hamburger .nav-hamburger__line { background: rgba(255,255,255,.9) !important; }
+[data-page="more"] #mobile-menu {
+  background: var(--paper) !important;
+  border-top: 1px solid var(--paper-line) !important;
+}
+[data-page="more"] #mobile-menu a { color: var(--ink) !important; }
+
+/* more page content area */
+[data-page="more"] .more-wrap, [data-page="more"] main {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+}
+[data-page="more"] .more-hero { text-align: center !important; }
+[data-page="more"] .more-hero h2, [data-page="more"] .more-hero .app-name {
+  font-family: var(--serif) !important;
+  color: var(--ink) !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+}
+[data-page="more"] .more-hero p { color: var(--muted) !important; }
+[data-page="more"] .more-site-btn {
+  background: linear-gradient(135deg, #fff9ea, #fdf0db) !important;
+  border: 1px solid #f0dba8 !important;
+  color: var(--g3) !important;
+  box-shadow: 0 4px 14px -8px rgba(180,120,30,.25) !important;
+}
+[data-page="more"] .more-site-btn i { color: var(--g2) !important; }
+
+/* Cards */
+[data-page="more"] .more-card {
+  background: var(--paper) !important;
+  border: 1px solid var(--paper-line) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 14px -8px rgba(80,60,20,.14) !important;
+  color: var(--ink) !important;
+}
+[data-page="more"] .more-card-title {
+  font-size: 10px !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  font-weight: 700 !important;
+}
+[data-page="more"] .more-link-row {
+  background: var(--paper) !important;
+  border-bottom: 1px solid var(--paper-line) !important;
+  color: var(--ink) !important;
+}
+[data-page="more"] .more-link-row:active { background: #f5f0e6 !important; }
+[data-page="more"] .more-link-name { color: var(--ink) !important; font-weight: 700 !important; }
+[data-page="more"] .more-link-desc { color: var(--muted) !important; }
+
+/* Link icons — per service gradient */
+[data-page="more"] .more-link-row:nth-child(1) .more-link-icon { background: linear-gradient(135deg,#3fb87f,#2a9c66) !important; }
+[data-page="more"] .more-link-row:nth-child(2) .more-link-icon { background: linear-gradient(135deg,var(--rose1),var(--violet1)) !important; }
+[data-page="more"] .more-link-row:nth-child(3) .more-link-icon { background: linear-gradient(135deg,#e0697f,var(--rose1)) !important; }
+[data-page="more"] .more-link-row:nth-child(4) .more-link-icon { background: linear-gradient(135deg,var(--g1),var(--g3)) !important; }
+[data-page="more"] .more-link-row:nth-child(5) .more-link-icon { background: linear-gradient(135deg,var(--sap1),var(--violet1)) !important; }
+[data-page="more"] .more-link-icon { color: #fff !important; border-radius: 11px !important; }
+
+/* Install card */
+[data-page="more"] .more-install-btn, [data-page="more"] #install-btn {
+  background: linear-gradient(135deg, var(--g1), var(--g3)) !important;
+  color: #fff8ea !important;
+  border: none !important;
+  box-shadow: 0 6px 14px -6px rgba(184,119,14,.45) !important;
+}
+
+/* About section */
+[data-page="more"] .more-about {
+  background: var(--paper) !important;
+  border: 1px solid var(--paper-line) !important;
+  color: var(--ink-soft) !important;
+  border-radius: 14px !important;
+}
+[data-page="more"] .more-about strong, [data-page="more"] .more-about b { color: var(--ink) !important; }
+[data-page="more"] .more-footer { color: var(--muted-faint) !important; }
+
+/* Bottom nav on more.html */
+[data-page="more"] .footer, [data-page="more"] footer {
+  background: var(--paper) !important;
+  border-top: 1px solid var(--paper-line) !important;
+  color: var(--muted) !important;
+}
+
+/* ================================================================
+   QUIZ — question text color fix
+================================================================ */
+.quiz-q-txt {
+  color: var(--ink) !important;
+  font-size: 17px !important;
+  line-height: 1.65 !important;
+}
+.quiz-meta { color: var(--muted) !important; font-size: 11px !important; }
+
+/* ================================================================
+   DAILY — day circles gradient
+================================================================ */
+.dp-day-n { font-size: 11px; font-weight: 700; color: var(--muted); }
+.dp-check {
+  background: linear-gradient(135deg, rgba(224,162,60,.15), rgba(201,146,78,.1)) !important;
+  border: 1px solid var(--paper-line);
+  color: var(--muted) !important;
+}
+.dp-item.dp-today .dp-check {
+  background: linear-gradient(135deg, rgba(224,162,60,.3), rgba(184,119,14,.2)) !important;
+  border-color: var(--g2) !important;
+  color: var(--g3) !important;
+}
+
+/* ================================================================
+   SEARCH — min-height fill
+================================================================ */
+[data-page="search"] body,
+[data-page="search"] .fp-body {
+  min-height: 100vh !important;
+}
+
+/* ================================================================
+   COMPARE — add banner gradient to ctrl-wrap header
+================================================================ */
+[data-page="compare"] .ctrl-wrap {
+  background: var(--ban-compare) !important;
+  border-bottom: none !important;
+  position: relative;
+  padding-bottom: 28px !important;
+}
+[data-page="compare"] .ctrl-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 18px;
+  background: var(--paper);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: scaleX(1.42);
+  z-index: 2;
+  pointer-events: none;
+}
+[data-page="compare"] .ctrl-label { color: rgba(255,255,255,.85) !important; }
+[data-page="compare"] .ctrl-sel,
+[data-page="compare"] .ver-add-sel {
+  background: rgba(255,255,255,.9) !important;
+  color: var(--ink) !important;
+  border-color: transparent !important;
+}
+[data-page="compare"] .ver-add-row {
+  position: relative;
+  z-index: 3;
+}

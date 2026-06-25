@@ -230,10 +230,13 @@ async function fetchVersionChapter(verId){
     try{return await fetchBolls(v.bcode,S.bookNum,S.ch);}catch(e){return[];}
   }
   if(v.src==='local'){
+    // Try local cache first
     const localBook=S.enDB[S.bookNum];
     if(localBook&&localBook[S.ch]&&localBook[S.ch].length){
       return localBook[S.ch].map((t,i)=>({num:i+1,text:t||''}));
     }
+    // Fallback: use bolls.life KJV (book num)
+    try{return await fetchBolls('KJV',S.bookNum,S.ch);}catch(e){}
     return[];
   }
   // src==='bapi'
