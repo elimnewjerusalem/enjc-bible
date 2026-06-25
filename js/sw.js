@@ -3,7 +3,7 @@
 //  Scope: app only (Home shell, Bible reader, Scripture Cards studio)
 // ═══════════════════════════════════════════════════════════════
 
-const CACHE_NAME = 'enjc-app-v5';
+const CACHE_NAME = 'enjc-app-v6';
 const DATA_CACHE = 'enjc-app-data-v1';
 
 // Static shell — cache on install, serve from cache always.
@@ -27,6 +27,7 @@ const SHELL_ASSETS = [
   'css/design-system.css',
   'css/premium-v2.css',
   'css/mobile-fix.css',
+  'css/parchment.css',
   'js/site.js',
   'js/features.js',
   'js/bible.js',

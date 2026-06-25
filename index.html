@@ -16,12 +16,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap" onload="this.rel='stylesheet'">
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&display=swap" onload="this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@400;600;700&display=swap">
-  </noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,600&display=swap"></noscript>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
   <style>
@@ -267,6 +263,7 @@
       background: none; color: var(--tx3); font-size: 16px; padding: 4px;
     }
   </style>
+<link rel="stylesheet" href="css/parchment.css">
 </head>
 <body>
 
@@ -303,8 +300,8 @@
 
     <!-- VOTD -->
     <div class="votd-wrap fade-in" id="votd-wrap" onclick="goVOTD()" role="button" tabindex="0" aria-label="இன்றைய வசனம் - tap to read">
-      <div class="votd-tag">இன்றைய வசனம்</div>
-      <div class="votd-verse" id="votd-verse">கர்த்தர் என் மேய்ப்பர், எனக்கு குறைவில்லை.</div>
+      <div class="votd-tag" id="votd-tag">இன்றைய வசனம்</div>
+      <div class="votd-verse ta-font" id="votd-verse">கர்த்தர் என் மேய்ப்பர், எனக்கு குறைவில்லை.</div>
       <div class="votd-meta">
         <span id="votd-ref">சங்கீதம் 23:1</span>
         <span class="votd-pill">TAP TO READ</span>
@@ -489,5 +486,44 @@
 })();
 </script>
 
+<script>
+// Parchment flourish corners
+(function injectFlourishes(){
+  const COLORS=["#c9924e","#b8567a","#6f4fa3","#4f9e8e"];
+  function makeSVG(color,style){
+    const ns="http://www.w3.org/2000/svg",svg=document.createElementNS(ns,"svg");
+    svg.setAttribute("viewBox","0 0 40 40"); svg.setAttribute("class","hero-corner"); svg.setAttribute("style",style||"");
+    const p=document.createElementNS(ns,"path"); p.setAttribute("d","M2 2 Q2 20 20 20 M2 2 Q20 2 20 20"); p.setAttribute("fill","none"); p.setAttribute("stroke",color); p.setAttribute("stroke-width","1.5");
+    const d=document.createElementNS(ns,"circle"); d.setAttribute("cx","2"); d.setAttribute("cy","2"); d.setAttribute("r","2.2"); d.setAttribute("fill",color);
+    svg.appendChild(p); svg.appendChild(d); return svg;
+  }
+  function flourish(el){
+    if(!el||el.dataset.fl) return; el.dataset.fl="1";
+    [["tl",""],["tr","transform:scaleX(-1)"],["bl","transform:scaleY(-1)"],["br","transform:scale(-1,-1)"]].forEach(([cls,st],i)=>{
+      const s=makeSVG(COLORS[i],st); s.classList.add(cls); el.appendChild(s);
+    });
+  }
+  function applyDropcap(){
+    const vtxt=document.getElementById("votd-verse");
+    if(!vtxt||!vtxt.textContent.trim()||vtxt.dataset.dc) return;
+    vtxt.dataset.dc="1";
+    const text=vtxt.textContent.trim();
+    if(text.length < 2) return;
+    const drop=document.createElement("span"); drop.className="votd-drop"; drop.textContent=text[0];
+    vtxt.textContent=text.slice(1);
+    vtxt.before(drop);
+  }
+  function run(){
+    flourish(document.querySelector(".votd-wrap"));
+    applyDropcap();
+  }
+  document.addEventListener("DOMContentLoaded",function(){
+    run();
+    const vo=document.getElementById("votd-verse");
+    if(vo){ const obs=new MutationObserver(()=>{if(!vo.dataset.dc) applyDropcap();}); obs.observe(vo,{childList:true,characterData:true,subtree:true}); }
+    setTimeout(run,2000);
+  });
+})();
+</script>
 </body>
 </html>

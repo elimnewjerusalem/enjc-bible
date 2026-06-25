@@ -2248,7 +2248,6 @@ function markRead(){
     const bk=BOOKS.find(b=>b.id===S.book);
     const pct=Math.round(d[S.book].length/(bk?.ch||1)*100);
     toast('\u2713 '+S.bookTaName+' Ch.'+S.ch+' read! ('+pct+'%)');
-    updateTrackerBadge();
   }
 }
 // ── VERSE MODAL ──────────────────────────────────────────────────
