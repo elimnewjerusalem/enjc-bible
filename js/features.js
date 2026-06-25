@@ -1,21 +1,20 @@
 'use strict';
 // ═══════════════════════════════════════════════════════════════
-//  ENJC features.js — standalone JS for feature pages
-//  (Quiz, Daily Read, Compare, Saved, Notes)
-//  Does NOT init any reader DOM — safe to load on any page
+//  features.js — standalone JS for all feature pages
+//  Quiz · Daily · Saved · Notes · Compare · Search
 // ═══════════════════════════════════════════════════════════════
-
-const C = {
-  enAPI:  'https://bible-api.com/',
-  bollsText: 'https://bolls.life/get-text/',
-  data:   'data/',
-  ms: 9000,
-};
 
 // DOM helpers
 function g(id){return document.getElementById(id);}
 function safe(id,v){const el=g(id);if(el)el.textContent=v;}
 
+// Config
+const C={
+  enAPI:'https://bible-api.com/',
+  bollsText:'https://bolls.life/get-text/',
+  data:'data/',
+  ms:9000,
+};
 const VERSIONS=[
   {id:'taov',  lang:'ta', code:'ov',     label:'தமிழ் OV',          short:'OV',   src:'bolls', bcode:'TAMOVR'},
   {id:'tabl98',lang:'ta', code:'bl98',   label:'தமிழ் BL98',        short:'BL98', src:'bolls', bcode:'TAMBL98'},
@@ -30,8 +29,8 @@ const VERSIONS=[
   {id:'erv',   lang:'en', code:'erv',    label:'ERV',                short:'ERV',  src:'bolls', bcode:'ERV'},
 ];
 
-function getVerCode(verId){ return (VERSIONS.find(v=>v.id===verId)||{}).code; }
-function getVer(verId){ return VERSIONS.find(v=>v.id===verId); }
+function getVerCode(verId){return(VERSIONS.find(v=>v.id===verId)||{}).code;}
+function getVer(verId){return VERSIONS.find(v=>v.id===verId);}
 
 const BOOKS=[
   {id:'genesis',n:1,name:'Genesis',ta:'ஆதியாகமம்',ch:50,t:'OT'},{id:'exodus',n:2,name:'Exodus',ta:'யாத்திராகமம்',ch:40,t:'OT'},{id:'leviticus',n:3,name:'Leviticus',ta:'லேவியராகமம்',ch:27,t:'OT'},{id:'numbers',n:4,name:'Numbers',ta:'எண்ணாகமம்',ch:36,t:'OT'},{id:'deuteronomy',n:5,name:'Deuteronomy',ta:'உபாகமம்',ch:34,t:'OT'},{id:'joshua',n:6,name:'Joshua',ta:'யோசுவா',ch:24,t:'OT'},{id:'judges',n:7,name:'Judges',ta:'நியாயாதிபதிகள்',ch:21,t:'OT'},{id:'ruth',n:8,name:'Ruth',ta:'ரூத்',ch:4,t:'OT'},{id:'1+samuel',n:9,name:'1 Samuel',ta:'1 சாமுவேல்',ch:31,t:'OT'},{id:'2+samuel',n:10,name:'2 Samuel',ta:'2 சாமுவேல்',ch:24,t:'OT'},{id:'1+kings',n:11,name:'1 Kings',ta:'1 இராஜாக்கள்',ch:22,t:'OT'},{id:'2+kings',n:12,name:'2 Kings',ta:'2 இராஜாக்கள்',ch:25,t:'OT'},{id:'1+chronicles',n:13,name:'1 Chronicles',ta:'1 நாளாகமம்',ch:29,t:'OT'},{id:'2+chronicles',n:14,name:'2 Chronicles',ta:'2 நாளாகமம்',ch:36,t:'OT'},{id:'ezra',n:15,name:'Ezra',ta:'எஸ்றா',ch:10,t:'OT'},{id:'nehemiah',n:16,name:'Nehemiah',ta:'நெகேமியா',ch:13,t:'OT'},{id:'esther',n:17,name:'Esther',ta:'எஸ்தர்',ch:10,t:'OT'},{id:'job',n:18,name:'Job',ta:'யோபு',ch:42,t:'OT'},{id:'psalms',n:19,name:'Psalms',ta:'சங்கீதம்',ch:150,t:'OT'},{id:'proverbs',n:20,name:'Proverbs',ta:'நீதிமொழிகள்',ch:31,t:'OT'},{id:'ecclesiastes',n:21,name:'Ecclesiastes',ta:'பிரசங்கி',ch:12,t:'OT'},{id:'song+of+solomon',n:22,name:'Song of Solomon',ta:'உன்னதப்பாட்டு',ch:8,t:'OT'},{id:'isaiah',n:23,name:'Isaiah',ta:'ஏசாயா',ch:66,t:'OT'},{id:'jeremiah',n:24,name:'Jeremiah',ta:'எரேமியா',ch:52,t:'OT'},{id:'lamentations',n:25,name:'Lamentations',ta:'புலம்பல்',ch:5,t:'OT'},{id:'ezekiel',n:26,name:'Ezekiel',ta:'எசேக்கியேல்',ch:48,t:'OT'},{id:'daniel',n:27,name:'Daniel',ta:'தானியேல்',ch:12,t:'OT'},{id:'hosea',n:28,name:'Hosea',ta:'ஓசியா',ch:14,t:'OT'},{id:'joel',n:29,name:'Joel',ta:'யோவேல்',ch:3,t:'OT'},{id:'amos',n:30,name:'Amos',ta:'ஆமோஸ்',ch:9,t:'OT'},{id:'obadiah',n:31,name:'Obadiah',ta:'ஒபதியா',ch:1,t:'OT'},{id:'jonah',n:32,name:'Jonah',ta:'யோனா',ch:4,t:'OT'},{id:'micah',n:33,name:'Micah',ta:'மீகா',ch:7,t:'OT'},{id:'nahum',n:34,name:'Nahum',ta:'நாகூம்',ch:3,t:'OT'},{id:'habakkuk',n:35,name:'Habakkuk',ta:'ஆபகூக்',ch:3,t:'OT'},{id:'zephaniah',n:36,name:'Zephaniah',ta:'செப்பனியா',ch:3,t:'OT'},{id:'haggai',n:37,name:'Haggai',ta:'ஆகாய்',ch:2,t:'OT'},{id:'zechariah',n:38,name:'Zechariah',ta:'சகரியா',ch:14,t:'OT'},{id:'malachi',n:39,name:'Malachi',ta:'மல்கியா',ch:4,t:'OT'},
@@ -151,17 +150,55 @@ const QQ_ALL=[
   {q:"வெளிப்படுத்தல் 21:4 — ___ கண்ணீரையும் துடைத்துவிடுவார்; மரணம் இனி இராது.",a:1,o:["கர்த்தர்","தேவன்","கிறிஸ்து","இயேசு"],r:"வெளிப்படுத்தல் 21:4"},
 ];
 
+let _quizSet=-1;
+function getQQ(){
+  if(_quizSet < 0){
+    // Rotate set by day of year
+    const d=new Date();
+    const day=Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);
+    _quizSet = day % 10;
+  }
+  const start = _quizSet * 10;
+  return QQ_ALL.slice(start, start + 10);
+}
 
-// ── Shared state (feature pages only need bm + notes) ────────────
-const S = {
-  bm:    JSON.parse(localStorage.getItem('enjc_bm')    || '[]'),
-  notes: JSON.parse(localStorage.getItem('enjc_notes') || '{}'),
-  ver:   localStorage.getItem('enjc_ver') || 'taov',
-  book:'', bookName:'', bookTaName:'', bookNum:1, ch:1,
+const QQ = getQQ(); // current set of 10
+
+// ── IMAGE VERSES ────────────────────────────────────────────────
+const IGVERSES=[
+  {ta:"தேவன் இவ்வளவாய் உலகத்தில் அன்பு கூர்ந்தார், அதனால் தம்முடைய ஒரே பேறான குமாரனை அனுப்பினார்.",tref:"யோவான் 3:16",en:"For God so loved the world, that He gave His only begotten Son.",ref:"John 3:16"},
+  {ta:"என்னை பலப்படுத்துகிற கிறிஸ்துவினால் எல்லாவற்றையும் செய்யவல்லேன்.",tref:"பிலிப்பியர் 4:13",en:"I can do all things through Christ who strengthens me.",ref:"Philippians 4:13"},
+  {ta:"கர்த்தர் என் மேய்ப்பர்; எனக்கு குறைவுண்டாவதில்லை.",tref:"சங்கீதம் 23:1",en:"The Lord is my shepherd; I shall not want.",ref:"Psalm 23:1"},
+  {ta:"நீ என் கண்களுக்கு அருமையானவன்; நான் உன்னை நேசிக்கிறேன்.",tref:"ஏசாயா 43:4",en:"You are precious in my sight, and honoured, and I love you.",ref:"Isaiah 43:4"},
+  {ta:"கர்த்தருக்கு காத்திருக்கிறவர்களோ புதுப்பெலன் அடைவார்கள்.",tref:"ஏசாயா 40:31",en:"They who wait for the Lord shall renew their strength.",ref:"Isaiah 40:31"},
+  {ta:"வருத்தப்பட்டு பாரஞ்சுமக்கிறவர்களே, என்னிடத்தில் வாருங்கள்.",tref:"மத்தேயு 11:28",en:"Come to me, all who labour and are heavy laden, and I will give you rest.",ref:"Matthew 11:28"},
+  {ta:"நான்தான் வழியும் சத்தியமும் ஜீவனுமாயிருக்கிறேன்.",tref:"யோவான் 14:6",en:"I am the way, the truth, and the life.",ref:"John 14:6"},
+  {ta:"தேவனிடத்தில் அன்பு கூருகிறவர்களுக்கு எல்லாமும் நன்மைக்கு ஏதுவாக நடக்கும்.",tref:"ரோமர் 8:28",en:"For those who love God all things work together for good.",ref:"Romans 8:28"}
+];
+
+
+const S={
+  bm:   JSON.parse(localStorage.getItem('enjc_bm')  ||'[]'),
+  notes:JSON.parse(localStorage.getItem('enjc_notes')||'{}'),
+  ver:  localStorage.getItem('enjc_ver')||'taov',
+  book:'',bookName:'',bookTaName:'',bookNum:1,ch:1,
   enDB:{},
 };
-function saveBM(bms){ localStorage.setItem('enjc_bm', JSON.stringify(bms)); S.bm = bms; }
-function updateBmBadge(){}  // stub — no badge element on feature pages
+function saveBM(bms){localStorage.setItem('enjc_bm',JSON.stringify(bms));S.bm=bms;}
+function updateBmBadge(){}
+function toast(msg){
+  let t=g('ft');
+  if(!t){t=document.createElement('div');t.id='ft';t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#c8a45a;color:#000;padding:8px 18px;border-radius:99px;font-size:13px;font-weight:600;z-index:9999;pointer-events:none;transition:opacity .3s';document.body.appendChild(t);}
+  t.textContent=msg;t.style.opacity='1';
+  clearTimeout(t._tid);t._tid=setTimeout(()=>t.style.opacity='0',2400);
+}
+
+async function fetchWithTimeout(url,ms=8000){
+  const ctrl=new AbortController();
+  const tid=setTimeout(()=>ctrl.abort(),ms);
+  try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);return r;}
+  catch(e){clearTimeout(tid);throw e;}
+}
 
 async function fetchT(url){
   const c=new AbortController();
@@ -185,32 +222,6 @@ async function fetchBolls(bcode, bookNum, ch){
   if(!vv.length)throw new Error('bolls '+bcode+' empty');
   try{localStorage.setItem(ck,JSON.stringify(vv));}catch(e){}
   return vv;
-}
-
-function cpV(ref,text){
-  navigator.clipboard?.writeText(ref+' \u2014 '+text);
-  toast('\uD83D\uDCCB Copied! '+ref);
-}
-
-function rmBM(i){const bms=S.bm;bms.splice(i,1);saveBM(bms);updateBmBadge();
-  // Re-render if on saved.html
-  const m=document.getElementById('fp-body');if(m)renderBM(m);
-}
-
-function renderBM(body){
-  const bms=S.bm;
-  if(!bms.length){body.innerHTML='<div class="bempty">♥ சேமித்த வசனங்கள் இல்லை.<br>வசனத்தில் ♥ அழுத்துங்கள்.</div>';return;}
-  body.innerHTML=bms.map((b,i)=>`
-    <div class="bm-item">
-      <div class="bm-text">
-        <div class="bm-ref">${b.refTA||b.ref}</div>
-        <div class="bm-v">${b.text}</div>
-      </div>
-      <div class="bm-acts">
-        <button class="p-act" onclick="cpV('${(b.refTA||b.ref).replace(/'/g,"\\'")}','${b.text.replace(/'/g,"\\'")}')">📋</button>
-        <button class="p-act" onclick="rmBM(${i})" style="color:#f87171">✕</button>
-      </div>
-    </div>`).join('');
 }
 
 async function fetchVersionChapter(verId){
@@ -237,71 +248,27 @@ async function fetchVersionChapter(verId){
   }catch(e){return[];}
 }
 
-let _cmpA='taov',_cmpB='kjv',_cmpData=null;
-
-function renderCompare(body){
-  if(!S.book){
-    body.innerHTML='<div class="bempty">முதலில் ஒரு புத்தகம் &amp; அதிகாரம் தேர்வு செய்யுங்கள்.</div>';
-    return;
-  }
-  body.innerHTML=`
-    <div class="cmp-head">${S.bookTaName||S.bookName} ${S.ch}</div>
-    <div class="cmp-pickers">
-      <select class="nx-sel" id="cmp-a" onchange="_cmpA=this.value;runCompare()">
-        ${VERSIONS.map(v=>`<option value="${v.id}" ${v.id===_cmpA?'selected':''}>${v.label}</option>`).join('')}
-      </select>
-      <span class="cmp-vs">vs</span>
-      <select class="nx-sel" id="cmp-b" onchange="_cmpB=this.value;runCompare()">
-        ${VERSIONS.map(v=>`<option value="${v.id}" ${v.id===_cmpB?'selected':''}>${v.label}</option>`).join('')}
-      </select>
-    </div>
-    <div id="cmp-body"><div class="bload"><div class="bspin"></div></div></div>
-    <button class="ch-btn primary" style="width:100%;margin-top:10px" onclick="shareCompare()">🔗 Share Compare</button>
-  `;
-  runCompare();
+function cpV(ref,text){
+  navigator.clipboard?.writeText(ref+' \u2014 '+text);
+  toast('\uD83D\uDCCB Copied! '+ref);
 }
 
-function renderCompare(body){
-  if(!S.book){
-    body.innerHTML='<div class="bempty">முதலில் ஒரு புத்தகம் &amp; அதிகாரம் தேர்வு செய்யுங்கள்.</div>';
-    return;
-  }
-  body.innerHTML=`
-    <div class="cmp-head">${S.bookTaName||S.bookName} ${S.ch}</div>
-    <div class="cmp-pickers">
-      <select class="nx-sel" id="cmp-a" onchange="_cmpA=this.value;runCompare()">
-        ${VERSIONS.map(v=>`<option value="${v.id}" ${v.id===_cmpA?'selected':''}>${v.label}</option>`).join('')}
-      </select>
-      <span class="cmp-vs">vs</span>
-      <select class="nx-sel" id="cmp-b" onchange="_cmpB=this.value;runCompare()">
-        ${VERSIONS.map(v=>`<option value="${v.id}" ${v.id===_cmpB?'selected':''}>${v.label}</option>`).join('')}
-      </select>
-    </div>
-    <div id="cmp-body"><div class="bload"><div class="bspin"></div></div></div>
-    <button class="ch-btn primary" style="width:100%;margin-top:10px" onclick="shareCompare()">🔗 Share Compare</button>
-  `;
-  runCompare();
+function rmBM(i){
+  const bms=S.bm;bms.splice(i,1);saveBM(bms);
+  const m=g('fp-body');if(m&&typeof renderBM==='function')renderBM(m);
 }
-
-async function runCompare(){
-  const out=g('cmp-body');if(!out)return;
-  out.innerHTML='<div class="bload"><div class="bspin"></div></div>';
-  const [a,b]=await Promise.all([fetchVersionChapter(_cmpA),fetchVersionChapter(_cmpB)]);
-  _cmpData={a,b,verA:getVer(_cmpA),verB:getVer(_cmpB)};
-  if(!a.length&&!b.length){out.innerHTML='<div class="berr">⚠ வசனங்கள் கிடைக்கவில்லை.</div>';return;}
-  const bMap={};b.forEach(v=>bMap[v.num]=v.text);
-  const aMap={};a.forEach(v=>aMap[v.num]=v.text);
-  const nums=[...new Set([...a.map(v=>v.num),...b.map(v=>v.num)])].sort((x,y)=>x-y);
-  out.innerHTML=nums.map(n=>`
-    <div class="cmp-row">
-      <div class="cmp-vn">${n}</div>
-      <div class="cmp-col">
-        <span class="cmp-tag">${getVer(_cmpA).short}</span>
-        <span class="cmp-txt">${aMap[n]||'—'}</span>
+function renderBM(body){
+  const bms=S.bm;
+  if(!bms.length){body.innerHTML='<div class="bempty">♥ சேமித்த வசனங்கள் இல்லை.<br>வசனத்தில் ♥ அழுத்துங்கள்.</div>';return;}
+  body.innerHTML=bms.map((b,i)=>`
+    <div class="bm-item">
+      <div class="bm-text">
+        <div class="bm-ref">${b.refTA||b.ref}</div>
+        <div class="bm-v">${b.text}</div>
       </div>
-      <div class="cmp-col">
-        <span class="cmp-tag">${getVer(_cmpB).short}</span>
-        <span class="cmp-txt">${bMap[n]||'—'}</span>
+      <div class="bm-acts">
+        <button class="p-act" onclick="cpV('${(b.refTA||b.ref).replace(/'/g,"\\'")}','${b.text.replace(/'/g,"\\'")}')">📋</button>
+        <button class="p-act" onclick="rmBM(${i})" style="color:#f87171">✕</button>
       </div>
     </div>`).join('');
 }
@@ -326,12 +293,125 @@ function renderNotesPanel(body){
     </div>`).join('');
 }
 
+function deleteNoteRef(ref){
+  const notes=JSON.parse(localStorage.getItem('enjc_notes')||'{}');
+  delete notes[ref];
+  localStorage.setItem('enjc_notes',JSON.stringify(notes));
+  S.notes=notes;
+  toast('🗑 Note deleted');
+  const m=g('fp-body');if(m)renderNotesPanel(m);
+  if(S.book)renderVerses();
+}
+
+function goToNoteRef(ref){
+  const m=ref.match(/^(.+)\s(\d+):(\d+)/);
+  if(!m)return;
+  const bk=BOOKS.find(b=>b.name.toLowerCase()===m[1].trim().toLowerCase());
+  if(!bk)return;
+  try{sessionStorage.setItem('enjc_go',JSON.stringify({book:bk.id,ch:parseInt(m[2])}));}catch(e){}
+  location.href='bible.html';
+}
+let _cmpA="taov",_cmpB="kjv",_cmpData=null;
+function renderCompare(body){
+  if(!S.book){
+    body.innerHTML='<div class="bempty">முதலில் ஒரு புத்தகம் &amp; அதிகாரம் தேர்வு செய்யுங்கள்.</div>';
+    return;
+  }
+  body.innerHTML=`
+    <div class="cmp-head">${S.bookTaName||S.bookName} ${S.ch}</div>
+    <div class="cmp-pickers">
+      <select class="nx-sel" id="cmp-a" onchange="_cmpA=this.value;runCompare()">
+        ${VERSIONS.map(v=>`<option value="${v.id}" ${v.id===_cmpA?'selected':''}>${v.label}</option>`).join('')}
+      </select>
+      <span class="cmp-vs">vs</span>
+      <select class="nx-sel" id="cmp-b" onchange="_cmpB=this.value;runCompare()">
+        ${VERSIONS.map(v=>`<option value="${v.id}" ${v.id===_cmpB?'selected':''}>${v.label}</option>`).join('')}
+      </select>
+    </div>
+    <div id="cmp-body"><div class="bload"><div class="bspin"></div></div></div>
+    <button class="ch-btn primary" style="width:100%;margin-top:10px" onclick="shareCompare()">🔗 Share Compare</button>
+  `;
+  runCompare();
+}
+
+async function runCompare(){
+  const out=g('cmp-body')||g('fp-body');if(!out)return;
+  out.innerHTML='<div class="bload"><div class="bspin"></div></div>';
+  const [a,b]=await Promise.all([fetchVersionChapter(_cmpA),fetchVersionChapter(_cmpB)]);
+  _cmpData={a,b,verA:getVer(_cmpA),verB:getVer(_cmpB)};
+  if(!a.length&&!b.length){out.innerHTML='<div class="berr">⚠ வசனங்கள் கிடைக்கவில்லை.</div>';return;}
+  const bMap={};b.forEach(v=>bMap[v.num]=v.text);
+  const aMap={};a.forEach(v=>aMap[v.num]=v.text);
+  const nums=[...new Set([...a.map(v=>v.num),...b.map(v=>v.num)])].sort((x,y)=>x-y);
+  out.innerHTML=nums.map(n=>`
+    <div class="cmp-row">
+      <div class="cmp-vn">${n}</div>
+      <div class="cmp-col">
+        <span class="cmp-tag">${getVer(_cmpA).short}</span>
+        <span class="cmp-txt">${aMap[n]||'—'}</span>
+      </div>
+      <div class="cmp-col">
+        <span class="cmp-tag">${getVer(_cmpB).short}</span>
+        <span class="cmp-txt">${bMap[n]||'—'}</span>
+      </div>
+    </div>`).join('');
+}
+
+function shareCompare(){
+  if(!_cmpData){toast('⚠ Compare தேர்வு செய்யுங்கள்');return;}
+  const {a,b,verA,verB}=_cmpData;
+  const head=(S.bookTaName||S.bookName)+' '+S.ch+' — '+verA.short+' vs '+verB.short;
+  const bMap={};b.forEach(v=>bMap[v.num]=v.text);
+  const lines=a.slice(0,8).map(v=>`${v.num}. [${verA.short}] ${v.text}\n   [${verB.short}] ${bMap[v.num]||'—'}`);
+  const msg=head+'\n\n'+lines.join('\n\n')+'\n\nhttps://elimnewjerusalem.github.io/enjc-bible/bible.html';
+  if(navigator.share){
+    navigator.share({title:head,text:msg}).catch(()=>{});
+  }else{
+    navigator.clipboard?.writeText(msg);
+    toast('📋 Compare copied!');
+  }
+}
+
+let _qi=0,_qs=0,_qo=[];
 function renderQuiz(body){
   _qi=0;_qs=0;
   _qo=[...Array(QQ.length).keys()].sort(()=>Math.random()-.5);
   renderQQ(body);
 }
 
+function renderQQ(body){
+  if(_qi>=_qo.length){
+    const pct=Math.round(_qs/_qo.length*100);
+    body.innerHTML=`<div style="text-align:center;padding:30px 16px">
+      <div style="font-size:3rem;margin-bottom:12px">${pct>=80?'🏆':pct>=60?'⭐':'📖'}</div>
+      <div style="font-size:1.6rem;font-weight:600;color:var(--gd);margin-bottom:6px">${_qs}/${_qo.length}</div>
+      <div style="font-size:13px;color:var(--tx2);margin-bottom:20px">${pct>=80?'மிகவும் நல்லது! Excellent!':pct>=60?'நல்லது! Good!':'இன்னும் படியுங்கள்!'}</div>
+      <button onclick="renderQuiz(g('fp-body'))" style="background:var(--gd,#c8a45a);color:#000;border:none;border-radius:99px;padding:11px 26px;font-size:13px;font-weight:500;cursor:pointer">மீண்டும் விளையாடு</button>
+    </div>`;return;
+  }
+  const q=QQ[_qo[_qi]];
+  body.innerHTML=`
+    <div style="padding:0 0 12px;border-bottom:1px solid var(--bd);margin-bottom:12px">
+      <div style="font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:8px">கேள்வி ${_qi+1}/${_qo.length} · Score: ${_qs}</div>
+      <div class="quiz-q">${q.q}</div>
+      <div class="quiz-ref">${q.r}</div>
+    </div>
+    <div>${q.o.map((opt,i)=>`<button class="quiz-opt" onclick="ansQ(this,${i},${q.a},${_qi})">${'ABCD'[i]}. ${opt}</button>`).join('')}</div>`;
+}
+
+function ansQ(el,chosen,correct,qi){
+  if(qi!==_qi)return;
+  const body=el.closest('[id]');
+  if(!body)return;
+  if(chosen===correct)_qs++;
+  body.querySelectorAll('.quiz-opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    else if(i===chosen&&chosen!==correct)b.classList.add('wrong');
+  });
+  toast(chosen===correct?'✓ சரியான பதில்!':'✗ '+QQ[_qo[qi]].o[correct]+' சரியான பதில்');
+  setTimeout(()=>{_qi++;renderQQ(body);},1500);
+}
 const DAILY_PLAN = (function(){
   // Simple sequential plan: one chapter per day, cycling through OT+NT
   const schedule = [
@@ -375,8 +455,7 @@ function getDailyProgress(){
   try{ return JSON.parse(localStorage.getItem('enjc_daily')||'{}'); }catch(e){ return {}; }
 }
 
-function saveDailyProgress(d){ localStorage.setItem('enjc_daily',JSON.stringify(d)); }
-
+function saveDailyProgress(d){localStorage.setItem("enjc_daily",JSON.stringify(d));}
 function updateDailyBadge(){
   const prog = getDailyProgress();
   const done = Object.values(prog).filter(Boolean).length;
@@ -444,93 +523,9 @@ function toggleDailyDay(i){
   updateDailyBadge();
 }
 
-function goDailyChapter(book, ch){
-  const i = DAILY_PLAN.findIndex(d=>d.book===book&&d.ch===ch);
-  if(i >= 0){
-    const prog = getDailyProgress();
-    prog['day_'+i] = true;
-    saveDailyProgress(prog);
-    updateDailyBadge();
-  }
-  try{ sessionStorage.setItem('enjc_go',JSON.stringify({book,ch})); }catch(e){}
-  location.href = 'bible.html';
-}
-
-
-// ── Additional helpers ────────────────────────────────────
-// fetchWithTimeout
-async function fetchWithTimeout(url,ms=8000){
-  const ctrl=new AbortController();
-  const tid=setTimeout(()=>ctrl.abort(),ms);
-  try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(tid);return r;}
-  catch(e){clearTimeout(tid);throw e;}
-}
-
-// toast
-function toast(msg,dur=2500){
-  const el=document.getElementById('toast');
-  if(!el)return;
-  el.innerHTML=msg;el.classList.add('show');
-  clearTimeout(_toastTimer);
-  _toastTimer=setTimeout(()=>el.classList.remove('show'),dur);
-}
-
-// shareCompare
-function shareCompare(){
-  if(!_cmpData){toast('⚠ Compare தேர்வு செய்யுங்கள்');return;}
-  const {a,b,verA,verB}=_cmpData;
-  const head=(S.bookTaName||S.bookName)+' '+S.ch+' — '+verA.short+' vs '+verB.short;
-  const bMap={};b.forEach(v=>bMap[v.num]=v.text);
-  const lines=a.slice(0,8).map(v=>`${v.num}. [${verA.short}] ${v.text}\n   [${verB.short}] ${bMap[v.num]||'—'}`);
-  const msg=head+'\n\n'+lines.join('\n\n')+'\n\nhttps://elimnewjerusalem.github.io/enjc-bible/bible.html';
-  if(navigator.share){
-    navigator.share({title:head,text:msg}).catch(()=>{});
-  }else{
-    navigator.clipboard?.writeText(msg);
-    toast('📋 Compare copied!');
-  }
-}
-
-// deleteNoteRef
-function deleteNoteRef(ref){
-  const notes=JSON.parse(localStorage.getItem('enjc_notes')||'{}');
-  delete notes[ref];
-  localStorage.setItem('enjc_notes',JSON.stringify(notes));
-  S.notes=notes;
-  toast('🗑 Note deleted');
-  openPanel('notes');
-  if(S.book)renderVerses();
-}
-
-// goToNoteRef
-function goToNoteRef(ref){
-  const m=ref.match(/^(.+)\s(\d+):(\d+)/);
-  if(!m){return;}
-  const bookName=m[1].trim();
-  const bk=BOOKS.find(b=>b.name.toLowerCase()===bookName.toLowerCase());
-  if(!bk){return;}
-  try{ sessionStorage.setItem('enjc_go',JSON.stringify({book:bk.id,ch:parseInt(m[2])})); }catch(e){}
+function goDailyChapter(book,ch){
+  const i=DAILY_PLAN.findIndex(d=>d.book===book&&d.ch===ch);
+  if(i>=0){const p=getDailyProgress();p['day_'+i]=true;saveDailyProgress(p);}
+  try{sessionStorage.setItem('enjc_go',JSON.stringify({book,ch}));}catch(e){}
   location.href='bible.html';
 }
-
-// renderQQ
-function renderQQ(body){
-  if(_qi>=_qo.length){
-    const pct=Math.round(_qs/_qo.length*100);
-    body.innerHTML=`<div style="text-align:center;padding:30px 16px">
-      <div style="font-size:3rem;margin-bottom:12px">${pct>=80?'🏆':pct>=60?'⭐':'📖'}</div>
-      <div style="font-size:1.6rem;font-weight:600;color:var(--gd);margin-bottom:6px">${_qs}/${_qo.length}</div>
-      <div style="font-size:13px;color:var(--tx2);margin-bottom:20px">${pct>=80?'மிகவும் நல்லது! Excellent!':pct>=60?'நல்லது! Good!':'இன்னும் படியுங்கள்!'}</div>
-      <button onclick="openPanel('quiz')" style="background:var(--gd);color:var(--bg);border:none;border-radius:99px;padding:11px 26px;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans)">மீண்டும் விளையாடு</button>
-    </div>`;return;
-  }
-  const q=QQ[_qo[_qi]];
-  body.innerHTML=`
-    <div style="padding:0 0 12px;border-bottom:1px solid var(--bd);margin-bottom:12px">
-      <div style="font-size:9px;color:var(--tx3);letter-spacing:1px;margin-bottom:8px">கேள்வி ${_qi+1}/${_qo.length} · Score: ${_qs}</div>
-      <div class="quiz-q">${q.q}</div>
-      <div class="quiz-ref">${q.r}</div>
-    </div>
-    <div>${q.o.map((opt,i)=>`<button class="quiz-opt" onclick="ansQ(this,${i},${q.a},${_qi})">${'ABCD'[i]}. ${opt}</button>`).join('')}</div>`;
-}
-

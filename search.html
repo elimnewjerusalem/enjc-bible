@@ -13,26 +13,33 @@
 <link rel="stylesheet" href="css/premium-v2.css">
 <link rel="stylesheet" href="css/mobile-fix.css">
 <style>
-body{background:var(--bg,#04101e);color:var(--tx,#e8eaf0);font-family:'DM Sans',system-ui,sans-serif;padding-bottom:40px}
-.fp-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg2,#071628);border-bottom:1px solid var(--bd,#1a2d47);position:sticky;top:0;z-index:10}
-.fp-back{width:36px;height:36px;border-radius:50%;background:none;border:1px solid var(--bd,#1a2d47);color:var(--tx,#e8eaf0);font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg,#04101e);color:var(--tx,#e8eaf0);font-family:'DM Sans',system-ui,sans-serif;padding-bottom:60px}
+:root{--gold:#c8a45a;--bg2:#071628;--bd:#1a2d47;--tx2:#8a9bb0;--tx3:#5c7a9a}
+.fp-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg2);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:10}
+.fp-back{width:36px;height:36px;border-radius:50%;background:none;border:1px solid var(--bd);color:var(--tx,#e8eaf0);font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0}
 .fp-title{font-size:17px;font-weight:600}
-.fp-body{padding:16px}
-</style>
-<style>
-.srch-bar{display:flex;gap:8px;padding:12px 16px;background:var(--bg2,#071628);border-bottom:1px solid var(--bd,#1a2d47)}
-.srch-inp{flex:1;padding:10px 14px;border-radius:10px;background:var(--bg,#04101e);border:1px solid var(--bd,#1a2d47);color:var(--tx,#e8eaf0);font-size:15px;outline:none}
-.srch-inp:focus{border-color:var(--gold,#c8a45a)}
-.srch-go{padding:10px 18px;border-radius:10px;background:var(--gold,#c8a45a);border:none;color:#000;font-weight:700;cursor:pointer;flex-shrink:0}
-.sr-meta{font-size:12px;color:var(--tx3,#5c7a9a);margin-bottom:12px}
-.sr-item{padding:12px 14px;background:var(--bg2,#071628);border-radius:12px;margin-bottom:8px;border:1px solid var(--bd,#1a2d47)}
-.sr-ref{font-size:11px;color:var(--gold,#c8a45a);margin-bottom:5px;font-weight:600}
-.sr-txt{font-size:14px;line-height:1.6}
-.sr-txt mark{background:rgba(200,164,90,.25);color:var(--gold,#c8a45a);border-radius:3px;padding:0 2px}
+.srch-bar{display:flex;gap:8px;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--bd);position:sticky;top:56px;z-index:9}
+.srch-inp{flex:1;padding:10px 14px;border-radius:10px;background:var(--bg,#04101e);border:1px solid var(--bd);color:var(--tx,#e8eaf0);font-size:15px;outline:none;-webkit-appearance:none}
+.srch-inp:focus{border-color:var(--gold)}
+.srch-go{padding:10px 18px;border-radius:10px;background:var(--gold);border:none;color:#000;font-weight:700;cursor:pointer;flex-shrink:0}
+.srch-tabs{display:flex;gap:6px;padding:10px 16px;background:var(--bg2);border-bottom:1px solid var(--bd)}
+.stab{flex:1;padding:7px;border-radius:8px;background:none;border:1px solid var(--bd);color:var(--tx2);font-size:12px;font-weight:600;cursor:pointer;text-align:center}
+.stab.on{background:var(--gold);color:#000;border-color:var(--gold)}
+.fp-body{padding:14px 16px}
+.sr-meta{font-size:12px;color:var(--tx3);margin-bottom:12px}
+.sr-item{padding:12px 14px;background:var(--bg2);border-radius:12px;margin-bottom:8px;border:1px solid var(--bd)}
+.sr-ref{font-size:11px;color:var(--gold);margin-bottom:5px;font-weight:700}
+.sr-txt{font-size:13px;line-height:1.7;color:var(--tx,#e8eaf0)}
+.sr-txt mark{background:rgba(200,164,90,.25);color:var(--gold);border-radius:3px;padding:0 2px}
 .sr-acts{display:flex;gap:6px;margin-top:8px;justify-content:flex-end}
-.sr-act{padding:4px 10px;border-radius:6px;background:var(--bg,#04101e);border:1px solid var(--bd,#1a2d47);color:var(--tx2,#8a9bb0);font-size:12px;cursor:pointer}
-.srch-empty{text-align:center;padding:48px 20px;color:var(--tx3,#5c7a9a)}
-.srch-empty i{font-size:40px;display:block;margin-bottom:12px;opacity:.4}
+.sr-act{padding:4px 10px;border-radius:6px;background:var(--bg,#04101e);border:1px solid var(--bd);color:var(--tx2);font-size:12px;cursor:pointer}
+.sr-act:active{background:var(--bg2)}
+.srch-empty{text-align:center;padding:48px 20px;color:var(--tx3);font-size:13px;line-height:1.8}
+.srch-empty i{font-size:36px;display:block;margin-bottom:12px;opacity:.4}
+.bload{display:flex;flex-direction:column;align-items:center;padding:48px 20px;gap:12px;color:var(--tx3);font-size:13px}
+.bspin{width:28px;height:28px;border:3px solid var(--bd);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -40,47 +47,143 @@ body{background:var(--bg,#04101e);color:var(--tx,#e8eaf0);font-family:'DM Sans',
   <a href="index.html" class="fp-back"><i class="ti ti-arrow-left"></i></a>
   <span class="fp-title">🔍 Word Search</span>
 </header>
+
 <div class="srch-bar">
-  <input class="srch-inp" id="srch-inp" type="search" placeholder="தேடுக — faith, அன்பு, love..." autocomplete="off" spellcheck="false">
-  <button class="srch-go" onclick="runSearch()">தேடு</button>
+  <input class="srch-inp" id="srch-inp" type="search" placeholder="Search: love, grace, faith..." autocomplete="off" spellcheck="false">
+  <button class="srch-go" onclick="runSearch()">Search</button>
 </div>
+
+<div class="srch-tabs">
+  <button class="stab on" id="tab-en" onclick="setTab('en')">English (KJV)</button>
+  <button class="stab" id="tab-ta" onclick="setTab('ta')">தமிழ் (OV)</button>
+</div>
+
 <div class="fp-body" id="fp-body">
-  <div class="srch-empty"><i class="ti ti-bible"></i>வார்த்தை அல்லது வசன குறிப்பு தட்டச்சு செய்யுங்கள்</div>
+  <div class="srch-empty">
+    <i class="ti ti-bible"></i>
+    வார்த்தை தட்டச்சு செய்து Search அழுத்துங்கள்<br>
+    <small style="color:var(--tx3);font-size:11px">Examples: love · grace · faith · அன்பு · கிருபை</small>
+  </div>
 </div>
+
 <script src="js/features.js"></script>
 <script>
 (function(){
   document.documentElement.setAttribute('data-theme', localStorage.getItem('enjc-theme')||'dark');
+
+  let currentTab = 'en';
   const inp = document.getElementById('srch-inp');
   const body = document.getElementById('fp-body');
+
   inp.addEventListener('keydown', e => { if(e.key==='Enter') runSearch(); });
   inp.focus();
+
+  window.setTab = function(tab){
+    currentTab = tab;
+    document.getElementById('tab-en').classList.toggle('on', tab==='en');
+    document.getElementById('tab-ta').classList.toggle('on', tab==='ta');
+    inp.placeholder = tab==='en' ? 'Search: love, grace, faith...' : 'தேடுக: அன்பு, கிருபை, விசுவாசம்...';
+    if(inp.value.trim()) runSearch();
+  };
+
   window.runSearch = async function(){
-    const q = inp.value.trim(); if(!q) return;
-    body.innerHTML = '<div class="bload"><div class="bspin"></div></div>';
+    const q = inp.value.trim();
+    if(!q) return;
+
+    body.innerHTML = '<div class="bload"><div class="bspin"></div><span>தேடுகிறது...</span></div>';
+
     try{
+      if(currentTab === 'en'){
+        await searchEnglish(q);
+      } else {
+        await searchTamil(q);
+      }
+    }catch(e){
+      body.innerHTML = `<div class="srch-empty"><i class="ti ti-wifi-off"></i>தேடல் தோல்வி — இணையம் சரிபாருங்கள்<br><small>${e.message}</small></div>`;
+    }
+  };
+
+  async function searchEnglish(q){
+    // bible-api handles verse references, bolls.life handles word search
+    // First try as verse reference (John 3:16)
+    const refPat = /^[1-3\s]*[a-zA-Z]+\s+\d+:\d+/i;
+    if(refPat.test(q)){
       const r = await fetch('https://bible-api.com/'+encodeURIComponent(q)+'?translation=kjv');
       const d = await r.json();
-      if(d.error) throw new Error(d.error);
-      const vv = d.verses || [];
-      if(!vv.length){ body.innerHTML='<div class="bempty">முடிவு இல்லை: "'+q+'"</div>'; return; }
-      const qEsc = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-      body.innerHTML = '<p class="sr-meta">"'+q+'" — '+vv.length+' results</p>' +
-        vv.map(v => {
-          const ref = v.book_name+' '+v.chapter+':'+v.verse;
-          const txt = v.text.replace(/\n/g,' ');
-          const hi = txt.replace(new RegExp('('+qEsc+')','gi'),'<mark>$1</mark>');
-          const sr = ref.replace(/'/g,"\\'"), st = txt.replace(/'/g,"\\'").replace(/\\/g,'\\\\');
-          return '<div class="sr-item"><div class="sr-ref">'+ref+'</div><div class="sr-txt">'+hi+'</div>'+
-            '<div class="sr-acts"><button class="sr-act" onclick="navigator.clipboard&&navigator.clipboard.writeText(\''+sr+' \u2014 '+st+'\')">📋 Copy</button>'+
-            '<button class="sr-act" onclick="goRead(\''+v.book_name.toLowerCase().replace(/ /g,'')+'\','+v.chapter+')">📖 Read</button></div></div>';
-        }).join('');
-    }catch(e){ body.innerHTML='<div class="bempty">முடிவு இல்லை: "'+q+'"</div>'; }
-  };
+      if(!d.error && d.verses?.length){
+        showResults(d.verses.map(v=>({
+          ref: v.book_name+' '+v.chapter+':'+v.verse,
+          text: v.text.trim().replace(/\n/g,' '),
+          book: v.book_name.toLowerCase().replace(/\s/g,''), ch: v.chapter
+        })), q);
+        return;
+      }
+    }
+    // Word search via bolls.life
+    const url = `https://bolls.life/search/?search=${encodeURIComponent(q)}&translation=KJV&take=30&skip=0`;
+    const r = await fetch(url);
+    if(!r.ok) throw new Error('API error '+r.status);
+    const d = await r.json();
+    const vv = (d.results||d||[]).slice(0,30);
+    if(!vv.length){
+      body.innerHTML = `<div class="srch-empty"><i class="ti ti-search-off"></i>"${q}" — முடிவு இல்லை</div>`;
+      return;
+    }
+    showResults(vv.map(v=>({
+      ref: (v.book_name||v.book||'?')+' '+(v.chapter||'?')+':'+(v.verse||v.verse_nr||'?'),
+      text: (v.text||v.verse_text||'').trim(),
+      book: (v.book_name||v.book||'').toLowerCase().replace(/\s/g,''),
+      ch: v.chapter||1
+    })), q);
+  }
+
+  async function searchTamil(q){
+    // Tamil search via bolls.life TAMOVR
+    const url = `https://bolls.life/search/?search=${encodeURIComponent(q)}&translation=TAMOVR&take=30&skip=0`;
+    const r = await fetch(url);
+    if(!r.ok) throw new Error('API error '+r.status);
+    const d = await r.json();
+    const vv = (d.results||d||[]).slice(0,30);
+    if(!vv.length){
+      body.innerHTML = `<div class="srch-empty"><i class="ti ti-search-off"></i>"${q}" — முடிவு இல்லை</div>`;
+      return;
+    }
+    // bolls returns book numbers — map to BOOKS
+    showResults(vv.map(v=>{
+      const bk = BOOKS.find(b=>b.n===(v.book||0));
+      return {
+        ref: (bk?bk.ta+' / '+bk.name:('Book '+v.book))+' '+(v.chapter||'?')+':'+(v.verse||v.verse_nr||'?'),
+        text: (v.text||v.verse_text||'').trim(),
+        book: bk?bk.id:'',
+        ch: v.chapter||1
+      };
+    }), q);
+  }
+
+  function showResults(vv, q){
+    const qEsc = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+    const hi = txt => txt.replace(new RegExp('('+qEsc+')','gi'),'<mark>$1</mark>');
+    body.innerHTML = `<p class="sr-meta">"${q}" — ${vv.length} results</p>` +
+      vv.map(v => {
+        const st = v.text.replace(/'/g,"\\'").replace(/\\/g,'\\\\');
+        const ref = v.ref.replace(/'/g,"\\'");
+        return `<div class="sr-item">
+          <div class="sr-ref">${v.ref}</div>
+          <div class="sr-txt">${hi(v.text)}</div>
+          <div class="sr-acts">
+            <button class="sr-act" onclick="navigator.clipboard&&navigator.clipboard.writeText('${ref} — ${st}').then(()=>toast('📋 Copied!'))">Copy</button>
+            ${v.book?`<button class="sr-act" onclick="goRead('${v.book}',${v.ch})">📖 Read</button>`:''}
+          </div>
+        </div>`;
+      }).join('');
+  }
+
   window.goRead = function(book, ch){
     try{ sessionStorage.setItem('enjc_go', JSON.stringify({book, ch})); }catch(e){}
     location.href = 'bible.html';
   };
+
 })();
 </script>
-</body></html>
+</body>
+</html>

@@ -13,16 +13,64 @@
 <link rel="stylesheet" href="css/premium-v2.css">
 <link rel="stylesheet" href="css/mobile-fix.css">
 <style>
-body{background:var(--bg,#04101e);color:var(--tx,#e8eaf0);font-family:'DM Sans',system-ui,sans-serif;padding-bottom:40px}
-.fp-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg2,#071628);border-bottom:1px solid var(--bd,#1a2d47);position:sticky;top:0;z-index:10}
-.fp-back{width:36px;height:36px;border-radius:50%;background:none;border:1px solid var(--bd,#1a2d47);color:var(--tx,#e8eaf0);font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg,#04101e);color:var(--tx,#e8eaf0);font-family:'DM Sans',system-ui,sans-serif;padding-bottom:60px}
+:root{--gold:#c8a45a;--bg2:#071628;--bd:#1a2d47;--tx2:#8a9bb0;--tx3:#5c7a9a}
+
+/* Header */
+.fp-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg2);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:10}
+.fp-back{width:36px;height:36px;border-radius:50%;background:none;border:1px solid var(--bd);color:var(--tx,#e8eaf0);font-size:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;flex-shrink:0}
 .fp-title{font-size:17px;font-weight:600}
-.fp-body{padding:16px}
-</style>
-<style>
-.cmp-nav{display:flex;gap:8px;padding:12px 16px;background:var(--bg2,#071628);border-bottom:1px solid var(--bd,#1a2d47);flex-wrap:wrap}
-.cmp-sel{flex:1;min-width:120px;padding:9px 10px;border-radius:10px;background:var(--bg,#04101e);border:1px solid var(--bd,#1a2d47);color:var(--tx,#e8eaf0);font-size:13px}
-.cmp-go{padding:9px 18px;border-radius:10px;background:var(--gold,#c8a45a);border:none;color:#000;font-weight:700;font-size:14px;cursor:pointer;flex-shrink:0}
+
+/* Controls */
+.ctrl-wrap{padding:14px 16px;background:var(--bg2);border-bottom:1px solid var(--bd);display:flex;flex-direction:column;gap:10px}
+.ctrl-row{display:flex;gap:8px;align-items:center}
+.ctrl-label{font-size:11px;color:var(--tx3);font-weight:600;letter-spacing:.04em;min-width:52px;flex-shrink:0}
+.ctrl-sel{flex:1;padding:9px 10px;border-radius:10px;background:var(--bg,#04101e);border:1px solid var(--bd);color:var(--tx,#e8eaf0);font-size:13px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235c7a9a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:28px}
+.ctrl-sel:focus{outline:none;border-color:var(--gold)}
+
+/* Version pills */
+.ver-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.ver-pill{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:20px;background:var(--bg,#04101e);border:1px solid var(--bd);font-size:12px;font-weight:500;color:var(--tx2);cursor:default}
+.ver-pill .pill-rm{background:none;border:none;color:var(--tx3);cursor:pointer;font-size:14px;line-height:1;padding:0 0 0 2px;display:flex;align-items:center}
+.ver-pill .pill-rm:hover{color:#f87171}
+.ver-pill.pill-1{border-color:#c8a45a55;color:#c8a45a}
+.ver-pill.pill-2{border-color:#60a5fa55;color:#60a5fa}
+.ver-pill.pill-3{border-color:#4ade8055;color:#4ade80}
+.ver-pill.pill-4{border-color:#f472b655;color:#f472b6}
+.ver-pill.pill-5{border-color:#a78bfa55;color:#a78bfa}
+
+.ver-add-row{display:flex;gap:6px;align-items:center;margin-top:4px}
+.ver-add-sel{flex:1;padding:7px 10px;border-radius:8px;background:var(--bg,#04101e);border:1px solid var(--bd);color:var(--tx2);font-size:12px}
+.ver-add-btn{padding:7px 14px;border-radius:8px;background:var(--gold);border:none;color:#000;font-weight:700;font-size:12px;cursor:pointer;flex-shrink:0;white-space:nowrap}
+.ver-add-btn:disabled{opacity:.4;cursor:default}
+
+/* Compare button */
+.cmp-go-btn{width:100%;padding:12px;border-radius:10px;background:var(--gold);border:none;color:#000;font-weight:700;font-size:15px;cursor:pointer;margin-top:4px}
+.cmp-go-btn:active{opacity:.85}
+
+/* Results */
+.fp-body{padding:12px 16px}
+.cmp-book-head{font-size:14px;font-weight:600;color:var(--gold);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--bd)}
+.ver-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.vtag{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600}
+.vtag-1{background:#c8a45a22;color:#c8a45a;border:1px solid #c8a45a44}
+.vtag-2{background:#60a5fa22;color:#60a5fa;border:1px solid #60a5fa44}
+.vtag-3{background:#4ade8022;color:#4ade80;border:1px solid #4ade8044}
+.vtag-4{background:#f472b622;color:#f472b6;border:1px solid #f472b644}
+.vtag-5{background:#a78bfa22;color:#a78bfa;border:1px solid #a78bfa44}
+.cmp-verse-block{background:var(--bg2);border-radius:12px;border:1px solid var(--bd);padding:12px 14px;margin-bottom:8px}
+.cmp-vnum{font-size:11px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.cmp-entry{margin-bottom:7px;padding-bottom:7px;border-bottom:1px solid var(--bd)}
+.cmp-entry:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.cmp-entry-tag{font-size:10px;font-weight:700;margin-bottom:3px}
+.cmp-entry-txt{font-size:13px;color:var(--tx,#e8eaf0);line-height:1.7}
+.cmp-share{width:100%;padding:11px;border-radius:10px;background:none;border:1px solid var(--bd);color:var(--tx2);font-size:13px;cursor:pointer;margin-top:4px}
+.cmp-share:active{background:var(--bg2)}
+.bempty{text-align:center;padding:48px 20px;color:var(--tx3)}
+.bload{display:flex;flex-direction:column;align-items:center;padding:48px 20px;gap:12px;color:var(--tx3);font-size:13px}
+.bspin{width:28px;height:28px;border:3px solid var(--bd);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -30,36 +78,174 @@ body{background:var(--bg,#04101e);color:var(--tx,#e8eaf0);font-family:'DM Sans',
   <a href="index.html" class="fp-back"><i class="ti ti-arrow-left"></i></a>
   <span class="fp-title">⇄ Compare Versions</span>
 </header>
-<div class="cmp-nav">
-  <select class="cmp-sel" id="cmp-book-sel"></select>
-  <select class="cmp-sel" id="cmp-ch-sel"><option>1</option></select>
-  <button class="cmp-go" onclick="loadCompare()">Compare</button>
+
+<div class="ctrl-wrap">
+  <!-- Book & Chapter -->
+  <div class="ctrl-row">
+    <span class="ctrl-label">புத்தகம்</span>
+    <select class="ctrl-sel" id="cmp-book-sel" onchange="updateChSel()"></select>
+  </div>
+  <div class="ctrl-row">
+    <span class="ctrl-label">அதிகாரம்</span>
+    <select class="ctrl-sel" id="cmp-ch-sel"></select>
+  </div>
+
+  <!-- Selected versions pills -->
+  <div>
+    <div style="font-size:11px;color:var(--tx3);font-weight:600;letter-spacing:.04em;margin-bottom:6px">VERSIONS (max 5)</div>
+    <div class="ver-pills" id="ver-pills"></div>
+    <div class="ver-add-row" id="ver-add-row">
+      <select class="ver-add-sel" id="ver-add-sel"></select>
+      <button class="ver-add-btn" id="ver-add-btn" onclick="addVersion()">+ Add</button>
+    </div>
+  </div>
+
+  <button class="cmp-go-btn" onclick="runMultiCompare()">Compare</button>
 </div>
-<div class="fp-body" id="fp-body"><div class="bempty">புத்தகம் தேர்ந்தெடுத்து Compare அழுத்துங்கள்.</div></div>
+
+<div class="fp-body" id="fp-body">
+  <div class="bempty">புத்தகம், அதிகாரம், versions தேர்ந்தெடுத்து Compare அழுத்துங்கள்.</div>
+</div>
+
 <script src="js/features.js"></script>
 <script>
 (function(){
   document.documentElement.setAttribute('data-theme', localStorage.getItem('enjc-theme')||'dark');
+
+  const COLORS = ['vtag-1','vtag-2','vtag-3','vtag-4','vtag-5'];
+  const PILL_COLORS = ['pill-1','pill-2','pill-3','pill-4','pill-5'];
+  let selectedVersions = ['taov','kjv'];
+
+  // Populate book selector
   const bsel = document.getElementById('cmp-book-sel');
-  const csel = document.getElementById('cmp-ch-sel');
+  let lastType = '';
   BOOKS.forEach(b => {
+    if(b.t !== lastType){
+      const og = document.createElement('optgroup');
+      og.label = b.t==='OT' ? 'பழைய ஏற்பாடு · Old Testament' : 'புதிய ஏற்பாடு · New Testament';
+      bsel.appendChild(og); lastType = b.t;
+    }
     const o = document.createElement('option');
-    o.value = b.id; o.textContent = (b.ta||b.name)+' · '+b.name;
-    bsel.appendChild(o);
+    o.value = b.id; o.textContent = b.ta + ' · ' + b.name;
+    bsel.lastElementChild.appendChild(o);
   });
-  function updateChSel(){
+
+  // Check sessionStorage for pre-selected book
+  try{
+    const go = JSON.parse(sessionStorage.getItem('enjc_go')||'null');
+    if(go && go.book){ bsel.value = go.book; sessionStorage.removeItem('enjc_go'); }
+  }catch(e){}
+
+  window.updateChSel = function(){
+    const csel = document.getElementById('cmp-ch-sel');
     const book = BOOKS.find(b=>b.id===bsel.value);
-    const chs = book ? book.ch : 1;
     csel.innerHTML = '';
-    for(let i=1;i<=chs;i++){ const o=document.createElement('option'); o.value=i; o.textContent='Chapter '+i; csel.appendChild(o); }
-  }
-  bsel.addEventListener('change', updateChSel);
-  updateChSel();
-  window.loadCompare = function(){
-    const book = BOOKS.find(b=>b.id===bsel.value); if(!book) return;
-    S.book=book.id; S.bookName=book.name; S.bookTaName=book.ta||book.name; S.bookNum=book.n; S.ch=parseInt(csel.value)||1;
-    renderCompare(document.getElementById('fp-body'));
+    for(let i=1; i<=(book?book.ch:1); i++){
+      const o = document.createElement('option');
+      o.value = i; o.textContent = 'Chapter ' + i;
+      csel.appendChild(o);
+    }
   };
+  updateChSel();
+
+  function renderPills(){
+    const pills = document.getElementById('ver-pills');
+    pills.innerHTML = selectedVersions.map((vid,i) => {
+      const v = getVer(vid);
+      return `<div class="ver-pill ${PILL_COLORS[i]}">
+        <span>${v ? v.short : vid}</span>
+        <button class="pill-rm" onclick="removeVersion(${i})" title="Remove">✕</button>
+      </div>`;
+    }).join('');
+    // Update add-sel to exclude already selected
+    const addSel = document.getElementById('ver-add-sel');
+    const prev = addSel.value;
+    addSel.innerHTML = VERSIONS
+      .filter(v => !selectedVersions.includes(v.id))
+      .map(v => `<option value="${v.id}">${v.label}</option>`)
+      .join('');
+    document.getElementById('ver-add-btn').disabled = selectedVersions.length >= 5 || VERSIONS.filter(v=>!selectedVersions.includes(v.id)).length === 0;
+    document.getElementById('ver-add-row').style.display = selectedVersions.length >= 5 ? 'none' : 'flex';
+  }
+
+  window.addVersion = function(){
+    const sel = document.getElementById('ver-add-sel');
+    if(!sel.value || selectedVersions.includes(sel.value)) return;
+    selectedVersions.push(sel.value);
+    renderPills();
+  };
+
+  window.removeVersion = function(i){
+    if(selectedVersions.length <= 1){ toast('குறைந்தது ஒரு version வேண்டும்'); return; }
+    selectedVersions.splice(i,1);
+    renderPills();
+  };
+
+  window.runMultiCompare = async function(){
+    const body = document.getElementById('fp-body');
+    const book = BOOKS.find(b=>b.id===bsel.value);
+    if(!book){ toast('புத்தகம் தேர்வு செய்யுங்கள்'); return; }
+    const ch = parseInt(document.getElementById('cmp-ch-sel').value)||1;
+
+    S.book = book.id; S.bookName = book.name; S.bookTaName = book.ta; S.bookNum = book.n; S.ch = ch;
+
+    body.innerHTML = '<div class="bload"><div class="bspin"></div><span>Fetching versions...</span></div>';
+
+    // Fetch all selected versions in parallel
+    const results = await Promise.all(selectedVersions.map(vid => fetchVersionChapter(vid)));
+
+    // Build verse number union
+    const allNums = [...new Set(results.flatMap(vv => vv.map(v=>v.num)))].sort((a,b)=>a-b);
+    if(!allNums.length){
+      body.innerHTML = '<div class="bempty">வசனங்கள் கிடைக்கவில்லை — Internet சரிபாருங்கள்.</div>';
+      return;
+    }
+
+    // Build lookup maps
+    const maps = results.map(vv => {
+      const m = {};
+      vv.forEach(v => m[v.num]=v.text);
+      return m;
+    });
+
+    const verLabels = selectedVersions.map(vid => getVer(vid));
+
+    body.innerHTML = `
+      <div class="cmp-book-head">${book.ta} · ${book.name} — Chapter ${ch}</div>
+      <div class="ver-tags">${verLabels.map((v,i)=>`<span class="vtag ${COLORS[i]}">${v?v.short:selectedVersions[i]}</span>`).join('')}</div>
+      ${allNums.map(n => `
+        <div class="cmp-verse-block">
+          <div class="cmp-vnum">Verse ${n}</div>
+          ${selectedVersions.map((vid,i) => {
+            const v = verLabels[i];
+            const txt = maps[i][n] || '—';
+            return `<div class="cmp-entry">
+              <div class="cmp-entry-tag vtag ${COLORS[i]}">${v?v.short:vid}</div>
+              <div class="cmp-entry-txt">${txt}</div>
+            </div>`;
+          }).join('')}
+        </div>`).join('')}
+      <button class="cmp-share" onclick="shareMulti()">🔗 Share</button>
+    `;
+
+    window._cmpResult = {book, ch, verLabels, maps, allNums, selectedVersions: [...selectedVersions]};
+  };
+
+  window.shareMulti = function(){
+    const r = window._cmpResult;
+    if(!r){ toast('Compare பண்ணுங்கள்'); return; }
+    const head = `${r.book.ta} / ${r.book.name} ${r.ch} — ${r.verLabels.map(v=>v?v.short:'?').join(' vs ')}`;
+    const lines = r.allNums.slice(0,6).map(n =>
+      r.selectedVersions.map((vid,i)=>`[${r.verLabels[i]?r.verLabels[i].short:vid}] ${r.maps[i][n]||'—'}`).join('\n')
+    );
+    const msg = head + '\n\n' + lines.join('\n\n') + '\n\nhttps://elimnewjerusalem.github.io/enjc-bible/compare.html';
+    if(navigator.share) navigator.share({title:head,text:msg}).catch(()=>{});
+    else{ navigator.clipboard?.writeText(msg); toast('📋 Copied!'); }
+  };
+
+  renderPills();
+
 })();
 </script>
-</body></html>
+</body>
+</html>

@@ -255,7 +255,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Restore navigation from feature pages (daily/compare/search)
   try{
     const go = JSON.parse(sessionStorage.getItem('enjc_go')||'null');
-    if(go && go.book){ S.book=go.book; S.ch=go.ch||1; sessionStorage.removeItem('enjc_go'); }
+    if(go && go.book){
+      sessionStorage.removeItem('enjc_go');
+      const bsel = g('book-sel');
+      if(bsel) bsel.value = go.book;
+      // onBook() will set S.book, S.ch=1; then we override ch
+      onBook();
+      if(go.ch && go.ch > 1){
+        S.ch = go.ch;
+        const csel = g('ch-sel');
+        if(csel) csel.value = go.ch;
+        loadCh();
+      }
+    }
   }catch(e){}
   syncVersionUI();
   renderVersionChips();
