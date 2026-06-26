@@ -12,31 +12,150 @@
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/premium-v2.css">
 <link rel="stylesheet" href="css/mobile-fix.css">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',system-ui,sans-serif;padding-bottom:60px}
-</style>
-
 <link rel="stylesheet" href="css/parchment.css">
+<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',system-ui,sans-serif;padding-bottom:40px}
+.hero-read{margin:0 16px 16px;border-radius:20px;overflow:hidden;position:relative;background:linear-gradient(160deg,#1a1a2e 0%,#16213e 40%,#0f3460 100%);padding:28px 20px 24px;border:1px solid rgba(212,175,55,.12)}
+.hero-read-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold,#D4AF37);font-weight:700;margin-bottom:6px}
+.hero-read-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:700;color:#FAF8F2;margin-bottom:4px;line-height:1.2}
+.hero-read-sub{font-size:12px;color:rgba(250,248,242,.6);margin-bottom:20px}
+.hero-read-btn{display:inline-flex;align-items:center;gap:8px;background:var(--gold,#D4AF37);color:#0F172A;border:none;border-radius:16px;font-size:13px;font-weight:700;padding:11px 24px;cursor:pointer;box-shadow:0 4px 20px rgba(212,175,55,.4)}
+.mark-done{display:flex;align-items:center;gap:8px;font-size:13px;color:#22C55E;margin-top:14px;font-weight:600;cursor:pointer;background:none;border:none}
+.week-section{margin:0 16px 16px;background:#1E293B;border-radius:20px;padding:16px}
+.week-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#64748B;font-weight:700;margin-bottom:12px}
+.week-prog-bar{height:4px;background:rgba(255,255,255,.06);border-radius:99px;margin-bottom:14px;overflow:hidden}
+.week-prog-fill{height:100%;background:var(--gold,#D4AF37);border-radius:99px}
+.week-dots{display:flex;justify-content:space-between}
+.wdot{display:flex;flex-direction:column;align-items:center;gap:5px}
+.wdot-c{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.wdot-c.done{background:var(--gold,#D4AF37);color:#0F172A}
+.wdot-c.today{background:transparent;border:2px solid var(--gold,#D4AF37);color:var(--gold,#D4AF37)}
+.wdot-c.future{background:#334155;color:#64748B}
+.wdot-l{font-size:9px;color:#64748B;font-weight:600}
+.stats-row{display:flex;gap:10px;margin:0 16px 8px}
+.stat-card{flex:1;background:#1E293B;border-radius:16px;padding:14px 12px;text-align:center}
+.stat-n{font-size:24px;font-weight:700;color:var(--gold,#D4AF37);display:block;margin-bottom:2px}
+.stat-l{font-size:10px;color:#64748B;font-weight:600;letter-spacing:.04em}
+</style>
 </head>
 <body>
 <header class="fp-head">
   <a href="index.html" class="fp-back"><i class="ti ti-arrow-left"></i></a>
-  <span class="fp-title">📅 Daily Bible Read</span>
+  <span class="fp-title">📅 Daily Reading</span>
+  <i class="ti ti-calendar" style="color:rgba(250,248,242,.5);font-size:20px;margin-left:auto"></i>
 </header>
-<div class="fp-body" id="fp-body"><div class="bload"><div class="bspin"></div></div></div>
+
+<!-- Hero today's reading -->
+<div style="height:20px"></div>
+<div class="hero-read">
+  <div class="hero-read-label">Today's Reading</div>
+  <div class="hero-read-title" id="hero-title">Genesis 1–3</div>
+  <div class="hero-read-sub" id="hero-sub">Creation of the World</div>
+  <button class="hero-read-btn" id="hero-read-btn">Read Now</button>
+  <button class="mark-done" id="mark-done-btn">
+    <i class="ti ti-circle-check"></i>
+    <span>Mark as Complete</span>
+  </button>
+</div>
+
+<!-- Week progress -->
+<div class="week-section">
+  <div class="week-label">This Week Progress <span id="week-count" style="color:var(--gold,#D4AF37)">0 / 7 Days</span></div>
+  <div class="week-prog-bar"><div class="week-prog-fill" id="week-fill" style="width:0%"></div></div>
+  <div class="week-dots" id="week-dots"></div>
+</div>
+
+<!-- Stats -->
+<div class="stats-row">
+  <div class="stat-card">
+    <span class="stat-n" id="stat-streak">0</span>
+    <span class="stat-l">🔥 Streak</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-n" id="stat-total">0</span>
+    <span class="stat-l">Total Read</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-n" id="stat-left">28</span>
+    <span class="stat-l">Remaining</span>
+  </div>
+</div>
+
+<div class="fp-body" id="fp-body">
+  <div class="bload"><div class="bspin"></div></div>
+</div>
+
 <script src="js/features.js"></script>
 <script>
 (function(){
   document.documentElement.setAttribute('data-theme', localStorage.getItem('enjc-theme')||'dark');
-  // Override navigate to go to bible.html with chapter
+
+  const DAYS = ['M','T','W','T','F','S','S'];
+
+  // Override goDailyChapter to navigate to bible.html
   window.goDailyChapter = function(book, ch){
     const i = DAILY_PLAN.findIndex(d=>d.book===book&&d.ch===ch);
     if(i >= 0){ const p=getDailyProgress(); p['day_'+i]=true; saveDailyProgress(p); }
     try{ sessionStorage.setItem('enjc_go', JSON.stringify({book, ch})); }catch(e){}
     location.href = 'bible.html';
   };
-  renderDaily(document.getElementById("fp-body"));
+
+  function getTodayIndex(){
+    const prog = getDailyProgress();
+    const done = Object.values(prog).filter(Boolean).length;
+    return Math.min(done, DAILY_PLAN.length - 1);
+  }
+
+  function renderHero(){
+    const prog = getDailyProgress();
+    const todayIdx = getTodayIndex();
+    const plan = DAILY_PLAN[todayIdx];
+    if(!plan) return;
+    document.getElementById('hero-title').textContent = plan.label.split('—')[0].trim();
+    document.getElementById('hero-sub').textContent = plan.label.includes('—') ? plan.label.split('—')[1].trim() : plan.en;
+    document.getElementById('hero-read-btn').onclick = () => goDailyChapter(plan.book, plan.ch);
+    const doneBtn = document.getElementById('mark-done-btn');
+    if(prog['day_'+todayIdx]){
+      doneBtn.style.color = 'var(--gold,#D4AF37)';
+      doneBtn.querySelector('span').textContent = 'Completed ✓';
+    }
+    doneBtn.onclick = () => {
+      const p = getDailyProgress();
+      p['day_'+todayIdx] = true;
+      saveDailyProgress(p);
+      renderHero(); renderStats(); renderWeek();
+    };
+  }
+
+  function renderWeek(){
+    const prog = getDailyProgress();
+    const total = Object.values(prog).filter(Boolean).length;
+    const weekDone = Math.min(total, 7);
+    document.getElementById('week-count').textContent = weekDone + ' / 7 Days';
+    document.getElementById('week-fill').style.width = (weekDone/7*100)+'%';
+    const dotsEl = document.getElementById('week-dots');
+    dotsEl.innerHTML = DAYS.map((d,i) => {
+      const cls = i < weekDone ? 'done' : (i === weekDone ? 'today' : 'future');
+      return `<div class="wdot"><div class="wdot-c ${cls}">${d}</div><div class="wdot-l">${d}</div></div>`;
+    }).join('');
+  }
+
+  function renderStats(){
+    const prog = getDailyProgress();
+    const total = Object.values(prog).filter(Boolean).length;
+    const streak = calcStreak(prog);
+    document.getElementById('stat-streak').textContent = streak;
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-left').textContent = DAILY_PLAN.length - total;
+  }
+
+  function tryRender(){
+    const m = document.getElementById('fp-body');
+    if(typeof renderDaily === 'function'){
+      renderHero(); renderWeek(); renderStats();
+      renderDaily(m);
+    } else { setTimeout(tryRender, 40); }
+  }
+  tryRender();
 })();
 </script>
 </body></html>

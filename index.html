@@ -300,49 +300,56 @@
 
     <!-- VOTD -->
     <div class="votd-wrap fade-in" id="votd-wrap" onclick="goVOTD()" role="button" tabindex="0" aria-label="இன்றைய வசனம் - tap to read">
-      <div class="votd-tag" id="votd-tag">இன்றைய வசனம்</div>
+      <div class="votd-tag" id="votd-tag">TODAY'S VERSE</div>
       <div class="votd-verse ta-font" id="votd-verse">கர்த்தர் என் மேய்ப்பர், எனக்கு குறைவில்லை.</div>
       <div class="votd-meta">
         <span id="votd-ref">சங்கீதம் 23:1</span>
-        <span class="votd-pill">TAP TO READ</span>
+        <span class="votd-pill">Read Chapter ›</span>
       </div>
     </div>
 
     <!-- Quick access -->
     <div class="sec-lbl fade-in delay-1">Quick Access</div>
 
-    <!-- Bible featured -->
-    <a href="bible.html" class="feat-card fade-in delay-1" aria-label="Open Bible">
-      <div class="feat-ic"><i class="ti ti-book" aria-hidden="true"></i></div>
-      <div class="feat-body">
+    <div class="quick-access-row fade-in delay-1">
+      <a href="bible.html" class="feat-card" aria-label="Open Bible">
+        <div class="feat-ic"><i class="ti ti-book" aria-hidden="true"></i></div>
         <div class="feat-name">Bible</div>
-        <div class="feat-sub">Tamil & English reader</div>
+        <div class="feat-sub">Read the Word</div>
         <span class="feat-badge">66 Books · 11 Versions</span>
-      </div>
-      <i class="ti ti-chevron-right feat-arr" aria-hidden="true">›</i>
-    </a>
+      </a>
+      <a href="imagegen.html" class="feat-card" aria-label="Open Verse Card maker">
+        <div class="feat-ic"><i class="ti ti-photo" aria-hidden="true"></i></div>
+        <div class="feat-name">Verse Cards</div>
+        <div class="feat-sub">Create &amp; Share</div>
+        <span class="feat-badge">8 Templates</span>
+      </a>
+    </div>
 
-    <!-- Verse Card featured -->
-    <a href="imagegen.html" class="feat-card fade-in delay-2" aria-label="Open Verse Card maker">
-      <div class="feat-ic" style="background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.2)"><i class="ti ti-photo" aria-hidden="true" style="color:#a78bfa"></i></div>
-      <div class="feat-body">
-        <div class="feat-name">Verse Card</div>
-        <div class="feat-sub">Make & share Scripture images</div>
-        <span class="feat-badge" style="background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.2);color:#a78bfa">8 Templates · WhatsApp Ready</span>
+    <!-- Today's Reading -->
+    <div class="sec-lbl fade-in delay-2">Today's Reading</div>
+    <div class="today-reading fade-in delay-2" id="today-reading-card">
+      <div class="today-reading-label">DAILY READ</div>
+      <div class="today-reading-body">
+        <div>
+          <div class="today-reading-title" id="today-title">Genesis 1–3</div>
+          <div class="today-reading-sub" id="today-sub">Creation of the World</div>
+        </div>
+        <div class="today-pct" id="today-pct">25%</div>
       </div>
-      <i class="ti ti-chevron-right feat-arr" aria-hidden="true">›</i>
-    </a>
+      <div class="today-prog-bar"><div class="today-prog-fill" id="today-fill" style="width:25%"></div></div>
+      <button class="today-read-btn" onclick="location.href='daily.html'">
+        <i class="ti ti-book-open" aria-hidden="true"></i>
+        Read Now
+      </button>
+    </div>
 
-    <!-- Tools grid -->
-    <div class="sec-lbl fade-in delay-2" style="margin-top:20px">Tools</div>
+    <!-- Tools -->
+    <div class="sec-lbl fade-in delay-2">Tools</div>
     <div class="tools-grid fade-in delay-2">
       <a href="quiz.html" class="tool-btn">
         <i class="ti ti-brain"></i>
         <span>Quiz</span>
-      </a>
-      <a href="daily.html" class="tool-btn">
-        <i class="ti ti-calendar-check"></i>
-        <span>Daily Read</span>
       </a>
       <a href="compare.html" class="tool-btn">
         <i class="ti ti-arrows-left-right"></i>
@@ -359,6 +366,10 @@
       <a href="notes.html" class="tool-btn">
         <i class="ti ti-notes"></i>
         <span>Notes</span>
+      </a>
+      <a href="bible.html" class="tool-btn">
+        <i class="ti ti-volume"></i>
+        <span>Audio Bible</span>
       </a>
     </div>
 

@@ -12,11 +12,41 @@
 <link rel="stylesheet" href="css/design-system.css">
 <link rel="stylesheet" href="css/premium-v2.css">
 <link rel="stylesheet" href="css/mobile-fix.css">
+<link rel="stylesheet" href="css/parchment.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',system-ui,sans-serif;padding-bottom:60px}
+body{font-family:'DM Sans',system-ui,sans-serif;padding-bottom:60px;background:#0F172A;color:#FAF8F2}
+.cmp-ctrl{padding:16px;background:#0F172A;border-bottom:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;gap:10px}
+.cmp-ref{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#D4AF37;padding:16px 16px 4px}
+.cmp-ref-sub{font-size:12px;color:#64748B;padding:0 16px 16px}
+.ctrl-r{display:flex;gap:8px;align-items:center}
+.ctrl-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#64748B;font-weight:700;min-width:52px;flex-shrink:0}
+.ctrl-sel{flex:1;padding:10px 12px;border-radius:12px;background:#1E293B;border:1px solid rgba(255,255,255,.08);color:#FAF8F2;font-size:13px;-webkit-appearance:none;appearance:none}
+.ver-pills-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.ver-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:999px;background:#1E293B;border:1px solid rgba(255,255,255,.1);font-size:12px;font-weight:600;color:#FAF8F2}
+.ver-pill .prm{background:none;border:none;color:#64748B;cursor:pointer;font-size:14px;line-height:1;padding:0 0 0 2px}
+.ver-add-row{display:flex;gap:8px}
+.ver-add-sel{flex:1;padding:9px 12px;border-radius:10px;background:#1E293B;border:1px solid rgba(255,255,255,.08);color:#FAF8F2;font-size:13px}
+.ver-add-btn{padding:9px 18px;border-radius:12px;background:#D4AF37;color:#0F172A;border:none;font-weight:700;font-size:13px;cursor:pointer;flex-shrink:0}
+.cmp-go{width:calc(100% - 32px);margin:0 16px;padding:14px;background:#D4AF37;color:#0F172A;border:none;border-radius:16px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(212,175,55,.35)}
+/* Result version cards */
+.cmp-results{padding:16px}
+.cmp-ref-display{font-size:16px;font-weight:700;color:#D4AF37;margin-bottom:16px}
+.ver-card{background:#1E293B;border-radius:20px;padding:16px;margin-bottom:10px}
+.ver-card-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;margin-bottom:10px}
+.ver-card-txt{font-size:14px;line-height:1.75;color:#FAF8F2}
+.pill-ov{background:rgba(212,175,55,.15);color:#D4AF37}
+.pill-erv{background:rgba(34,197,94,.12);color:#22C55E}
+.pill-kjv{background:rgba(96,165,250,.15);color:#60a5fa}
+.pill-nkjv{background:rgba(52,211,153,.12);color:#34d399}
+.pill-amp{background:rgba(214,90,122,.12);color:#D65A7A}
+.pill-niv{background:rgba(20,184,166,.12);color:#14B8A6}
+.add-ver-btn{width:100%;padding:14px;background:#1E293B;border:1px solid rgba(255,255,255,.1);border-radius:16px;color:#64748B;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px}
+.bload{display:flex;flex-direction:column;align-items:center;padding:48px 20px;gap:12px;color:#64748B;font-size:13px}
+.bspin{width:28px;height:28px;border:3px solid rgba(255,255,255,.08);border-top-color:#D4AF37;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bempty{text-align:center;padding:48px 20px;color:#64748B}
 </style>
-<link rel="stylesheet" href="css/parchment.css">
 </head>
 <body>
 <header class="fp-head">
@@ -24,32 +54,30 @@ body{font-family:'DM Sans',system-ui,sans-serif;padding-bottom:60px}
   <span class="fp-title">⇄ Compare Versions</span>
 </header>
 
-<div class="ctrl-wrap">
-  <!-- Book & Chapter -->
-  <div class="ctrl-row">
-    <span class="ctrl-label">புத்தகம்</span>
-    <select class="ctrl-sel" id="cmp-book-sel" onchange="updateChSel()"></select>
+<div class="cmp-ctrl">
+  <div class="ctrl-r">
+    <span class="ctrl-lbl">அதிகாரம்</span>
+    <select class="ctrl-sel" id="cmp-book-sel"></select>
   </div>
-  <div class="ctrl-row">
-    <span class="ctrl-label">அதிகாரம்</span>
+  <div class="ctrl-r">
+    <span class="ctrl-lbl"></span>
     <select class="ctrl-sel" id="cmp-ch-sel"></select>
   </div>
-
-  <!-- Selected versions pills -->
-  <div>
-    <div style="font-size:11px;color:var(--tx3);font-weight:600;letter-spacing:.04em;margin-bottom:6px">VERSIONS (max 5)</div>
-    <div class="ver-pills" id="ver-pills"></div>
-    <div class="ver-add-row" id="ver-add-row">
-      <select class="ver-add-sel" id="ver-add-sel"></select>
-      <button class="ver-add-btn" id="ver-add-btn" onclick="addVersion()">+ Add</button>
+  <div class="ctrl-r">
+    <span class="ctrl-lbl">Versions</span>
+    <div style="flex:1">
+      <div class="ver-pills-wrap" id="ver-pills"></div>
+      <div class="ver-add-row" id="ver-add-row" style="margin-top:8px">
+        <select class="ver-add-sel" id="ver-add-sel"></select>
+        <button class="ver-add-btn" onclick="addVersion()">+ Add</button>
+      </div>
     </div>
   </div>
-
-  <button class="cmp-go-btn" onclick="runMultiCompare()">Compare</button>
 </div>
+<button class="cmp-go" onclick="runMultiCompare()">Compare</button>
 
-<div class="fp-body" id="fp-body">
-  <div class="bempty">புத்தகம், அதிகாரம், versions தேர்ந்தெடுத்து Compare அழுத்துங்கள்.</div>
+<div id="cmp-results" style="padding:16px">
+  <div class="bempty">Book, Chapter, Versions தேர்ந்தெடுத்து Compare அழுத்துங்கள்.</div>
 </div>
 
 <script src="js/features.js"></script>
@@ -57,140 +85,91 @@ body{font-family:'DM Sans',system-ui,sans-serif;padding-bottom:60px}
 (function(){
   document.documentElement.setAttribute('data-theme', localStorage.getItem('enjc-theme')||'dark');
 
-  const COLORS = ['vtag-1','vtag-2','vtag-3','vtag-4','vtag-5'];
-  const PILL_COLORS = ['pill-1','pill-2','pill-3','pill-4','pill-5'];
+  const PILL_CLASS = {taov:'pill-ov',erv:'pill-erv',kjv:'pill-kjv',nkjv:'pill-nkjv',amp:'pill-amp',niv:'pill-niv'};
+  const DEFAULT_PILL = 'pill-kjv';
   let selectedVersions = ['taov','kjv'];
 
-  // Populate book selector
+  // Populate books
   const bsel = document.getElementById('cmp-book-sel');
-  let lastType = '';
+  let lt = '';
   BOOKS.forEach(b => {
-    if(b.t !== lastType){
-      const og = document.createElement('optgroup');
-      og.label = b.t==='OT' ? 'பழைய ஏற்பாடு · Old Testament' : 'புதிய ஏற்பாடு · New Testament';
-      bsel.appendChild(og); lastType = b.t;
-    }
-    const o = document.createElement('option');
-    o.value = b.id; o.textContent = b.ta + ' · ' + b.name;
-    bsel.lastElementChild.appendChild(o);
+    if(b.t !== lt){ const og=document.createElement('optgroup'); og.label=b.t==='OT'?'பழைய ஏற்பாடு':'புதிய ஏற்பாடு'; bsel.appendChild(og); lt=b.t; }
+    const o=document.createElement('option'); o.value=b.id; o.textContent=b.ta+' · '+b.name; bsel.lastElementChild.appendChild(o);
   });
-
-  // Check sessionStorage for pre-selected book
-  try{
-    const go = JSON.parse(sessionStorage.getItem('enjc_go')||'null');
-    if(go && go.book){ bsel.value = go.book; sessionStorage.removeItem('enjc_go'); }
-  }catch(e){}
-
-  window.updateChSel = function(){
-    const csel = document.getElementById('cmp-ch-sel');
-    const book = BOOKS.find(b=>b.id===bsel.value);
-    csel.innerHTML = '';
-    for(let i=1; i<=(book?book.ch:1); i++){
-      const o = document.createElement('option');
-      o.value = i; o.textContent = 'Chapter ' + i;
-      csel.appendChild(o);
-    }
-  };
+  try{ const go=JSON.parse(sessionStorage.getItem('enjc_go')||'null'); if(go&&go.book){bsel.value=go.book;sessionStorage.removeItem('enjc_go');}}catch(e){}
   updateChSel();
 
+  window.updateChSel = function(){
+    const csel=document.getElementById('cmp-ch-sel');
+    const book=BOOKS.find(b=>b.id===bsel.value);
+    csel.innerHTML='';
+    for(let i=1;i<=(book?book.ch:1);i++){const o=document.createElement('option');o.value=i;o.textContent='Chapter '+i;csel.appendChild(o);}
+  };
+  bsel.addEventListener('change', updateChSel);
+
   function renderPills(){
-    const pills = document.getElementById('ver-pills');
-    pills.innerHTML = selectedVersions.map((vid,i) => {
-      const v = getVer(vid);
-      return `<div class="ver-pill ${PILL_COLORS[i]}">
-        <span>${v ? v.short : vid}</span>
-        <button class="pill-rm" onclick="removeVersion(${i})" title="Remove">✕</button>
-      </div>`;
+    const pills=document.getElementById('ver-pills');
+    pills.innerHTML=selectedVersions.map((vid,i)=>{
+      const v=getVer(vid); const pc=PILL_CLASS[vid]||DEFAULT_PILL;
+      return `<div class="ver-pill ${pc}"><span>${v?v.short:vid}</span><button class="prm" onclick="removeVersion(${i})">✕</button></div>`;
     }).join('');
-    // Update add-sel to exclude already selected
-    const addSel = document.getElementById('ver-add-sel');
-    const prev = addSel.value;
-    addSel.innerHTML = VERSIONS
-      .filter(v => !selectedVersions.includes(v.id))
-      .map(v => `<option value="${v.id}">${v.label}</option>`)
-      .join('');
-    document.getElementById('ver-add-btn').disabled = selectedVersions.length >= 5 || VERSIONS.filter(v=>!selectedVersions.includes(v.id)).length === 0;
-    document.getElementById('ver-add-row').style.display = selectedVersions.length >= 5 ? 'none' : 'flex';
+    const addSel=document.getElementById('ver-add-sel');
+    addSel.innerHTML=VERSIONS.filter(v=>!selectedVersions.includes(v.id)).map(v=>`<option value="${v.id}">${v.label}</option>`).join('');
+    document.getElementById('ver-add-row').style.display=selectedVersions.length>=5?'none':'flex';
   }
 
-  window.addVersion = function(){
-    const sel = document.getElementById('ver-add-sel');
-    if(!sel.value || selectedVersions.includes(sel.value)) return;
-    selectedVersions.push(sel.value);
-    renderPills();
+  window.addVersion=function(){
+    const sel=document.getElementById('ver-add-sel');
+    if(!sel.value||selectedVersions.includes(sel.value))return;
+    selectedVersions.push(sel.value); renderPills();
+  };
+  window.removeVersion=function(i){
+    if(selectedVersions.length<=1){return;}
+    selectedVersions.splice(i,1); renderPills();
   };
 
-  window.removeVersion = function(i){
-    if(selectedVersions.length <= 1){ toast('குறைந்தது ஒரு version வேண்டும்'); return; }
-    selectedVersions.splice(i,1);
-    renderPills();
-  };
+  window.runMultiCompare=async function(){
+    const results=document.getElementById('cmp-results');
+    const book=BOOKS.find(b=>b.id===bsel.value);
+    if(!book)return;
+    const ch=parseInt(document.getElementById('cmp-ch-sel').value)||1;
+    S.book=book.id; S.bookName=book.name; S.bookTaName=book.ta; S.bookNum=book.n; S.ch=ch;
+    results.innerHTML='<div class="bload"><div class="bspin"></div><span>Loading...</span></div>';
 
-  window.runMultiCompare = async function(){
-    const body = document.getElementById('fp-body');
-    const book = BOOKS.find(b=>b.id===bsel.value);
-    if(!book){ toast('புத்தகம் தேர்வு செய்யுங்கள்'); return; }
-    const ch = parseInt(document.getElementById('cmp-ch-sel').value)||1;
+    const data=await Promise.all(selectedVersions.map(vid=>fetchVersionChapter(vid)));
+    const allNums=[...new Set(data.flatMap(vv=>vv.map(v=>v.num)))].sort((a,b)=>a-b);
+    if(!allNums.length){results.innerHTML='<div class="bempty">வசனங்கள் கிடைக்கவில்லை</div>';return;}
+    const maps=data.map(vv=>{const m={};vv.forEach(v=>m[v.num]=v.text);return m;});
+    const verLabels=selectedVersions.map(vid=>getVer(vid));
 
-    S.book = book.id; S.bookName = book.name; S.bookTaName = book.ta; S.bookNum = book.n; S.ch = ch;
-
-    body.innerHTML = '<div class="bload"><div class="bspin"></div><span>Fetching versions...</span></div>';
-
-    // Fetch all selected versions in parallel
-    const results = await Promise.all(selectedVersions.map(vid => fetchVersionChapter(vid)));
-
-    // Build verse number union
-    const allNums = [...new Set(results.flatMap(vv => vv.map(v=>v.num)))].sort((a,b)=>a-b);
-    if(!allNums.length){
-      body.innerHTML = '<div class="bempty">வசனங்கள் கிடைக்கவில்லை — Internet சரிபாருங்கள்.</div>';
-      return;
-    }
-
-    // Build lookup maps
-    const maps = results.map(vv => {
-      const m = {};
-      vv.forEach(v => m[v.num]=v.text);
-      return m;
-    });
-
-    const verLabels = selectedVersions.map(vid => getVer(vid));
-
-    body.innerHTML = `
-      <div class="cmp-book-head">${book.ta} · ${book.name} — Chapter ${ch}</div>
-      <div class="ver-tags">${verLabels.map((v,i)=>`<span class="vtag ${COLORS[i]}">${v?v.short:selectedVersions[i]}</span>`).join('')}</div>
-      ${allNums.map(n => `
-        <div class="cmp-verse-block">
-          <div class="cmp-vnum">Verse ${n}</div>
-          ${selectedVersions.map((vid,i) => {
-            const v = verLabels[i];
-            const txt = maps[i][n] || '—';
-            return `<div class="cmp-entry">
-              <div class="cmp-entry-tag vtag ${COLORS[i]}">${v?v.short:vid}</div>
-              <div class="cmp-entry-txt">${txt}</div>
+    results.innerHTML=`
+      <div class="cmp-ref-display">${book.ta} / ${book.name} — Chapter ${ch}</div>
+      ${allNums.map(n=>`
+        <div class="ver-card">
+          <div style="font-size:12px;color:#64748B;font-weight:700;margin-bottom:10px">Verse ${n}</div>
+          ${selectedVersions.map((vid,i)=>{
+            const v=verLabels[i]; const pc=PILL_CLASS[vid]||DEFAULT_PILL;
+            const txt=maps[i][n]||'—';
+            return `<div style="margin-bottom:10px">
+              <div class="ver-card-pill ${pc}">${v?v.short:vid}</div>
+              <div class="ver-card-txt">${txt}</div>
             </div>`;
           }).join('')}
         </div>`).join('')}
-      <button class="cmp-share" onclick="shareMulti()">🔗 Share</button>
+      <button class="add-ver-btn" onclick="shareResult()"><i class="ti ti-share-2"></i> Share</button>
     `;
-
-    window._cmpResult = {book, ch, verLabels, maps, allNums, selectedVersions: [...selectedVersions]};
+    window._cmpMeta={book,ch,verLabels,maps,allNums,selectedVersions:[...selectedVersions]};
   };
 
-  window.shareMulti = function(){
-    const r = window._cmpResult;
-    if(!r){ toast('Compare பண்ணுங்கள்'); return; }
-    const head = `${r.book.ta} / ${r.book.name} ${r.ch} — ${r.verLabels.map(v=>v?v.short:'?').join(' vs ')}`;
-    const lines = r.allNums.slice(0,6).map(n =>
-      r.selectedVersions.map((vid,i)=>`[${r.verLabels[i]?r.verLabels[i].short:vid}] ${r.maps[i][n]||'—'}`).join('\n')
-    );
-    const msg = head + '\n\n' + lines.join('\n\n') + '\n\nhttps://elimnewjerusalem.github.io/enjc-bible/compare.html';
-    if(navigator.share) navigator.share({title:head,text:msg}).catch(()=>{});
-    else{ navigator.clipboard?.writeText(msg); toast('📋 Copied!'); }
+  window.shareResult=function(){
+    const r=window._cmpMeta; if(!r)return;
+    const head=`${r.book.ta} / ${r.book.name} ${r.ch} — ${r.verLabels.map(v=>v?v.short:'?').join(' vs ')}`;
+    const msg=head+'\n\n'+r.allNums.slice(0,5).map(n=>r.selectedVersions.map((vid,i)=>`[${r.verLabels[i]?r.verLabels[i].short:vid}] ${r.maps[i][n]||'—'}`).join('\n')).join('\n\n');
+    if(navigator.share)navigator.share({title:head,text:msg}).catch(()=>{});
+    else{navigator.clipboard?.writeText(msg);toast('📋 Copied!');}
   };
 
   renderPills();
-
 })();
 </script>
-</body>
-</html>
+</body></html>
