@@ -230,13 +230,26 @@ async function fetchVersionChapter(verId){
     try{return await fetchBolls(v.bcode,S.bookNum,S.ch);}catch(e){return[];}
   }
   if(v.src==='local'){
-    // Try local cache first
+    // Try local enDB cache first (only available on bible.html)
     const localBook=S.enDB[S.bookNum];
     if(localBook&&localBook[S.ch]&&localBook[S.ch].length){
       return localBook[S.ch].map((t,i)=>({num:i+1,text:t||''}));
     }
-    // Fallback: use bolls.life KJV (book num)
-    try{return await fetchBolls('KJV',S.bookNum,S.ch);}catch(e){}
+    // Fallback 1: bolls.life KJV
+    try{
+      const vv=await fetchBolls('KJV',S.bookNum,S.ch);
+      if(vv.length)return vv;
+    }catch(e){}
+    // Fallback 2: bible-api.com KJV
+    try{
+      const ck='enjc_en_kjv_'+S.bookNum+'_'+S.ch;
+      try{const c=localStorage.getItem(ck);if(c){const p=JSON.parse(c);if(p?.length)return p;}}catch(e){}
+      const r=await fetchWithTimeout(C.enAPI+S.book+'+'+S.ch+'?translation=kjv',9000);
+      const d=await r.json();if(d.error)return[];
+      const vv=(d.verses||[]).map(x=>({num:x.verse,text:x.text.trim().replace(/\n/g,' ')}));
+      if(vv.length){try{localStorage.setItem(ck,JSON.stringify(vv));}catch(e){}}
+      return vv;
+    }catch(e){}
     return[];
   }
   // src==='bapi'

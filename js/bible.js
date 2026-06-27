@@ -252,21 +252,21 @@ document.addEventListener('DOMContentLoaded',()=>{
   applyTheme(S.theme);
   applyFont(S.fontFamily);
   populateBooks();
-  // Restore navigation from feature pages (daily/compare/search)
+  // Restore navigation from feature pages (daily/compare/search/VOTD)
   try{
     const go = JSON.parse(sessionStorage.getItem('enjc_go')||'null');
     if(go && go.book){
       sessionStorage.removeItem('enjc_go');
+      window._goVerse = go.verse || null; // save target verse for post-load scroll
       const bsel = g('book-sel');
       if(bsel) bsel.value = go.book;
-      // onBook() will set S.book, S.ch=1; then we override ch
       onBook();
       if(go.ch && go.ch > 1){
         S.ch = go.ch;
         const csel = g('ch-sel');
         if(csel) csel.value = go.ch;
-        loadCh();
       }
+      loadCh();
     }
   }catch(e){}
   syncVersionUI();
@@ -645,6 +645,11 @@ async function loadEN(){
         return localCh.map((text,i)=>({num:i+1, text: text||''}));
       }
     }
+    // Local cache miss — try bolls.life KJV
+    try{
+      const vv=await fetchBolls('KJV',S.bookNum,S.ch);
+      if(vv.length)return vv;
+    }catch(e){}
   }
   // ── 2. Modern translations (AMP/ASV/NKJV/NASB/ERV) via bolls.life ─
   if(vCfg.src==='bolls'){
@@ -704,6 +709,23 @@ function renderVerses(){
     </div>`;
   }).join('');
   g('bcontent').innerHTML='<div class="vlist">'+html+'</div>';
+  // Scroll to target verse if coming from VOTD or direct link
+  if(window._goVerse){
+    const targetVerse = window._goVerse;
+    window._goVerse = null;
+    setTimeout(()=>{
+      // Find verse element by verse number
+      const idx = S.verses.findIndex(v=>v.num===targetVerse);
+      const el = idx >= 0 ? g('vi'+idx) : null;
+      if(el){
+        el.scrollIntoView({behavior:'smooth', block:'center'});
+        // Highlight it briefly
+        el.style.transition='background .3s';
+        el.style.background='rgba(212,175,55,.12)';
+        setTimeout(()=>{ el.style.background=''; }, 2000);
+      }
+    }, 350);
+  }
 }
 
 function updateChUI(){

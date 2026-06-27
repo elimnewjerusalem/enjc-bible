@@ -304,7 +304,7 @@
       <div class="votd-verse ta-font" id="votd-verse">கர்த்தர் என் மேய்ப்பர், எனக்கு குறைவில்லை.</div>
       <div class="votd-meta">
         <span id="votd-ref">சங்கீதம் 23:1</span>
-        <span class="votd-pill">Read Chapter ›</span>
+        <span class="votd-pill" onclick="goVOTD();event.stopPropagation()">Read Chapter ›</span>
       </div>
     </div>
 
@@ -458,7 +458,7 @@
   }
 
   /* ── Load VOTD from bible-data.json ── */
-  let _votdBook = '', _votdChapter = 1;
+  let _votdBook = '', _votdChapter = 1, _votdRef = '';
 
   const BASE = (function(){
     const p = window.location.pathname;
@@ -476,19 +476,27 @@
       document.getElementById('votd-ref').textContent = v.tref || v.ref || '';
       _votdBook = v.book || '';
       _votdChapter = v.chapter || 1;
+      _votdRef = v.ref || v.tref || '';
     })
     .catch(() => {
       document.getElementById('votd-verse').textContent = 'கர்த்தர் என் மேய்ப்பர், எனக்கு குறைவில்லை.';
       document.getElementById('votd-ref').textContent = 'சங்கீதம் 23:1';
       _votdBook = 'psalms';
       _votdChapter = 23;
+      _votdRef = 'Psalm 23:1';
     });
 
-  /* ── Go to VOTD in bible ── */
+  /* ── Go to VOTD in bible — navigate to exact verse ── */
   window.goVOTD = function() {
     if (_votdBook) {
+      // Parse verse number from ref string e.g. "Jeremiah 29:11" → 11
+      const verseNum = _votdRef ? parseInt((_votdRef.match(/:\s*(\d+)/)||[])[1])||1 : 1;
       try {
-        localStorage.setItem('enjc_app_votd', JSON.stringify({ book: _votdBook, chapter: _votdChapter }));
+        sessionStorage.setItem('enjc_go', JSON.stringify({
+          book: _votdBook,
+          ch: _votdChapter,
+          verse: verseNum
+        }));
       } catch(e) {}
     }
     window.location.href = 'bible.html';
