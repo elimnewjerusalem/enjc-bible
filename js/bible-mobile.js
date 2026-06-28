@@ -15,7 +15,7 @@
   _earlyHide.textContent = `
     @media (max-width: 640px) {
       .nx-top, .nx-mid, #bcontent, .ch-bar, header,
-      .site-footer, .mob-nav { visibility: hidden; }
+      .site-footer, .mob-nav, .bv-wrap { visibility: hidden; }
     }
   `;
   document.head.appendChild(_earlyHide);
@@ -72,6 +72,7 @@
         .nx-top, .nx-mid, .nx-feat-bar, .offline-bar { display: none !important; }
         #bcontent { display: none !important; }
         .ch-bar, .ch-prog, .audio-bar { display: none !important; }
+        .bv-wrap { display: none !important; }
         header, .mob-nav, .wa-float, .site-footer, .scroll-top-btn { display: none !important; }
         body { overflow: hidden !important; }
         #mob-bible-app { display: flex !important; }
