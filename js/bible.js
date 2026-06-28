@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       const bsel = g('book-sel');
       if(bsel) bsel.value = go.book;
       onBook();
-      if(go.ch && go.ch > 1){
+      if(go.ch){
         S.ch = go.ch;
         const csel = g('ch-sel');
         if(csel) csel.value = go.ch;

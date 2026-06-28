@@ -124,7 +124,7 @@
         <div id="mb-reader-content" class="mb-reader-content"></div>
         <div class="mb-reader-nav">
           <button class="mb-nav-btn" id="mb-prev" onclick="mbPrevCh()">← Prev</button>
-          <button class="mb-nav-play" onclick="mbPlayAll()">▶ Play</button>
+          <button class="mb-nav-play" onclick="mbPlayAll()">▶</button>
           <button class="mb-nav-btn" id="mb-next" onclick="mbNextCh()">Next →</button>
         </div>
         <div class="mb-audio-bar" id="mb-audio-bar">
